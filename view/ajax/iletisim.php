@@ -90,17 +90,6 @@
                     </tr>
 
                     <tr>
-                        <th>Telefon</th>
-                        <td><?=$tel?></td>
-                    </tr>
-
-                    <tr>
-                        <th>Konu</th>
-                        <td><?=$konu?></td>
-                    </tr>
-
-
-                    <tr>
                         <th>Mesajı</th>
                         <td><?=$mesaj?></td>
                     </tr>

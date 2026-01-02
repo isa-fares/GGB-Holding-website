@@ -43,5 +43,31 @@ return[
 		'gesob_bilmer'=>'GESOB BİLMER',
 		'esnaf_destek'=>'Esnaf Destek Hattı',
 
+		// Page Header
+		'page_title'=>'İletişim',
+		'breadcrumb_home'=>'Anasayfa',
+		'breadcrumb_contact'=>'İletişim',
+		'header_description'=>'<strong>2 sektör ve 1.000\'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya devam ediyoruz.',
+
+		// Contact Info
+		'contact_headquarters'=>'Genel Merkez',
+		'contact_email'=>'E-posta Adresi',
+		'contact_phone'=>'Telefon',
+
+		// Form Section
+		'form_subheading'=>'Bizimle İletişime Geçin',
+		'form_title_1'=>'GGB Holding ile',
+		'form_title_2'=>'Güçlü İş Birlikleri Kurun',
+		'form_description'=>'GGB Holding olarak; uzmanlığımız, deneyimimiz ve güçlü kurumsal yapımızla işletmenize değer katacak çözümler sunuyoruz.',
+		'form_section_title'=>'Bize Mesaj Gönderin',
+		'form_section_desc'=>'Mail adresiniz gizli tutulur. Zorunlu alanlar * ile işaretlenmiştir.',
+		'form_name_placeholder'=>'Adınız*',
+		'form_email_placeholder'=>'E-posta Adresiniz*',
+		'form_message_placeholder'=>'Mesajınız*',
+		'form_captcha_label'=>'Güvenlik Kodu',
+		'form_captcha_placeholder'=>'Güvenlik Kodu*',
+		'form_captcha_hint'=>'* kodu değiştirmek için resmin üzerine tıklayın',
+		'form_submit'=>'Mesaj Gönder',
+
 
 ];

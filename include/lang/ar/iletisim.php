@@ -43,5 +43,31 @@ return[
 		'gesob_bilmer'=>'GESOB BİLMER',
 		'esnaf_destek'=>'خط دعم الحرفيين',
 
+		// Page Header
+		'page_title'=>'اتصل بنا',
+		'breadcrumb_home'=>'الرئيسية',
+		'breadcrumb_contact'=>'اتصل بنا',
+		'header_description'=>'نواصل الإنتاج وخلق القيمة مع <strong>قطاعين وما يقرب من 1,000</strong> موظف.',
+
+		// Contact Info
+		'contact_headquarters'=>'المقر الرئيسي',
+		'contact_email'=>'عنوان البريد الإلكتروني',
+		'contact_phone'=>'الهاتف',
+
+		// Form Section
+		'form_subheading'=>'اتصل بنا',
+		'form_title_1'=>'قم ببناء شراكات',
+		'form_title_2'=>'تجارية قوية مع GGB Holding',
+		'form_description'=>'كشركة GGB Holding؛ نقدم حلولاً تضيف قيمة لعملك من خلال خبرتنا وتجربتنا وهيكلنا المؤسسي القوي.',
+		'form_section_title'=>'أرسل لنا رسالة',
+		'form_section_desc'=>'سيتم الحفاظ على سرية عنوان بريدك الإلكتروني. الحقول المطلوبة محددة بـ *.',
+		'form_name_placeholder'=>'اسمك*',
+		'form_email_placeholder'=>'عنوان بريدك الإلكتروني*',
+		'form_message_placeholder'=>'رسالتك*',
+		'form_captcha_label'=>'رمز الأمان',
+		'form_captcha_placeholder'=>'رمز الأمان*',
+		'form_captcha_hint'=>'* انقر على الصورة لتغيير الرمز',
+		'form_submit'=>'إرسال الرسالة',
+
 
 ];

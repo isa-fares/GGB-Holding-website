@@ -32,21 +32,20 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                 <div class="container">
                     <div class="col-12">
                         <div>
-                            <h1>İletişim</h1>
+                            <h1><?= $this->lang->iletisim('page_title') ?></h1>
                             <section class="breadcrumb_section">
                                 <div class="row">
                                     <div class="breadcrumb_overlay">
                                         <div class="breadcrumb">
-                                            <a href="/">Anasayfa </a>
-                                            <a href="/">İletişim </a>
+                                            <a href="/"><?= $this->lang->iletisim('breadcrumb_home') ?> </a>
+                                            <a href="/"><?= $this->lang->iletisim('breadcrumb_contact') ?> </a>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                         <div>
-                            <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya
-                                devam ediyoruz.</p>
+                            <p><?= $this->lang->iletisim('header_description') ?></p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +59,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                             <div class="sasly-iconic-box style-twelve mb-30" data-aos="fade-up" data-aos-delay="10"
                                 data-aos-duration="1300">
                                 <div class="content">
-                                    <h5>Genel Merkez</h5>
+                                    <h5><?= $this->lang->iletisim('contact_headquarters') ?></h5>
                                     <p>2. Organize Sanayi Bölgesi Celal Doğan Bulvarı No: 56 Başpınar / Gaziantep
                                     </p>
                                 </div>
@@ -71,7 +70,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                             <div class="sasly-iconic-box style-twelve mb-30" data-aos="fade-up" data-aos-delay="15"
                                 data-aos-duration="1600">
                                 <div class="content">
-                                    <h5>E-posta Adresi</h5>
+                                    <h5><?= $this->lang->iletisim('contact_email') ?></h5>
                                     <p><a href="info@ggbholding.com.tr">info@ggbholding.com.tr</a></p>
                                 </div>
                             </div>
@@ -81,7 +80,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                             <div class="sasly-iconic-box style-twelve mb-30" data-aos="fade-up" data-aos-delay="20"
                                 data-aos-duration="1900">
                                 <div class="content">
-                                    <h5>Telefon</h5>
+                                    <h5><?= $this->lang->iletisim('contact_phone') ?></h5>
                                     <p><a href="tel:+903429099720">+90 (342) 909 97 20</a></p>
                                 </div>
                             </div>
@@ -97,20 +96,18 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
 
                             <div class="section-content-box mb-50" data-aos="fade-right" data-aos-duration="1200">
                                 <div class="section-title mb-30">
-                                    <span class="sub-heading">Bizimle İletişime Geçin</span>
-                                    <h3>GGB Holding ile
-                                        Güçlü İş Birlikleri Kurun</h3>
+                                    <span class="sub-heading"><?= $this->lang->iletisim('form_subheading') ?></span>
+                                    <h3><?= $this->lang->iletisim('form_title_1') ?>
+                                        <?= $this->lang->iletisim('form_title_2') ?></h3>
                                 </div>
-                                <p data-aos="fade-up" data-aos-duration="1000">GGB Holding olarak; uzmanlığımız,
-                                    deneyimimiz ve güçlü kurumsal yapımızla işletmenize değer katacak çözümler
-                                    sunuyoruz.</p>
+                                <p data-aos="fade-up" data-aos-duration="1000"><?= $this->lang->iletisim('form_description') ?></p>
                             </div>
                         </div>
                         <div class="col-lg-8">
 
                             <div class="contact-wrapper mb-50" data-aos="fade-left" data-aos-duration="1400">
-                                <h3>Bize Mesaj Gönderin</h3>
-                                <p>Mail adresiniz gizli tutulur. Zorunlu alanlar * ile işaretlenmiştir.</p>
+                                <h3><?= $this->lang->iletisim('form_section_title') ?></h3>
+                                <p><?= $this->lang->iletisim('form_section_desc') ?></p>
                                     <?php Form::Open(array(
                                         "class" => "iletisim-form contact-form",
                                         "method" => "post",
@@ -126,35 +123,35 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input type="text" class="form_control" placeholder="Adınız*"
+                                                <input type="text" class="form_control" placeholder="<?= $this->lang->iletisim('form_name_placeholder') ?>"
                                                     name="adi" required="">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="email" class="form_control"
-                                                    placeholder="E-posta Adresiniz*" name="email" required="">
+                                                    placeholder="<?= $this->lang->iletisim('form_email_placeholder') ?>" name="email" required="">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <textarea class="form_control" placeholder="Mesajınız*"
+                                                <textarea class="form_control" placeholder="<?= $this->lang->iletisim('form_message_placeholder') ?>"
                                                     name="mesaj" rows="5" cols="8"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label>Güvenlik Kodu</label>
+                                                <label><?= $this->lang->iletisim('form_captcha_label') ?></label>
                                                 <div class="captcha" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
                                                     <img class="captcha_image" src="<?= $this->baseURL("ajax/getcaptchaimage", "tr", 1) ?>" style="cursor: pointer;">
-                                                    <input type="text" minlength="6" class="form_control" name="captcha_value" maxlength="6" placeholder="Güvenlik Kodu*" required>
+                                                    <input type="text" minlength="6" class="form_control" name="captcha_value" maxlength="6" placeholder="<?= $this->lang->iletisim('form_captcha_placeholder') ?>" required>
                                                 </div>
-                                                <small style="display: block; margin-top: 5px; color: #666;">* kodu değiştirmek için resmin üzerine tıklayın</small>
+                                                <small style="display: block; margin-top: 5px; color: #666;"><?= $this->lang->iletisim('form_captcha_hint') ?></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <button class="cmt-btn theme-btn style-one">Mesaj Gönder <i
+                                                <button class="cmt-btn theme-btn style-one"><?= $this->lang->iletisim('form_submit') ?> <i
                                                         class="far fa-angle-double-right"></i></button>
                                             </div>
                                         </div>
@@ -193,13 +190,13 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                             <div class="section-content-box">
                                 <div class="section-title text-white mb-55">
                                     <h2 class="text-anm">
-                                        <span class="font-200">Sürdürülebilir Bir Gelecek ve</span> <br>
-                                        Daha Yeşil Bir Dünya İçin Çalışıyoruz
+                                        <span class="font-200"><?= $this->lang->index('sustainability_title_1') ?></span> <br>
+                                        <?= $this->lang->index('sustainability_title_2') ?>
                                     </h2>
                                 </div>
                                 <div class="cta-button" data-aos="fade-up" data-aos-duration="1200">
                                     <a href="<?= $this->BaseURL('surdurulebilirlik', $lang, 1) ?>" class="theme-btn style-one">
-                                        Politikamız <i class="far fa-angle-double-right"></i>
+                                        <?= $this->lang->index('sustainability_cta') ?> <i class="far fa-angle-double-right"></i>
                                     </a>
                                 </div>
                             </div>

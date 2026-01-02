@@ -24,18 +24,16 @@
                         <div class="row">
                             <div class="col-xl-7">
                                 <div class="hero-content">
-                                    <span class="sub-heading"><i class="far fa-arrow-right"></i>GGB Holding</span>
-                                    <h1 class="split"><span class="font-200">Sürdürülebilir</span><span
-                                            class="font-400">Yenilikçi</span> <span class="font-700">Güçlü</span></h1>
+                                    <span class="sub-heading"><i class="far fa-arrow-right"></i><?= $this->lang->index('hero_subheading') ?></span>
+                                    <h1 class="split"><span class="font-200"><?= $this->lang->index('hero_title_1') ?></span><span
+                                            class="font-400"><?= $this->lang->index('hero_title_2') ?></span> <span class="font-700"><?= $this->lang->index('hero_title_3') ?></span></h1>
                                 </div>
                             </div>
                             <div class="col-xl-5">
                                 <div class="hero-content">
                                     <div class="text-box" data-aos="fade-down" data-aos-duration="1800">
-                                        <p>GGB Holding olarak, boyadan tekstile kalite, <span>yenilik ve
-                                                sürdürülebilirlik</span> standartları belirliyoruz. Güven Boya ve
-                                            Kristal Tekstil ile hayatınıza değer katıyoruz.</p>
-                                        <a href="#" class="theme-btn style-two">İştiraklerimizi Keşfedin<i
+                                        <p><?= $this->lang->index('hero_description') ?></p>
+                                        <a href="#" class="theme-btn style-two"><?= $this->lang->index('hero_cta') ?><i
                                                 class="far fa-angle-double-right"></i></a>
                                     </div>
                                     <div class="hero-image" data-aos="fade-up" data-aos-duration="2000">
@@ -52,14 +50,11 @@
                             <div class="headline-wrap style-one">
                                 <span class="marquee-wrap">
                                     <span class="marquee-inner left">
-                                        <span class="marquee-item"><b>Sosyal Sorumluluk Değerler
-                                                Sürdürülebilirlik</b></span>
-                                        <span class="marquee-item"><b>Sosyal Sorumluluk Değerler
-                                                Sürdürülebilirlik</b></span>
+                                        <span class="marquee-item"><b><?= $this->lang->index('values_marquee') ?></b></span>
+                                        <span class="marquee-item"><b><?= $this->lang->index('values_marquee') ?></b></span>
                                     </span>
                                     <span class="marquee-inner left">
-                                        <span class="marquee-item"><b>Sosyal Sorumluluk Değerler
-                                                Sürdürülebilirlik</b></span>
+                                        <span class="marquee-item"><b><?= $this->lang->index('values_marquee') ?></b></span>
                                     </span>
                                 </span>
                             </div>
@@ -69,10 +64,8 @@
                                 <div class="col-lg-12">
                                     <div class="section-title style-one text-white text-center mb-60" data-aos="fade-up"
                                         data-aos-duration="1500">
-                                        <span class="sub-heading"><i class="far fa-arrow-right"></i>Kurumsal
-                                            İlkelerimiz</span>
-                                        <h2 class="text-anm"><span class="font-200">GGB Holding’in</span> Gücünü Yaratan
-                                            Temel Değerler</h2>
+                                        <span class="sub-heading"><i class="far fa-arrow-right"></i><?= $this->lang->index('values_subheading') ?></span>
+                                        <h2 class="text-anm"><span class="font-200"><?= $this->lang->index('values_title_1') ?></span> <?= $this->lang->index('values_title_2') ?></h2>
                                     </div>
                                 </div>
                             </div>
@@ -81,9 +74,8 @@
                                     <div class="sasly-info-box style-one mb-30" data-aos="fade-up">
                                         <div class="content">
                                             <div class="number">01</div>
-                                            <h4 class="title">Müşteri Odaklılık</h4>
-                                            <p>İş ortaklarımızın beklentilerini anlar, ihtiyaçlarına özel esnek ve hızlı
-                                                çözümler sunarız</p>
+                                            <h4 class="title"><?= $this->lang->index('value_1_title') ?></h4>
+                                            <p><?= $this->lang->index('value_1_desc') ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -92,9 +84,8 @@
                                         data-aos-duration="1800">
                                         <div class="content">
                                             <div class="number">02</div>
-                                            <h4 class="title">Yenilikçilik</h4>
-                                            <p>Sektördeki gelişmeleri yakından takip eder, AR-GE yatırımlarımızla fark
-                                                yaratan çözümler üretiriz.</p>
+                                            <h4 class="title"><?= $this->lang->index('value_2_title') ?></h4>
+                                            <p><?= $this->lang->index('value_2_desc') ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,15 +94,14 @@
                                         data-aos-duration="2100">
                                         <div class="content">
                                             <div class="number">03</div>
-                                            <h4 class="title">Sürdürülebilirlik</h4>
-                                            <p>Çevre dostu çözümler ve karbon ayak izi azaltımı ile gelecek nesillere
-                                                yatırım yapıyoruz.</p>
+                                            <h4 class="title"><?= $this->lang->index('value_3_title') ?></h4>
+                                            <p><?= $this->lang->index('value_3_desc') ?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12" id="jj_theme">
                                     <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two" data-aos="fade-up"
-                                        data-aos-duration="1800">Bizi Tanıyın<i
+                                        data-aos-duration="1800"><?= $this->lang->index('values_cta') ?><i
                                             class="far fa-angle-double-right"></i></a>
                                 </div>
                             </div>
@@ -124,10 +114,10 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title style-one mb-60" style="margin-left: 0">
-                                    <span class="sub-heading"><i class="far fa-arrow-right"></i>Hakkımızda</span>
+                                    <span class="sub-heading"><i class="far fa-arrow-right"></i><?= $this->lang->index('about_subheading') ?></span>
                                     <h2 class="text-anm">
-                                        <span class="font-200">GGB Holding’in Gücüyle</span>
-                                        Geleceği Şekillendirin
+                                        <span class="font-200"><?= $this->lang->index('about_title_1') ?></span>
+                                        <?= $this->lang->index('about_title_2') ?>
                                     </h2>
                                 </div>
                             </div>
@@ -138,36 +128,30 @@
                                     <div class="experience-box mb-60" data-aos="fade-up">
                                         <div class="number">55+</div>
                                         <div class="duration">
-                                            Yıllık Sektörel <br> Tecrübe
+                                            <?= $this->lang->index('about_experience_label') ?>
                                         </div>
                                     </div>
                                     <p class="mb-35" data-aos="fade-up">
-                                        Uslu Group’un temelleri, 1970 yılında Fevzi Uslu’nun 15 m²’lik küçük bir
-                                        dükkânda başlayan azmi ve ustalığıyla atıldı. Boya satışından halı ve tekstil
-                                        sektörüne latex tedarikine uzanan bu yolculuk, yıllar içinde büyüyerek bölgenin
-                                        güvenilir ve öncü tedarikçilerinden biri olmamızı sağladı.
+                                        <?= $this->lang->index('about_text_1') ?>
                                     </p>
                                     <p class="mb-35" data-aos="fade-up">
-                                        2000 yılında Gaziantep Güven Boya adıyla kurumsal yapıya geçişimiz ve ardından
-                                        gelen ithalat–ihracat faaliyetlerimiz, şirketimizin vizyonunu daha da
-                                        genişletti.
+                                        <?= $this->lang->index('about_text_2') ?>
                                     </p>
                                     <div class="row">
                                         <div class="col-12" data-aos="fade-up">
                                             <ul class="check-list style-one mb-0">
-                                                <li><i class="fas fa-badge-check"></i>Tekstil ve Boya Sektöründe
-                                                    Liderlik</li>
+                                                <li><i class="fas fa-badge-check"></i><?= $this->lang->index('about_list_1') ?></li>
                                             </ul>
                                         </div>
                                         <div class="col-12" data-aos="fade-up">
                                             <ul class="check-list style-one">
-                                                <li><i class="fas fa-badge-check"></i>Güven, Kalite ve Sürdürülebilirlik
+                                                <li><i class="fas fa-badge-check"></i><?= $this->lang->index('about_list_2') ?>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="about-button" data-aos="fade-up">
-                                        <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two">Detaylı Bilgi <i
+                                        <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two"><?= $this->lang->index('about_cta') ?> <i
                                                 class="far fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
@@ -175,8 +159,7 @@
                             <div class="col-lg-7">
                                 <div class="section-image-box mb-55">
                                     <div class="ia_overlay">
-                                        <span><strong>%74'lük ihracat</strong> üretimi ile ülke ekonomisine katkı
-                                            sağlıyoruz</span>
+                                        <span><?= $this->lang->index('about_overlay_text') ?></span>
                                         <img src="<?= $assetURL ?>images/ia.jpg" class="rounded-3 translate-img"
                                             alt="GGB Holding Hakkımızda">
                                     </div>
@@ -188,14 +171,14 @@
                         <div class="headline-wrap style-two">
                             <span class="marquee-wrap">
                                 <span class="marquee-inner left">
-                                    <span class="marquee-item"><b>İnovasyon</b></span>
-                                    <span class="marquee-item"><b>Kalite</b></span>
-                                    <span class="marquee-item"><b>Güven</b></span>
+                                    <span class="marquee-item"><b><?= $this->lang->index('marquee_innovation') ?></b></span>
+                                    <span class="marquee-item"><b><?= $this->lang->index('marquee_quality') ?></b></span>
+                                    <span class="marquee-item"><b><?= $this->lang->index('marquee_trust') ?></b></span>
                                 </span>
                                 <span class="marquee-inner left">
-                                    <span class="marquee-item"><b>İnovasyon</b></span>
-                                    <span class="marquee-item"><b>Kalite</b></span>
-                                    <span class="marquee-item"><b>Güven</b></span>
+                                    <span class="marquee-item"><b><?= $this->lang->index('marquee_innovation') ?></b></span>
+                                    <span class="marquee-item"><b><?= $this->lang->index('marquee_quality') ?></b></span>
+                                    <span class="marquee-item"><b><?= $this->lang->index('marquee_trust') ?></b></span>
                                 </span>
                             </span>
                         </div>
@@ -209,9 +192,8 @@
                                 <div class="col-lg-12">
                                     <div class="section-title style-one text-center mb-60">
                                         <span class="sub-heading"><i
-                                                class="far fa-arrow-right"></i>İştiraklerimiz</span>
-                                        <h2 class="text-anm"><span class="font-200">GGB Holding'in</span> Değer Üreten
-                                            Markaları</h2>
+                                                class="far fa-arrow-right"></i><?= $this->lang->index('partners_subheading') ?></span>
+                                        <h2 class="text-anm"><span class="font-200"><?= $this->lang->index('partners_title_1') ?></span> <?= $this->lang->index('partners_title_2') ?></h2>
                                     </div>
                                 </div>
                             </div>
@@ -267,9 +249,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="section-title text-center mb-120">
-                                    <span class="sub-heading"><i class="far fa-arrow-right"></i>Haberler &
-                                        Duyurular</span>
-                                    <h2 class="text-anm"><span class="font-200">GGB Holding'den</span><br>Son Gelişmeler
+                                    <span class="sub-heading"><i class="far fa-arrow-right"></i><?= $this->lang->index('blog_subheading') ?></span>
+                                    <h2 class="text-anm"><span class="font-200"><?= $this->lang->index('blog_title_1') ?></span><br><?= $this->lang->index('blog_title_2') ?>
                                     </h2>
                                 </div>
                             </div>
@@ -350,13 +331,13 @@
                                 <div class="section-content-box">
                                     <div class="section-title text-white mb-55">
                                         <h2 class="text-anm">
-                                            <span class="font-200">Sürdürülebilir Bir Gelecek ve</span> <br>
-                                            Daha Yeşil Bir Dünya İçin Çalışıyoruz
+                                            <span class="font-200"><?= $this->lang->index('sustainability_title_1') ?></span> <br>
+                                            <?= $this->lang->index('sustainability_title_2') ?>
                                         </h2>
                                     </div>
                                     <div class="cta-button" data-aos="fade-up" data-aos-duration="1200">
                                         <a href="<?= $this->BaseURL('surdurulebilirlik', $lang, 1) ?>" class="theme-btn style-one">
-                                            Politikamız <i class="far fa-angle-double-right"></i>
+                                            <?= $this->lang->index('sustainability_cta') ?> <i class="far fa-angle-double-right"></i>
                                         </a>
                                     </div>
                                 </div>

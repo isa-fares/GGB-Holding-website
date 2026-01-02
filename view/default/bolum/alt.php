@@ -20,7 +20,7 @@ $kurumsal_kimlik = $this->dbLangSelectRow('sayfa', ['id'=>2, 'master_id'=>22]);
                             <p>2. Organize Sanayi Bölgesi Celal Doğan Bulvarı No: 56 Başpınar / Gaziantep<br><br><a
                                     href="#">0 (342) 909 97 20</a><br><a href="#">info@ggbholding.com</a></p>
                             <div style="background-size: cover; background-repeat: no-repeat;">
-                                <h3>Takip Edin</h3>
+                                <h3><?= $this->lang->footer('follow_us') ?></h3>
                                 <ul class="social_list">
                                     <li>
                                         <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
@@ -45,31 +45,27 @@ $kurumsal_kimlik = $this->dbLangSelectRow('sayfa', ['id'=>2, 'master_id'=>22]);
                                         style="background-size: cover; background-repeat: no-repeat;">
                                         <ul class="footer-list">
                                             <li>
-                                                <h6>Kolay Erişim</h6>
+                                                <h6><?= $this->lang->footer('quick_access') ?></h6>
                                             </li>
                                             <li>
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>Kalite
-                                                            Politikası</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>Üretim
-                                                            Politikası</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>Multimedya</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>İştiraklerimiz</a>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('quality_policy') ?></a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('production_policy') ?></a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('multimedia') ?></a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('our_affiliates') ?></a>
                                                     </li>
                                                 </ul>
                                             </li>
                                         </ul>
                                         <ul class="footer-list">
                                             <li>
-                                                <h6>Kurumsal</h6>
+                                                <h6><?= $this->lang->footer('corporate') ?></h6>
                                             </li>
                                             <li>
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>Hakkımızda</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>Sertifika &
-                                                            Belgelerimiz</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i>Sürdürülebilirlik
-                                                            Politikası</a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('about_us') ?></a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('certificates_documents') ?></a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right"></i><?= $this->lang->footer('sustainability_policy') ?></a></li>
                                                 </ul>
                                             </li>
                                         </ul>

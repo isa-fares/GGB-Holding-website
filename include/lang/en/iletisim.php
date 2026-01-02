@@ -43,5 +43,31 @@ return[
 		'gesob_bilmer'=>'GESOB BİLMER',
 		'esnaf_destek'=>'Artisan Support Line',
 
+		// Page Header
+		'page_title'=>'Contact',
+		'breadcrumb_home'=>'Home',
+		'breadcrumb_contact'=>'Contact',
+		'header_description'=>'We continue to produce and create value with <strong>2 sectors and nearly 1,000</strong> employees.',
+
+		// Contact Info
+		'contact_headquarters'=>'Headquarters',
+		'contact_email'=>'Email Address',
+		'contact_phone'=>'Phone',
+
+		// Form Section
+		'form_subheading'=>'Contact Us',
+		'form_title_1'=>'Build Strong Business',
+		'form_title_2'=>'Partnerships with GGB Holding',
+		'form_description'=>'As GGB Holding; we offer solutions that will add value to your business with our expertise, experience and strong corporate structure.',
+		'form_section_title'=>'Send Us a Message',
+		'form_section_desc'=>'Your email address will be kept confidential. Required fields are marked with *.',
+		'form_name_placeholder'=>'Your Name*',
+		'form_email_placeholder'=>'Your Email Address*',
+		'form_message_placeholder'=>'Your Message*',
+		'form_captcha_label'=>'Security Code',
+		'form_captcha_placeholder'=>'Security Code*',
+		'form_captcha_hint'=>'* click on the image to change the code',
+		'form_submit'=>'Send Message',
+
 
 ];

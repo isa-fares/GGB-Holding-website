@@ -44,9 +44,13 @@
                                 // If page is not set, default to index page
                                 $currentPage = isset($page) ? $page : "index";
                                 
+                                // Convert page key to SEO-friendly link using lang->link()
+                                // This ensures the link works with both Turkish and English names
+                                $currentPageLink = $this->lang->link($currentPage);
+                                
                                 // Build the language switch URL using BaseURL method
                                 // BaseURL($url, $lang, $uzanti) - uzanti=1 adds .html extension
-                                $langSwitchUrl = $this->BaseURL($currentPage, $toggleLang, 1);
+                                $langSwitchUrl = $this->BaseURL($currentPageLink, $toggleLang, 1);
                                 
                                 // Set tooltip text based on target language
                                 $tooltipText = ($toggleLang == "en") ? "Switch to English" : "Switch to Turkish";
@@ -71,13 +75,13 @@
             <div class="nav-inner-menu">
                 <div class="primary-menu">
                     <div class="site-branding">
-                        <a href="<?= $this->BaseURL('index', $lang, 1) ?>" class="brand-logo"><img src="<?= $assetURL ?>images/header_logo.png"
+                        <a href="<?= $this->BaseURL($this->lang->link('index'), $lang, 1) ?>" class="brand-logo"><img src="<?= $assetURL ?>images/header_logo.png"
                                 alt="GGB Logo"></a>
                     </div>
                     <div class="sasly-nav-menu">
                         <div class="sasly-menu-top justify-content-between">
                             <div class="site-branding">
-                                <a href="<?= $this->BaseURL('index', $lang, 1) ?>" class="brand-logo"><img src="<?= $assetURL ?>images/header_logo.png"
+                                <a href="<?= $this->BaseURL($this->lang->link('index'), $lang, 1) ?>" class="brand-logo"><img src="<?= $assetURL ?>images/header_logo.png"
                                         alt="GGB Logo"></a>
                             </div>
                             <div class="navbar-close">
@@ -86,62 +90,60 @@
                         </div>
                         <nav class="main-menu">
                             <ul>
-                                <li class="menu-item has-children"><a href="#">Kurumsal</a>
+                                <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Kurumsal') ?></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>">Hakkımızda</a></li>
-                                        <li><a href="<?= $this->BaseURL('belgeler', $lang, 1) ?>">Sertifika & Belgelerimiz</a></li>
-                                        <li><a href="<?= $this->BaseURL('vizyon_misyon', $lang, 1) ?>">vizyon & Misyonumuz</a></li>
-                                        <li><a href="<?= $this->BaseURL('surdurulebilirlik', $lang, 1) ?>">Sürdürülebilirlik</a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('kurumsal'), $lang, 1) ?>"><?= $this->lang->header('Hakkımızda') ?></a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('belgeler'), $lang, 1) ?>"><?= $this->lang->header('Sertifika Belgelerimiz') ?></a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('vizyon_misyon'), $lang, 1) ?>"><?= $this->lang->header('Vizyon Misyon') ?></a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('surdurulebilirlik'), $lang, 1) ?>"><?= $this->lang->header('Sürdürülebilirlik') ?></a></li>
                                     </ul>
                                 </li>
-                                <li class="menu-item has-children"><a href="#">Politikalar</a>
+                                <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Politikalar') ?></a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="<?= $this->BaseURL('sosyal_sorumluluk_politikasi', $lang, 1) ?>">Sosyal
-                                                Sorumluluk Politikası</a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('sosyal_sorumluluk_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Sosyal Sorumluluk Politikasi') ?></a>
                                         </li>
                                         <li>
-                                            <a href="<?= $this->BaseURL('cevre_politikasi', $lang, 1) ?>">Çevre Politikası</a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('cevre_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Cevre Politikasi') ?></a>
                                         </li>
                                         <li>
-                                            <a href="<?= $this->BaseURL('yolsuzluk_politikasi', $lang, 1) ?>">Yolsuzluk ve Rüşvet
-                                                Politikası</a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('yolsuzluk_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Yolsuzluk Politikasi') ?></a>
                                         </li>
                                         <li>
-                                            <a href="<?= $this->BaseURL('kalite_politikasi', $lang, 1) ?>">Kalite Politikası</a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('kalite_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Kalite Politikasi') ?></a>
                                         </li>
                                         <li>
-                                            <a href="<?= $this->BaseURL('isg_politikasi', $lang, 1) ?>">İSG Politikası</a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('isg_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Isg Politikasi') ?></a>
                                         </li>
 
                                         <li>
-                                            <a href="<?= $this->BaseURL('enerji_politikasi', $lang, 1) ?>">Enerji Politikası</a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('enerji_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Enerji Politikasi') ?></a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item"><a href="<?= $this->BaseURL('faaliyet_alanlari', $lang, 1) ?>">Faaliyet Alanları</a></li>
-                                <li class="menu-item"><a href="<?= $this->BaseURL('insan_kaynaklari', $lang, 1) ?>">İnsan Kaynakları</a></li>
-                                <li class="menu-item has-children"><a href="#">İştirakler</a>
+                                <li class="menu-item"><a href="<?= $this->BaseURL($this->lang->link('faaliyet_alanlari'), $lang, 1) ?>"><?= $this->lang->header('Faaliyet Alanlari') ?></a></li>
+                                <li class="menu-item"><a href="<?= $this->BaseURL($this->lang->link('insan_kaynaklari'), $lang, 1) ?>"><?= $this->lang->header('Insan Kaynaklari') ?></a></li>
+                                <li class="menu-item has-children"><a href="#"><?= $this->lang->header('İştirakler') ?></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<?= $this->BaseURL('kristal', $lang, 1) ?>">Kristal Tekstil</a></li>
-                                        <li><a href="<?= $this->BaseURL('guven', $lang, 1) ?>">Güven Boya</a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('kristal'), $lang, 1) ?>"><?= $this->lang->header('Kristal') ?></a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('guven'), $lang, 1) ?>"><?= $this->lang->header('Guven') ?></a></li>
                                     </ul>
                                 </li>
-                                <li class="menu-item has-children"><a href="#">Multimedya</a>
+                                <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Multimedya') ?></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<?= $this->BaseURL('foto_galeri', $lang, 1) ?>">Foto Galeri</a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('foto_galeri'), $lang, 1) ?>"><?= $this->lang->header('Foto Galeri') ?></a></li>
                                         <li><a href="#">Video Galeri</a></li>
-                                        <li><a href="<?= $this->BaseURL('blog_liste', $lang, 1) ?>">Blog</a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('blog_liste'), $lang, 1) ?>"><?= $this->lang->header('Blog Liste') ?></a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </nav>
                         <div class="sasly-nav-button mt-20 d-block d-md-none">
-                            <a href="<?= $this->BaseURL('iletisim', $lang, 1) ?>" class="theme-btn style-one">İletişim<i
+                            <a href="<?= $this->BaseURL($this->lang->link('iletisim'), $lang, 1) ?>" class="theme-btn style-one"><?= $this->lang->header('İletişim') ?><i
                                     class="far fa-angle-double-right"></i></a>
                         </div>
                         <div class="sasly-menu-bottom mt-50 d-block d-lg-none">
-                            <h5>Bizi Takip Edin</h5>
+                            <h5><?= $this->lang->header('Bizi Takip Edin') ?></h5>
                             <ul class="social-link">
                                 <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
@@ -152,7 +154,7 @@
                     </div>
                     <div class="nav-right-item">
                         <div class="nav-button d-none d-md-block">
-                            <a href="<?= $this->BaseURL('iletisim', $lang, 1) ?>" class="theme-btn style-one">İletişim<i
+                            <a href="<?= $this->BaseURL($this->lang->link('iletisim'), $lang, 1) ?>" class="theme-btn style-one"><?= $this->lang->header('İletişim') ?><i
                                     class="far fa-angle-double-right"></i></a>
                         </div>
                         <div class="navbar-toggler">

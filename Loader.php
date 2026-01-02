@@ -261,6 +261,83 @@ class Loader extends FrontClass
                 $text .= $this->_include('sayfa/iletisim',$data,$this->theme);
                 break;
 
+            case 'belgeler':
+            case 'documents':
+                $text .= $this->_include('sayfa/belgeler',$data,$this->theme);
+                break;
+
+            case 'vizyon-misyon':
+            case 'vision-mission':
+                $text .= $this->_include('sayfa/vizyon_misyon',$data,$this->theme);
+                break;
+
+            case 'surdurulebilirlik':
+            case 'sustainability':
+                $text .= $this->_include('sayfa/surdurulebilirlik',$data,$this->theme);
+                break;
+
+            case 'sosyal-sorumluluk-politikasi':
+            case 'social-responsibility-policy':
+                $text .= $this->_include('sayfa/sosyal_sorumluluk_politikasi',$data,$this->theme);
+                break;
+
+            case 'cevre-politikasi':
+            case 'environmental-policy':
+                $text .= $this->_include('sayfa/cevre_politikasi',$data,$this->theme);
+                break;
+
+            case 'yolsuzluk-politikasi':
+            case 'anti-corruption-policy':
+                $text .= $this->_include('sayfa/yolsuzluk_politikasi',$data,$this->theme);
+                break;
+
+            case 'kalite-politikasi':
+            case 'quality-policy':
+                $text .= $this->_include('sayfa/kalite_politikasi',$data,$this->theme);
+                break;
+
+            case 'isg-politikasi':
+            case 'health-safety-policy':
+                $text .= $this->_include('sayfa/isg_politikasi',$data,$this->theme);
+                break;
+
+            case 'enerji-politikasi':
+            case 'energy-policy':
+                $text .= $this->_include('sayfa/enerji_politikasi',$data,$this->theme);
+                break;
+
+            case 'faaliyet-alanlari':
+            case 'business-areas':
+                $text .= $this->_include('sayfa/faaliyet_alanlari',$data,$this->theme);
+                break;
+
+            case 'insan-kaynaklari':
+            case 'human-resources':
+                $text .= $this->_include('sayfa/insan_kaynaklari',$data,$this->theme);
+                break;
+
+            case 'kristal':
+                $text .= $this->_include('sayfa/kristal',$data,$this->theme);
+                break;
+
+            case 'guven':
+                $text .= $this->_include('sayfa/guven',$data,$this->theme);
+                break;
+
+            case 'blog':
+            case 'blog_liste':
+                $text .= $this->_include('sayfa/blog_liste',$data,$this->theme);
+                break;
+
+            case 'foto-galeri':
+            case 'foto_galeri':
+                $text .= $this->_include('sayfa/foto_galeri',$data,$this->theme);
+                break;
+
+            case 'video-galeri':
+            case 'video_galeri':
+                $text .= $this->_include('sayfa/video_galeri',$data,$this->theme);
+                break;
 
             case 'katalog':
             case 'catalogue':

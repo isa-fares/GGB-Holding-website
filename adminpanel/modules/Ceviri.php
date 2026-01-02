@@ -29,7 +29,7 @@ class Ceviri  extends Settings{
 
         $this->tablist = array(
             array("title" => "Çeviri Listesi", "href" => "liste", "icon" => "mdi mdi-view-sequential"),
-            //array("title" => "Haberler Modül Ayarları", "href" => "settings", "icon" => "mdi mdi-settings")
+                //array("title" => "Haberler Modül Ayarları", "href" => "settings", "icon" => "mdi mdi-settings")
         );
 
 

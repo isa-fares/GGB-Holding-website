@@ -46,6 +46,21 @@ return[
 		'gesob_bilmer'=>'gesob-bilmer',
 		'birlik_denetleme_kurulu'=>'birlik-denetleme-kurulu',
 		'hizmetler'=>'hizmetler',
-        'teknik-destek-formu'=>'Teknik Destek Formu',
+		'teknik-destek-formu'=>'Teknik Destek Formu',
+		'belgeler'=>'belgeler',
+		'vizyon_misyon'=>'vizyon-misyon',
+		'surdurulebilirlik'=>'surdurulebilirlik',
+		'sosyal_sorumluluk_politikasi'=>'sosyal-sorumluluk-politikasi',
+		'cevre_politikasi'=>'cevre-politikasi',
+		'yolsuzluk_politikasi'=>'yolsuzluk-politikasi',
+		'kalite_politikasi'=>'kalite-politikasi',
+		'isg_politikasi'=>'isg-politikasi',
+		'enerji_politikasi'=>'enerji-politikasi',
+		'faaliyet_alanlari'=>'faaliyet-alanlari',
+		'insan_kaynaklari'=>'insan-kaynaklari',
+		'kristal'=>'kristal',
+		'guven'=>'guven',
+		'blog_liste'=>'blogs',
+
 
 ];

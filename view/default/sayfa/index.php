@@ -16,6 +16,11 @@ $this->setPageMeta(
     "index, follow"  // Robots meta tag
 );
 
+
+$isitirakler_sayfalar = $this->getCategoryPages("İştirakler");
+
+
+
 ?>
 <!-- END_HEADER -->
     <div id="smooth-wrapper">
@@ -140,12 +145,7 @@ $this->setPageMeta(
                                             <?= $this->lang->index('about_experience_label') ?>
                                         </div>
                                     </div>
-                                    <p class="mb-35" data-aos="fade-up">
-                                        <?= $this->lang->index('about_text_1') ?>
-                                    </p>
-                                    <p class="mb-35" data-aos="fade-up">
-                                        <?= $this->lang->index('about_text_2') ?>
-                                    </p>
+                                    <?=  $this->kisaca() ?>
                                     <div class="row">
                                         <div class="col-12" data-aos="fade-up">
                                             <ul class="check-list style-one mb-0">
@@ -207,48 +207,33 @@ $this->setPageMeta(
                                 </div>
                             </div>
                             <div class="row">
+                                <?php foreach ($isitirakler_sayfalar as $sayfa) : 
+                                    $link = $this->lang->link($sayfa['url']);
+                                    $url = $this->BaseURL($link, $lang, 1);
+                                    $baslik = $sayfa['baslik'];
+                                    $ozet = $sayfa['ozet'];
+                                    $resim = $this->dbResimAl($sayfa['resim'], "sayfa", "600,400");
+                                    ?>
                                 <div class="col-md-6">
                                     <div class="sasly-card-item style-one mb-30" data-aos="fade-up"
                                         data-aos-duration="1300">
                                         <div class="content-box">
                                             <div class="content">
-                                                <h5>Kristal <span>Tekstil</span></h5>
-                                                <p>Son teknolojiyle donatılmış üretim tesislerinde yüksek kaliteli
-                                                    polyester iplik üretimi yaparak halı ve tekstil sektörlerine
-                                                    yenilikçi çözümler sunmaktadır.</p>
+                                                <h5><?= $baslik ?> <span><?= $baslik ?></span></h5>
+                                                <p><?= $ozet ?></p>
                                             </div>
                                         </div>
                                         <div class="thumbnail" style="max-height: none">
-                                            <a href="<?= $this->BaseURL('kristal', $lang, 1) ?>" class="partner_logo">
+                                            <a href="<?= $url ?>" class="partner_logo">
                                                 <img src="<?= $assetURL ?>images/a1.jpg">
                                                 <div>
-                                                    <img src="<?= $assetURL ?>images/kristal_logo.jpg" alt="">
+                                                    <img src="<?= $resim ?>" alt="<?= $baslik ?>">
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="sasly-card-item style-one mb-30" data-aos="fade-up"
-                                        data-aos-duration="1700">
-                                        <div class="content-box">
-                                            <div class="content">
-                                                <h5>Güven <span>Boya</span></h5>
-                                                <p>Güven Boya, köklü ticaret deneyimiyle boya, latex ve sektörel
-                                                    yardımcı ürünlerin tedarikinde bölgenin güvenilir ve öncü
-                                                    markalarından biridir.</p>
-                                            </div>
-                                        </div>
-                                        <div class="thumbnail" style="max-height: none">
-                                            <a href="<?= $this->BaseURL('guven_boya', $lang, 1) ?>" class="partner_logo">
-                                                <img src="<?= $assetURL ?>images/a2.jpg">
-                                                <div>
-                                                    <img src="<?= $assetURL ?>images/guven_logo.png" alt="">
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

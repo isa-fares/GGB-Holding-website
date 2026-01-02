@@ -164,7 +164,7 @@ class Sayfa  extends Settings{
 
         foreach ($this->settings->lang('lang') as $dil=>$title):
             $tabForm[$dil]['text']  = $form->input(array('value'=>((isset($data[$dil]['baslik']) ? $this->temizle($data[$dil]['baslik']) :'')),'title'=>'Sayfa Adı','lang'=>$dil,'name'=>'baslik'));
-            //$tabForm[$dil]['text'] .= $form->textarea(array('value'=>((isset($data[$dil]['ozet']) ? $this->temizle($data[$dil]['ozet']) :'')),'title'=>'Özet','name'=>'ozet','lang'=>$dil));
+            $tabForm[$dil]['text'] .= $form->textarea(array('value'=>((isset($data[$dil]['ozet']) ? $this->temizle($data[$dil]['ozet']) :'')),'title'=>'Özet','name'=>'ozet','lang'=>$dil));
             $tabForm[$dil]['text'] .= $form->textEditor(array('value'=>((isset($data[$dil]['detay']) ? $this->temizle($data[$dil]['detay']) :'')),'title'=>'Detay','name'=>'detay','lang'=>$dil,'height' => '250'));
 
             $tabForm[$dil]['text'].= $form->file(array("lang"=>$dil, 'url'=>$this->BaseURL('upload')."/".$this->modulName,'folder'=>$this->modulName,'title'=>'Sayfa Resmi','name'=>'resim','resimBoyut'=>$this->modul_image_size($this->modul_info["id"]),'src'=>((isset($data[$dil]['resim'])) ? $data[$dil]['resim'] :'')));
@@ -393,7 +393,7 @@ class Sayfa  extends Settings{
 
         foreach ($this->settings->lang('lang') as $dil=>$title):
             $tabForm[$dil]['text']  = $form->input(array("required"=>array("tr"),'value'=>((isset($data[$dil]['baslik']) ? $this->temizle($data[$dil]['baslik']) :'')),'title'=>'Sayfa Adı','lang'=>$dil,'name'=>'baslik'));
-            //$tabForm[$dil]['text'] .= $form->textarea(array('value'=>((isset($data[$dil]['ozet']) ? $this->temizle($data[$dil]['ozet']) :'')),'title'=>'Özet','name'=>'ozet','lang'=>$dil));
+            $tabForm[$dil]['text'] .= $form->textarea(array('value'=>((isset($data[$dil]['ozet']) ? $this->temizle($data[$dil]['ozet']) :'')),'title'=>'Özet','name'=>'ozet','lang'=>$dil));
             $tabForm[$dil]['text'] .= $form->textEditor(array('value'=>((isset($data[$dil]['detay']) ? $this->temizle($data[$dil]['detay']) :'')),'title'=>'Detay','name'=>'detay','lang'=>$dil,'height' => '250'));
 
             $tabForm[$dil]['text'].= $form->file(array("lang"=>$dil, 'url'=>$this->BaseURL('upload')."/".$this->modulName,'folder'=>$this->modulName,'title'=>'Sayfa Resmi','name'=>'SayfaResim','resimBoyut'=>$this->modul_image_size($this->modul_info["id"]),'src'=>((isset($data[$dil]['resim'])) ? $data[$dil]['resim'] :'')));

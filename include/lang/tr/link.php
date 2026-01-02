@@ -60,7 +60,7 @@ return[
 		'insan_kaynaklari'=>'insan-kaynaklari',
 		'kristal'=>'kristal',
 		'guven'=>'guven',
-		'blog_liste'=>'blogs',
+		'blog_liste'=>'blog',
 
 
 ];

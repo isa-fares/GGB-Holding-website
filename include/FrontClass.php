@@ -59,6 +59,10 @@ class FrontClass extends Mail
      * @var
      */
     public $metaKeywords;
+    /**
+     * @var
+     */
+    public $robots;
     /**     * @var
      */
     public $pageLang;
@@ -112,6 +116,73 @@ class FrontClass extends Mail
     public function sayfaBaslik()
     {
         return $this->sayfaBaslik;
+    }
+
+    /**
+     * Set page meta tags automatically
+     * 
+     * @param string $pageName Page name/key (e.g., "Iletisim", "Kurumsal")
+     * @param string|null $customTitle Custom page title (optional, will use lang->header if not provided)
+     * @param string|null $customDescription Custom meta description (optional)
+     * @param string|null $customKeywords Custom meta keywords (optional)
+     * @param string|null $robots Robots meta tag (default: "index, follow")
+     * @return void
+     */
+    public function setPageMeta($pageName, $customTitle = null, $customDescription = null, $customKeywords = null, $robots = null)
+    {
+        $lang = $this->pageLang;
+        if ($lang == "") $lang = "tr";
+        
+        // Get site title
+        $siteTitle = $this->ayarlar("title_" . $lang);
+        
+        // Get page title from language file or use custom
+        if ($customTitle !== null) {
+            $pageTitle = $customTitle;
+        } else {
+            // Try to get from header translations
+            if (isset($this->lang) && method_exists($this->lang, 'header')) {
+                try {
+                    $pageTitle = $this->lang->header($pageName);
+                } catch (Exception $e) {
+                    $pageTitle = $pageName;
+                }
+            } else {
+                $pageTitle = $pageName;
+            }
+        }
+        
+        // Set page title: "Page Name - Site Name"
+        $this->sayfaBaslik = $pageTitle . " - " . $siteTitle;
+        
+        // Set Open Graph title (same as page title)
+        $this->ogBaslik = $this->sayfaBaslik;
+        
+        // Set Open Graph URL if not already set
+        if (empty($this->ogUrl) && property_exists($this, 'fullUrl') && !empty($this->fullUrl)) {
+            $this->ogUrl = $this->fullUrl;
+        }
+        
+        // Set meta description
+        if ($customDescription !== null) {
+            $this->ogDescription = $customDescription;
+        } else {
+            // Use default site description if no custom description
+            $this->ogDescription = $this->ayarlar("description_" . $lang);
+        }
+        
+        // Set meta keywords
+        if ($customKeywords !== null) {
+            $this->metaKeywords = $customKeywords;
+        }
+        // If not set, will use default from ayarlar in getHeader()
+        
+        // Set robots meta tag
+        if ($robots !== null) {
+            $this->robots = $robots;
+        } else {
+            $this->robots = "index, follow"; // Default
+        }
     }
 
     /**
@@ -949,9 +1020,10 @@ class FrontClass extends Mail
     <base url=\"".$this->BaseURL()."\">
     <meta http-equiv=\"content-Type\" content=\"text/html; charset=utf-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">
-    <meta name=\"description\" content=\"".$this->ayarlar("description_$lang")."\" />
+    <meta name=\"description\" content=\"".((isset($this->ogDescription) && $this->ogDescription != "") ? $this->ogDescription : $this->ayarlar("description_$lang"))."\" />
     <meta name=\"keywords\" content=\"".((isset($this->metaKeywords) && $this->metaKeywords != "") ? $this->metaKeywords : $this->ayarlar("keywords_$lang"))."\" />
-    <meta name=\"author\" content=\"Ve İnteraktif Medya\" />";
+    <meta name=\"author\" content=\"Ve İnteraktif Medya\" />
+    <meta name=\"robots\" content=\"".((isset($this->robots) && $this->robots != "") ? $this->robots : "index, follow")."\" />";
 
         if ($this->disable_cache){
             $text.= "\n\t<meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-revalidate\">

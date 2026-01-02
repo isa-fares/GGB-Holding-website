@@ -7,6 +7,15 @@
  * @var $page string
  */
 
+// Page Configuration - Set Meta Tags automatically
+$this->setPageMeta(
+    "Anasayfa",  // Page name/key
+    null,  // Custom title (null = use from lang->header)
+    null,  // Custom description (null = use default from ayarlar)
+    null,  // Custom keywords (null = use default from ayarlar)
+    "index, follow"  // Robots meta tag
+);
+
 ?>
 <!-- END_HEADER -->
     <div id="smooth-wrapper">

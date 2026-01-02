@@ -4,7 +4,16 @@
  * @var $assetURL string
  * @var $page string
  */
+
+// Get pages for each category using the helper function
+// This function automatically handles language switching and returns pages in current language
+$kurumsal_sayfalar = $this->getCategoryPages("Kurumsal");
+$politikalar_sayfalar = $this->getCategoryPages("Politikalar");
+$isitirakler_sayfalar = $this->getCategoryPages("İştirakler");
+$insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
+
 ?>
+
 <!-- START_HEADER -->
     <div class="offcanvas__overlay"></div>
 
@@ -92,41 +101,43 @@
                             <ul>
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Kurumsal') ?></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<?= $this->BaseURL($this->lang->link('kurumsal'), $lang, 1) ?>"><?= $this->lang->header('Hakkımızda') ?></a></li>
-                                        <li><a href="<?= $this->BaseURL($this->lang->link('belgeler'), $lang, 1) ?>"><?= $this->lang->header('Sertifika Belgelerimiz') ?></a></li>
-                                        <li><a href="<?= $this->BaseURL($this->lang->link('vizyon_misyon'), $lang, 1) ?>"><?= $this->lang->header('Vizyon Misyon') ?></a></li>
-                                        <li><a href="<?= $this->BaseURL($this->lang->link('surdurulebilirlik'), $lang, 1) ?>"><?= $this->lang->header('Sürdürülebilirlik') ?></a></li>
+                                        <?php foreach ($kurumsal_sayfalar as $sayfa) {
+                                            $link = $this->lang->link($sayfa['url']);
+                                            $url = $this->BaseURL($link, $lang, 1); 
+                                            $baslik = $sayfa['baslik'];
+                                        ?>
+                                            <li>
+                                                <a href="<?= $url ?>"><?= $baslik ?></a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </li>
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Politikalar') ?></a>
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a href="<?= $this->BaseURL($this->lang->link('sosyal_sorumluluk_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Sosyal Sorumluluk Politikasi') ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL($this->lang->link('cevre_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Cevre Politikasi') ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL($this->lang->link('yolsuzluk_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Yolsuzluk Politikasi') ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL($this->lang->link('kalite_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Kalite Politikasi') ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL($this->lang->link('isg_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Isg Politikasi') ?></a>
-                                        </li>
-
-                                        <li>
-                                            <a href="<?= $this->BaseURL($this->lang->link('enerji_politikasi'), $lang, 1) ?>"><?= $this->lang->header('Enerji Politikasi') ?></a>
-                                        </li>
+                                        <?php foreach ($politikalar_sayfalar as $sayfa) {
+                                            $link = $this->lang->link($sayfa['url']);
+                                            $url = $this->BaseURL($link, $lang, 1); 
+                                            $baslik = $sayfa['baslik'];
+                                        ?>
+                                            <li>
+                                                <a href="<?= $url ?>"><?= $baslik ?></a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </li>
                                 <li class="menu-item"><a href="<?= $this->BaseURL($this->lang->link('faaliyet_alanlari'), $lang, 1) ?>"><?= $this->lang->header('Faaliyet Alanlari') ?></a></li>
                                 <li class="menu-item"><a href="<?= $this->BaseURL($this->lang->link('insan_kaynaklari'), $lang, 1) ?>"><?= $this->lang->header('Insan Kaynaklari') ?></a></li>
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('İştirakler') ?></a>
                                     <ul class="sub-menu">
-                                        <li><a href="<?= $this->BaseURL($this->lang->link('kristal'), $lang, 1) ?>"><?= $this->lang->header('Kristal') ?></a></li>
-                                        <li><a href="<?= $this->BaseURL($this->lang->link('guven'), $lang, 1) ?>"><?= $this->lang->header('Guven') ?></a></li>
+                                        <?php foreach ($isitirakler_sayfalar as $sayfa) {
+                                            $link = $this->lang->link($sayfa['url']);
+                                            $url = $this->BaseURL($link, $lang, 1); 
+                                            $baslik = $sayfa['baslik'];
+                                        ?>
+                                            <li>
+                                                <a href="<?= $url ?>"><?= $baslik ?></a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </li>
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Multimedya') ?></a>

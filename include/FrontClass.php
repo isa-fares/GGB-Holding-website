@@ -514,6 +514,44 @@ class FrontClass extends Mail
 
 
     /**
+     * Get category by Turkish name and return pages in current language
+     * 
+     * @param string $categoryName Turkish category name (e.g., "Kurumsal", "Politikalar")
+     * @return array Array of pages in current language, or empty array if category not found
+     */
+    public function getCategoryPages($categoryName) {
+        // Initialize empty array
+        $pages = array();
+        
+        // Get category by Turkish name (always search in main table)
+        // Temporarily set language to Turkish to get category ID from main table
+        $originalLang = $this->pageLang;
+        $this->pageLang = "tr";
+        
+        $kategori = $this->dbLangSelectRow("sayfakategori", ["baslik" => $categoryName]);
+        
+        // Restore original language
+        $this->pageLang = $originalLang;
+        
+        if ($kategori && isset($kategori["id"])) {
+            $kategoriId = $kategori["id"];
+            
+            // Get pages in current language using dbLangSelect
+            $result = $this->dbLangSelect(
+                "sayfa",
+                "aktif = 1 and baslik <> '' and kid = " . $kategoriId
+            );
+            
+            // Ensure it's an array (dbLangSelect returns array or false)
+            if (is_array($result)) {
+                $pages = $result;
+            }
+        }
+        
+        return $pages;
+    }
+
+    /**
      * @param $resim
      * @param $klasor
      * @param string $boyut

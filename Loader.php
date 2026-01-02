@@ -164,7 +164,17 @@ class Loader extends FrontClass
                 break;
 
             default:
-                $text .=  $this->_include('sayfa/'.$data['page'],$data,$this->theme);
+                // Check if specific page file exists
+                $sub = (file_exists('view')) ? 'view/' : null;
+                $pageFile = $sub . $this->theme . 'sayfa/' . $data['page'] . '.php';
+                
+                if (file_exists($pageFile)):
+                    // Use specific page file if it exists
+                    $text .=  $this->_include('sayfa/'.$data['page'],$data,$this->theme);
+                else:
+                    // Use template for dynamic pages from database
+                    $text .=  $this->_include('sayfa/_sayfa_template',$data,$this->theme);
+                endif;
                 break;
 
 

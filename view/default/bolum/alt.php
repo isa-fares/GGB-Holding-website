@@ -10,7 +10,6 @@ $mevzuat  = $this->dbLangSelect("sayfa","aktif = 1 and baslik <> '' and kid = 2"
 $ahilik  = $this->dbLangSelect("sayfa","aktif = 1 and baslik <> '' and kid = 3");
 $kurumsal_kimlik = $this->dbLangSelectRow('sayfa', ['id'=>2, 'master_id'=>22]);
 ?>
-
 <!-- START_FOOTER -->
             <footer class="footer35">
                 <div class="footer_pattern" style="background-size: cover; background-repeat: no-repeat;"></div>
@@ -91,4 +90,4 @@ $kurumsal_kimlik = $this->dbLangSelectRow('sayfa', ['id'=>2, 'master_id'=>22]);
                 </div>
             </footer>
         </div>
-        <!-- END_FOOTER -->
+<!-- END_FOOTER -->

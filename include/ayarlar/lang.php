@@ -21,14 +21,14 @@ return [
 
     'lang' => array(
     'tr'=>'Türkçe',
-    // "en"=>"İngilizce",
+    "en"=>"İngilizce",
     /*"ar"=>"Arapça",
     /*"ru"=>"Rusça",
     "fr"=>"Fransızca"*/
     ),  
     'langView' => array(
     'tr'=>'TÜRKÇE',
-    // "en"=>"ENGLISH",
+    "en"=>"ENGLISH",
     /* "ar"=>" العربية", /*"ru"=>"РОССИЯ",
     "fr"=>" FRANÇAIS"*/
     ),

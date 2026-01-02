@@ -21,7 +21,41 @@
                     <div class="col-lg-5">
                         <div class="top-right">
                             <ul class="top-nav-link">
-                                <li><a href="#"><i class="fa-light fa-globe"></i> EN</a></li>
+                                <?php
+                                /**
+                                 * Language Toggle Button
+                                 * 
+                                 * This code creates a language switcher that toggles between Turkish (tr) and English (en)
+                                 * - If current language is Turkish: shows "EN" button to switch to English
+                                 * - If current language is English: shows "TR" button to switch to Turkish
+                                 * - Maintains the same page when switching languages
+                                 */
+                                
+                                // Get current language (default to Turkish if not set)
+                                $currentLang = ($lang == "tr") ? "tr" : "en";
+                                
+                                // Determine the toggle language (opposite of current)
+                                $toggleLang = ($currentLang == "tr") ? "en" : "tr";
+                                
+                                // Set the button text based on toggle language
+                                $toggleLangText = ($currentLang == "tr") ? "EN" : "TR";
+                                
+                                // Get current page name to maintain same page when switching language
+                                // If page is not set, default to index page
+                                $currentPage = isset($page) ? $page : "index";
+                                
+                                // Build the language switch URL using BaseURL method
+                                // BaseURL($url, $lang, $uzanti) - uzanti=1 adds .html extension
+                                $langSwitchUrl = $this->BaseURL($currentPage, $toggleLang, 1);
+                                
+                                // Set tooltip text based on target language
+                                $tooltipText = ($toggleLang == "en") ? "Switch to English" : "Switch to Turkish";
+                                ?>
+                                <li>
+                                    <a href="<?= $langSwitchUrl ?>" title="<?= $tooltipText ?>">
+                                        <i class="fa-light fa-globe"></i> <?= $toggleLangText ?>
+                                    </a>
+                                </li>
                             </ul>
                             <ul class="social-link">
                                 <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>

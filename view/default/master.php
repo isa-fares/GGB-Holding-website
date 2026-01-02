@@ -14,9 +14,9 @@
 <!-- GOOGLE ANALYTICS -->
 <?= $this->getAnalytics(); ?>
 
-
-<meta name="Copyright" content="Copyright 2020. <?= $this->ayarlar("firma_" . $lang) ?>. Tüm Hakları Saklıdır.">
-<meta name="publisher" content="Ve İnteraktif Medya" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="Copyright" content="Copyright 2026. <?= $this->ayarlar("firma_" . $lang) ?>. Tüm Hakları Saklıdır.">
+<meta name="publisher" content="GGB Holding" />
 <meta name="robots" content="index, follow">
 <meta name="revisit-after" content="3 days">
 <meta name="twitter:card" content="summary">
@@ -24,7 +24,8 @@
 <link rel="canonical" href="<?= $this->fullUrl ?>">
 
 
-<link rel="shortcut icon" href="<?= $assetURL ?>img/favicon.png">
+<link rel="shortcut icon" href="<?= $assetURL ?>images/favicon.png" type="image/png">
+
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -50,39 +51,49 @@
 </script>
 
 
-
 <?php
 $this->inc_file("css", array(
-    "css/styles.css"
+    "fonts/fontawesome/css/all.min.css",
+    "css/plugins/bootstrap.min.css",
+    "css/plugins/slick.css",
+    "css/plugins/magnific-popup.css",
+    "css/plugins/aos.css", 
+    "css/default.css",
+    "css/common_style.css",
+    "css/style.css"
+
 ));
+
 ?>
 
-<?php
-
-$this->inc_file("script", array(
-    "js/jquery-3.6.0.min.js",
-));
-
-?>
 </head>
 
 
 
-<body class="lang_<?= $lang ?> <?= ($page == "index") ? "index" : "other" ?>">
+<body class="business-website lang_<?= $lang ?> <?= ($page == "index") ? "index" : "other" ?>">
 
     <div class="page">
 
 
         <?= $content ?>
 
-
-
         <?php
         $this->inc_file("script", array(
-            "js/jquery-3.6.0.min.js",
+            "js/plugins/jquery-3.7.1.min.js",
+            "js/plugins/popper.min.js",
+            "js/plugins/bootstrap.min.js",
+            "js/plugins/gsap/gsap.min.js",
+            "js/plugins/gsap/SplitText.min.js",
+            "js/plugins/gsap/ScrollSmoother.min.js",
+            "js/plugins/gsap/ScrollTrigger.min.js",
+            "js/plugins/slick.min.js",
+            "js/plugins/jquery.magnific-popup.min.js",
+            "js/plugins/aos.js",
+            "js/plugins/fancybox.js",
+            "js/common_script.js",
+            "js/theme.js",
             "js/form.js",
-            "js/sweetalert2@11.js",
-
+            "js/sweetalert2@11.js"
         ));
         ?>
 

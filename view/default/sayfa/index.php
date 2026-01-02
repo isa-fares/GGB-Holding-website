@@ -5,10 +5,364 @@
  * @var $lang string
  * @var $assetURL string
  * @var $page string
- */?>
-<?php
-$slayt = $this->slayt();
-$rakamlar = $this->dbLangSelect("rakam", "aktif = 1", "resim");
-$haberler  = $this->dbLangSelect("haber", "aktif = 1  and baslik <> ''", "resim", "LIMIT 20");
-$duyurular  = $this->dbLangSelect("duyuru", "aktif = 1  and baslik <> ''", "resim", "LIMIT 20");
+ */
+
 ?>
+<!-- END_HEADER -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <div class="line_wrap">
+                <div class="line_item_one"></div>
+                <div class="line_item"></div>
+                <div class="line_item"></div>
+                <div class="line_item"></div>
+                <div class="line_item"></div>
+            </div>
+            <main>
+                <section class="hero-sb">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-7">
+                                <div class="hero-content">
+                                    <span class="sub-heading"><i class="far fa-arrow-right"></i>GGB Holding</span>
+                                    <h1 class="split"><span class="font-200">Sürdürülebilir</span><span
+                                            class="font-400">Yenilikçi</span> <span class="font-700">Güçlü</span></h1>
+                                </div>
+                            </div>
+                            <div class="col-xl-5">
+                                <div class="hero-content">
+                                    <div class="text-box" data-aos="fade-down" data-aos-duration="1800">
+                                        <p>GGB Holding olarak, boyadan tekstile kalite, <span>yenilik ve
+                                                sürdürülebilirlik</span> standartları belirliyoruz. Güven Boya ve
+                                            Kristal Tekstil ile hayatınıza değer katıyoruz.</p>
+                                        <a href="#" class="theme-btn style-two">İştiraklerimizi Keşfedin<i
+                                                class="far fa-angle-double-right"></i></a>
+                                    </div>
+                                    <div class="hero-image" data-aos="fade-up" data-aos-duration="2000">
+                                        <img src="<?= $assetURL ?>images/hero-img1.jpg" alt="hero img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="what-we-sb">
+                    <div class="wrapper primary-bg pt-60 pb-100">
+                        <div class="animated-big-text pb-75">
+                            <div class="headline-wrap style-one">
+                                <span class="marquee-wrap">
+                                    <span class="marquee-inner left">
+                                        <span class="marquee-item"><b>Sosyal Sorumluluk Değerler
+                                                Sürdürülebilirlik</b></span>
+                                        <span class="marquee-item"><b>Sosyal Sorumluluk Değerler
+                                                Sürdürülebilirlik</b></span>
+                                    </span>
+                                    <span class="marquee-inner left">
+                                        <span class="marquee-item"><b>Sosyal Sorumluluk Değerler
+                                                Sürdürülebilirlik</b></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="section-title style-one text-white text-center mb-60" data-aos="fade-up"
+                                        data-aos-duration="1500">
+                                        <span class="sub-heading"><i class="far fa-arrow-right"></i>Kurumsal
+                                            İlkelerimiz</span>
+                                        <h2 class="text-anm"><span class="font-200">GGB Holding’in</span> Gücünü Yaratan
+                                            Temel Değerler</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-xl-4 col-md-6 col-sm-12">
+                                    <div class="sasly-info-box style-one mb-30" data-aos="fade-up">
+                                        <div class="content">
+                                            <div class="number">01</div>
+                                            <h4 class="title">Müşteri Odaklılık</h4>
+                                            <p>İş ortaklarımızın beklentilerini anlar, ihtiyaçlarına özel esnek ve hızlı
+                                                çözümler sunarız</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6 col-sm-12">
+                                    <div class="sasly-info-box style-one mb-30" data-aos="fade-up"
+                                        data-aos-duration="1800">
+                                        <div class="content">
+                                            <div class="number">02</div>
+                                            <h4 class="title">Yenilikçilik</h4>
+                                            <p>Sektördeki gelişmeleri yakından takip eder, AR-GE yatırımlarımızla fark
+                                                yaratan çözümler üretiriz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6 col-sm-12">
+                                    <div class="sasly-info-box style-one mb-30" data-aos="fade-up"
+                                        data-aos-duration="2100">
+                                        <div class="content">
+                                            <div class="number">03</div>
+                                            <h4 class="title">Sürdürülebilirlik</h4>
+                                            <p>Çevre dostu çözümler ve karbon ayak izi azaltımı ile gelecek nesillere
+                                                yatırım yapıyoruz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12" id="jj_theme">
+                                    <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two" data-aos="fade-up"
+                                        data-aos-duration="1800">Bizi Tanıyın<i
+                                            class="far fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-sb pt-130 pb-75">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title style-one mb-60" style="margin-left: 0">
+                                    <span class="sub-heading"><i class="far fa-arrow-right"></i>Hakkımızda</span>
+                                    <h2 class="text-anm">
+                                        <span class="font-200">GGB Holding’in Gücüyle</span>
+                                        Geleceği Şekillendirin
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-lg-5">
+                                <div class="section-content-box style-one mb-55">
+                                    <div class="experience-box mb-60" data-aos="fade-up">
+                                        <div class="number">55+</div>
+                                        <div class="duration">
+                                            Yıllık Sektörel <br> Tecrübe
+                                        </div>
+                                    </div>
+                                    <p class="mb-35" data-aos="fade-up">
+                                        Uslu Group’un temelleri, 1970 yılında Fevzi Uslu’nun 15 m²’lik küçük bir
+                                        dükkânda başlayan azmi ve ustalığıyla atıldı. Boya satışından halı ve tekstil
+                                        sektörüne latex tedarikine uzanan bu yolculuk, yıllar içinde büyüyerek bölgenin
+                                        güvenilir ve öncü tedarikçilerinden biri olmamızı sağladı.
+                                    </p>
+                                    <p class="mb-35" data-aos="fade-up">
+                                        2000 yılında Gaziantep Güven Boya adıyla kurumsal yapıya geçişimiz ve ardından
+                                        gelen ithalat–ihracat faaliyetlerimiz, şirketimizin vizyonunu daha da
+                                        genişletti.
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-12" data-aos="fade-up">
+                                            <ul class="check-list style-one mb-0">
+                                                <li><i class="fas fa-badge-check"></i>Tekstil ve Boya Sektöründe
+                                                    Liderlik</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-12" data-aos="fade-up">
+                                            <ul class="check-list style-one">
+                                                <li><i class="fas fa-badge-check"></i>Güven, Kalite ve Sürdürülebilirlik
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about-button" data-aos="fade-up">
+                                        <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two">Detaylı Bilgi <i
+                                                class="far fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="section-image-box mb-55">
+                                    <div class="ia_overlay">
+                                        <span><strong>%74'lük ihracat</strong> üretimi ile ülke ekonomisine katkı
+                                            sağlıyoruz</span>
+                                        <img src="<?= $assetURL ?>images/ia.jpg" class="rounded-3 translate-img"
+                                            alt="GGB Holding Hakkımızda">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="animated-big-text">
+                        <div class="headline-wrap style-two">
+                            <span class="marquee-wrap">
+                                <span class="marquee-inner left">
+                                    <span class="marquee-item"><b>İnovasyon</b></span>
+                                    <span class="marquee-item"><b>Kalite</b></span>
+                                    <span class="marquee-item"><b>Güven</b></span>
+                                </span>
+                                <span class="marquee-inner left">
+                                    <span class="marquee-item"><b>İnovasyon</b></span>
+                                    <span class="marquee-item"><b>Kalite</b></span>
+                                    <span class="marquee-item"><b>Güven</b></span>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="core-features-sb">
+                    <div class="features-wrapper main-gray-bg pt-130 pb-100">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="section-title style-one text-center mb-60">
+                                        <span class="sub-heading"><i
+                                                class="far fa-arrow-right"></i>İştiraklerimiz</span>
+                                        <h2 class="text-anm"><span class="font-200">GGB Holding'in</span> Değer Üreten
+                                            Markaları</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="sasly-card-item style-one mb-30" data-aos="fade-up"
+                                        data-aos-duration="1300">
+                                        <div class="content-box">
+                                            <div class="content">
+                                                <h5>Kristal <span>Tekstil</span></h5>
+                                                <p>Son teknolojiyle donatılmış üretim tesislerinde yüksek kaliteli
+                                                    polyester iplik üretimi yaparak halı ve tekstil sektörlerine
+                                                    yenilikçi çözümler sunmaktadır.</p>
+                                            </div>
+                                        </div>
+                                        <div class="thumbnail" style="max-height: none">
+                                            <a href="<?= $this->BaseURL('kristal', $lang, 1) ?>" class="partner_logo">
+                                                <img src="<?= $assetURL ?>images/a1.jpg">
+                                                <div>
+                                                    <img src="<?= $assetURL ?>images/kristal_logo.jpg" alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="sasly-card-item style-one mb-30" data-aos="fade-up"
+                                        data-aos-duration="1700">
+                                        <div class="content-box">
+                                            <div class="content">
+                                                <h5>Güven <span>Boya</span></h5>
+                                                <p>Güven Boya, köklü ticaret deneyimiyle boya, latex ve sektörel
+                                                    yardımcı ürünlerin tedarikinde bölgenin güvenilir ve öncü
+                                                    markalarından biridir.</p>
+                                            </div>
+                                        </div>
+                                        <div class="thumbnail" style="max-height: none">
+                                            <a href="<?= $this->BaseURL('guven_boya', $lang, 1) ?>" class="partner_logo">
+                                                <img src="<?= $assetURL ?>images/a2.jpg">
+                                                <div>
+                                                    <img src="<?= $assetURL ?>images/guven_logo.png" alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="blogs-sb pt-130 pb-50" id="indexBlog">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title text-center mb-120">
+                                    <span class="sub-heading"><i class="far fa-arrow-right"></i>Haberler &
+                                        Duyurular</span>
+                                    <h2 class="text-anm"><span class="font-200">GGB Holding'den</span><br>Son Gelişmeler
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+
+                            <!-- Blog 1 -->
+                            <div class="col-xl-4 col-md-6">
+                                <div class="blog-post-item style-one mb-80" data-aos="fade-up" data-aos-duration="1200">
+                                    <div class="post-thumbnail">
+                                        <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
+                                            <img src="<?= $assetURL ?>images/blog/blog1.jpg" alt="Blog">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-meta style-one">
+                                            <span class="date"><a href="#">Ekim 12, 2024</a></span>
+                                        </div>
+                                        <h4 class="title">
+                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
+                                                GGB Holding’den Yeni Yatırım: Üretim Teknolojilerinde Güçlü Adım
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Blog 2 -->
+                            <div class="col-xl-4 col-md-6">
+                                <div class="blog-post-item style-one mb-80" data-aos="fade-up" data-aos-duration="1400">
+                                    <div class="post-thumbnail">
+                                        <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
+                                            <img src="<?= $assetURL ?>images/blog/blog2.jpg" alt="Blog">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-meta style-one">
+                                            <span class="date"><a href="#">Ekim 05, 2024</a></span>
+                                        </div>
+                                        <h4 class="title">
+                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
+                                                Sektörlerde Dijital Dönüşüm: GGB Holding’den Stratejik Atılım
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Blog 3 -->
+                            <div class="col-xl-4 col-md-6">
+                                <div class="blog-post-item style-one mb-80" data-aos="fade-up" data-aos-duration="1600">
+                                    <div class="post-thumbnail">
+                                        <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
+                                            <img src="<?= $assetURL ?>images/blog/blog3.jpg" alt="Blog">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-meta style-one">
+                                            <span class="date"><a href="#">Eylül 28, 2024</a></span>
+                                        </div>
+                                        <h4 class="title">
+                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
+                                                GGB Holding’den Sürdürülebilirlik Odaklı Yeni Proje
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <section class="cta-sb bg_cover p-r z-1" id="index_sust"
+                    style="background-image: url(<?= $assetURL ?>images/sust.jpg);">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-8">
+                                <div class="section-content-box">
+                                    <div class="section-title text-white mb-55">
+                                        <h2 class="text-anm">
+                                            <span class="font-200">Sürdürülebilir Bir Gelecek ve</span> <br>
+                                            Daha Yeşil Bir Dünya İçin Çalışıyoruz
+                                        </h2>
+                                    </div>
+                                    <div class="cta-button" data-aos="fade-up" data-aos-duration="1200">
+                                        <a href="<?= $this->BaseURL('surdurulebilirlik', $lang, 1) ?>" class="theme-btn style-one">
+                                            Politikamız <i class="far fa-angle-double-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+     <!-- START_FOOTER -->

@@ -22,18 +22,7 @@ $kurumsal_kimlik = $this->dbLangSelectRow('sayfa', ['id'=>2, 'master_id'=>22]);
                             <div style="background-size: cover; background-repeat: no-repeat;">
                                 <h3><?= $this->lang->footer('follow_us') ?></h3>
                                 <ul class="social_list">
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    </li>
+                                    <?= $this->getSocialList() ?>
                                 </ul>
                             </div>
                         </div>

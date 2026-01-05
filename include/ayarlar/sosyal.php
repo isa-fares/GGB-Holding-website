@@ -10,7 +10,7 @@ return [
 
     'list' => array(
         "fb"=>"Facebook",
-        "tw"=>"Twitter",
+        "tw"=>"X",
         "ins"=>"Instagram",
         //"vm"=>"Vimeo"
         //"ytb"=>"Youtube",
@@ -31,14 +31,14 @@ return [
     ),
 
     "frontIcons"=>array(
-        "fb"=>"fa fa-facebook-f",
-        "tw"=>"fa fa-twitter",
-        "ytb"=>"fa fa-youtube",
-        "ins"=>"fa fa-instagram",
-        "link"=>"fa fa-linkedin",
-        "wp"=>"fa fa-whatsapp",
-        "vm"=>"fa fa-vimeo",
-        "tlg"=>"fa fa-telegram"
+        "fb"=>"fa-brands fa-facebook-f",
+        "tw"=>"fa-brands fa-x-twitter",
+        "ytb"=>"fa-brands fa-youtube",
+        "ins"=>"fa-brands fa-instagram",
+        "link"=>"fa-brands fa-linkedin-in",
+        "wp"=>"fa-brands fa-whatsapp",
+        "vm"=>"fa-brands fa-vimeo",
+        "tlg"=>"fa-brands fa-telegram"
     )
 
 ];

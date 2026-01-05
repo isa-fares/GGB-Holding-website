@@ -49,6 +49,7 @@ return[
 	'blog_subheading'=>'News & Announcements',
 	'blog_title_1'=>'Latest Developments',
 	'blog_title_2'=>'from GGB Holding',
+	'blog_cta'=>'View All News',
 
 	// Sustainability CTA
 	'sustainability_title_1'=>'Working for a Sustainable Future and',

@@ -49,6 +49,7 @@ return[
 	'blog_subheading'=>'Haberler & Duyurular',
 	'blog_title_1'=>'GGB Holding\'den',
 	'blog_title_2'=>'Son Gelişmeler',
+	'blog_cta'=>'Tüm Haberleri Görüntüle',
 
 	// Sustainability CTA
 	'sustainability_title_1'=>'Sürdürülebilir Bir Gelecek ve',

@@ -298,6 +298,15 @@ $blogs = $this->dbLangSelect(
                             <?php endforeach; ?>
 
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="blog-cta text-center" data-aos="fade-up" data-aos-duration="1200">
+                                    <a href="<?= $this->BaseURL($this->lang->link('blog_liste'), $lang, 1) ?>" class="theme-btn style-one">
+                                        <?= $this->lang->index('blog_cta') ?> <i class="far fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section class="cta-sb bg_cover p-r z-1" id="index_sust"

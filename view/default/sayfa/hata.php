@@ -7,7 +7,7 @@
  */
 // Page / SEO
 $sayfa  = "Hata";
-$baslik = "404 - Sayfa Bulunamadı";
+$baslik = $this->lang->genel('error_404_title');
 $this->sayfaBaslik = $baslik." - ".$this->ayarlar("title_".$lang);
 $this->ogBaslik    = $this->sayfaBaslik;
 $this->ogUrl       = $this->fullUrl;
@@ -15,14 +15,13 @@ $this->ogUrl       = $this->fullUrl;
 
 <div class="error-404-wrapper">
 	<div class="error-404-inner">
-		<div class="error-404-image-wrapper">
-			<img src="<?=$assetURL?>404.png" alt="404" class="error-404-image">
-		</div>
-		<p class="error-404-text">Aradığınız sayfa bulunamadı.</p>
+		<div class="error-404-code">404</div>
+		<h1 class="error-404-title"><?= $this->lang->genel('error_404_title') ?></h1>
+		<p class="error-404-text"><?= $this->lang->genel('error_404_message') ?></p>
 
 		<div class="error-404-buttons">
-			<a href="<?=$this->baseURL('index', $lang, 1)?>" class="error-404-btn primary">Anasayfa</a>
-			<a href="javascript:history.back(-1)" class="error-404-btn secondary">Geri Dön</a>
+			<a href="<?=$this->baseURL('index', $lang, 1)?>" class="error-404-btn primary"><?= $this->lang->genel('error_404_home') ?></a>
+			<a href="javascript:history.back(-1)" class="error-404-btn secondary"><?= $this->lang->genel('error_404_back') ?></a>
 		</div>
 	</div>
 </div>
@@ -35,75 +34,121 @@ $this->ogUrl       = $this->fullUrl;
 	justify-content: center;
 	text-align: center;
 	background-color: #ffffff;
+	padding: 60px 20px;
 }
 
 .error-404-inner {
-	padding: 20px;
-}
-
-.error-404-image-wrapper {
-	margin-bottom: 15px;
-}
-
-.error-404-image {
-	max-width: 60%;
+	padding: 40px;
+	max-width: 600px;
 	width: 100%;
-	height: auto;
+}
+
+.error-404-code {
+	font-size: 120px;
+	font-weight: 700;
+	line-height: 1;
+	color: #be1f2f;
+	margin-bottom: 20px;
+	font-family: "Plus Jakarta Sans", sans-serif;
+	letter-spacing: -4px;
+}
+
+.error-404-title {
+	font-size: 32px;
+	font-weight: 700;
+	color: #111111;
+	margin-bottom: 20px;
+	font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .error-404-text {
-	font-size: 40px;
-	margin: 0 0 25px;
-	color: #555;
+	font-size: 18px;
+	margin: 0 0 40px;
+	color: #696969;
+	line-height: 1.6;
+	font-family: "Manrope", sans-serif;
 }
 
 .error-404-buttons {
 	display: inline-flex;
-	gap: 12px;
+	gap: 15px;
 	flex-wrap: wrap;
 	justify-content: center;
 }
 
 .error-404-btn {
 	display: inline-block;
-	padding: 10px 22px;
+	padding: 16px 32px;
 	border-radius: 4px;
-	font-size: 30px;
+	font-size: 16px;
 	font-weight: 600;
 	text-decoration: none;
-	border: 1px solid transparent;
+	border: 2px solid transparent;
+	transition: all 0.3s ease;
+	font-family: "Manrope", sans-serif;
 }
 
 .error-404-btn.primary {
-	background-color: #007bff;
-	border-color: #007bff;
-	color: #fff;
+	background-color: #be1f2f;
+	border-color: #be1f2f;
+	color: #ffffff;
+}
+
+.error-404-btn.primary:hover {
+	background-color: #9a1926;
+	border-color: #9a1926;
+	color: #ffffff;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(190, 31, 47, 0.3);
 }
 
 .error-404-btn.secondary {
 	background-color: #ffffff;
-	border-color: #007bff;
-	color: #007bff;
-}
-
-.error-404-btn.primary:hover {
-	background-color: #0056b3;
-	border-color: #0056b3;
-	color: #fff;
+	border-color: #be1f2f;
+	color: #be1f2f;
 }
 
 .error-404-btn.secondary:hover {
-	background-color: #007bff;
-	color: #fff;
+	background-color: #be1f2f;
+	border-color: #be1f2f;
+	color: #ffffff;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(190, 31, 47, 0.3);
 }
 
 @media (max-width: 575px) {
+	.error-404-wrapper {
+		padding: 40px 15px;
+	}
+	
+	.error-404-inner {
+		padding: 20px;
+	}
+	
 	.error-404-code {
 		font-size: 80px;
+		letter-spacing: -2px;
+	}
+
+	.error-404-title {
+		font-size: 24px;
 	}
 
 	.error-404-text {
-		font-size: 18px;
+		font-size: 16px;
+		margin-bottom: 30px;
+	}
+	
+	.error-404-btn {
+		padding: 14px 28px;
+		font-size: 14px;
+		width: 100%;
+		max-width: 200px;
+	}
+	
+	.error-404-buttons {
+		flex-direction: column;
+		align-items: center;
 	}
 }
 </style>

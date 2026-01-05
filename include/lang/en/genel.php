@@ -24,4 +24,15 @@ return[
 	'hr_content_paragraph4'=>'As our group grows, new roles, areas of expertise, and career opportunities emerge. As Human Resources, we conduct our <strong>talent acquisition</strong>, <strong>performance management</strong>, and <strong>talent development</strong> processes with a strategic approach; we strongly support our internal promotion system. Because we know that our employees\' success is the foundation of our sustainable growth.',
 	'hr_content_paragraph5'=>'If you also want to be part of a work environment shaped by the principles of reliability, productivity, and innovation, you can contact us to join the GGB Holding family. We look forward to walking together towards a stronger future.',
 
+	// Blog Detail
+	'blog_other_posts'=>'Other Posts',
+	'blog_share'=>'Share:',
+	'blog_share_message'=>'I recommend reading this article',
+	
+	// Error 404
+	'error_404_title'=>'404 - Page Not Found',
+	'error_404_message'=>'The page you are looking for could not be found.',
+	'error_404_home'=>'Home',
+	'error_404_back'=>'Go Back',
+
 ];

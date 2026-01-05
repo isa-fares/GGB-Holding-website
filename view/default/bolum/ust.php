@@ -71,9 +71,7 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                                 </li>
                             </ul>
                             <ul class="social-link">
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-x-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                <?= $this->getSocialList() ?>
                             </ul>
                         </div>
                     </div>
@@ -171,10 +169,7 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                         <div class="sasly-menu-bottom mt-50 d-block d-lg-none">
                             <h5><?= $this->lang->header('Bizi Takip Edin') ?></h5>
                             <ul class="social-link">
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                <?= $this->getSocialList() ?>
                             </ul>
                         </div>
                     </div>

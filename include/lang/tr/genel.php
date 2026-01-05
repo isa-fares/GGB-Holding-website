@@ -24,4 +24,15 @@ return[
 	'hr_content_paragraph4'=>'Grubumuzun büyümesiyle paralel olarak yeni roller, uzmanlık alanları ve kariyer fırsatları ortaya çıkıyor. İnsan Kaynakları olarak <strong>yetenek kazanımı</strong>, <strong>performans yönetimi</strong> ve <strong>yetenek geliştirme</strong> süreçlerimizi stratejik bir yaklaşımla yürütüyor; iç terfi sistemimizi güçlü bir şekilde destekliyoruz. Çünkü biliyoruz ki çalışanlarımızın başarısı, sürdürülebilir büyümemizin temelidir.',
 	'hr_content_paragraph5'=>'Siz de güvenilirlik, üretkenlik ve yenilikçilik ilkeleriyle şekillenen bir çalışma ortamında yer almak isterseniz, GGB Holding ailesine katılmak için bizimle iletişime geçebilirsiniz. Birlikte daha güçlü bir geleceğe yürümeyi sabırsızlıkla bekliyoruz.',
 
+	// Blog Detail
+	'blog_other_posts'=>'Diğer bloglar',
+	'blog_share'=>'Paylaş:',
+	'blog_share_message'=>'Bu makaleyi okumanızı öneririm',
+	
+	// Error 404
+	'error_404_title'=>'404 - Sayfa Bulunamadı',
+	'error_404_message'=>'Aradığınız sayfa bulunamadı.',
+	'error_404_home'=>'Anasayfa',
+	'error_404_back'=>'Geri Dön',
+
 ];

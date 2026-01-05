@@ -73,13 +73,6 @@ $this->setPageMeta(
     $blog_baslik,
     $blog_ozet
 );
-
-
-echo '<pre>';
-
-print_r($blog_Ek_Resimler);
-echo '</pre>';
- exit;
 ?>
 
 <div id="smooth-wrapper">
@@ -102,7 +95,7 @@ echo '</pre>';
                                 <div class="page-content text-center">
                                     <h3 class="page-title">
                                         <a href="<?= $blog_liste_url ?>">
-                                            <i class="fa-regular fa-arrow-left"></i>Diğer bloglar
+                                            <i class="fa-regular fa-arrow-left"></i><?= $this->lang->genel('blog_other_posts') ?>
                                         </a><br>
                                         <?= $blog_baslik ?>
                                     </h3>
@@ -141,11 +134,12 @@ echo '</pre>';
                                         </div>
                                         <div class="entry-footer">
                                             <div class="social-share">
-                                                <span>Paylaş:</span>
-                                                <a target="_blank" href="https://twitter.com/intent/tweet?text=Bu%20makaleyi%20okumanızı%20öneririm&url=" onclick="this.href+= encodeURIComponent(window.location.href)"><i class="fa-brands fa-x-twitter"></i></a>
+                                                <span><?= $this->lang->genel('blog_share') ?></span>
+                                                <?php $share_message = urlencode($this->lang->genel('blog_share_message')); ?>
+                                                <a target="_blank" href="https://twitter.com/intent/tweet?text=<?= $share_message ?>&url=" onclick="this.href+= encodeURIComponent(window.location.href)"><i class="fa-brands fa-x-twitter"></i></a>
                                                 <a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url=" onclick="this.href+= encodeURIComponent(window.location.href)"><i class="fa-brands fa-linkedin-in"></i></a>
                                                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" onclick="this.href+= encodeURIComponent(window.location.href)"><i class="fa-brands fa-facebook-f"></i></a>
-                                                <a target="_blank" href="https://api.whatsapp.com/send?text=Bu%20makaleyi%20okumanızı%20öneririm:%20" onclick="this.href+= encodeURIComponent(window.location.href)"><i class="fa-brands fa-whatsapp"></i></a>
+                                                <a target="_blank" href="https://api.whatsapp.com/send?text=<?= $share_message ?>:%20" onclick="this.href+= encodeURIComponent(window.location.href)"><i class="fa-brands fa-whatsapp"></i></a>
                                             </div>
                                         </div>
                                     </div>

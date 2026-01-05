@@ -63,7 +63,7 @@ $fotos = ($galeri_data && isset($galeri_data['fotos'])) ? $galeri_data['fotos'] 
                                     <?php if ($galeri_data && isset($galeri_data['galeri']['ozet']) && !empty($galeri_data['galeri']['ozet'])): ?>
                                         <p><?= $galeri_data['galeri']['ozet'] ?></p>
                                     <?php else: ?>
-                                        <p><?= $this->lang->genel('company_stats_description') ?></p>
+                                        <p><?= $this->ozetKisaca() ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>

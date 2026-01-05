@@ -71,7 +71,7 @@ $this->setPageMeta(
                                     </section>
                                 </div>
                                 <div>
-                                    <p><?= $this->lang->genel('company_stats_description') ?></p>
+                                    <p><?= $this->ozetKisaca() ?></p>
                                 </div>
                             </div>
                         </div>

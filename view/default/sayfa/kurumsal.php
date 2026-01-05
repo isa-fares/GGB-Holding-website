@@ -103,11 +103,7 @@ $sidebar_pages = $kurumsal_pages;
                             </section>
                         </div>
                         <div>
-                            <?php if (!empty($ozet)): ?>
-                                <p><?= $ozet ?></p>
-                            <?php else: ?>
-                                <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya devam ediyoruz.</p>
-                            <?php endif; ?>
+                            <p><?= $this->ozetKisaca() ?></p>
                         </div>
                     </div>
                 </div>

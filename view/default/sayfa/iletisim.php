@@ -45,7 +45,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                             </section>
                         </div>
                         <div>
-                            <p><?= $this->lang->iletisim('header_description') ?></p>
+                            <p><?= $this->ozetKisaca() ?></p>
                         </div>
                     </div>
                 </div>

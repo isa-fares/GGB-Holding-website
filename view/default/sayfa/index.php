@@ -18,7 +18,13 @@ $this->setPageMeta(
 
 
 $isitirakler_sayfalar = $this->getCategoryPages("İştirakler");
-
+$blogs = $this->dbLangSelect(
+    "blog",
+    "aktif = 1 AND sil = 0 AND baslik <> ''",
+    "resim",
+    "LIMIT 3",
+    "ORDER BY sira ASC"
+);
 
 
 ?>
@@ -210,24 +216,29 @@ $isitirakler_sayfalar = $this->getCategoryPages("İştirakler");
                                 <?php foreach ($isitirakler_sayfalar as $sayfa) : 
                                     $link = $this->lang->link($sayfa['url']);
                                     $url = $this->BaseURL($link, $lang, 1);
-                                    $baslik = $sayfa['baslik'];
                                     $ozet = $sayfa['ozet'];
                                     $resim = $this->dbResimAl($sayfa['resim'], "sayfa", "600,400");
+                                    $logo = $this->dbResimAl($sayfa['banner'], "sayfa", "600,300");
+                                    $baslik = $sayfa['baslik'];
+                                    //baslik tow words extract word1 - word2
+                                    $baslik_words = explode(" ", $baslik);
+                                    $baslik_words_1 = $baslik_words[0];
+                                    $baslik_words_2 = $baslik_words[1];
                                     ?>
                                 <div class="col-md-6">
                                     <div class="sasly-card-item style-one mb-30" data-aos="fade-up"
                                         data-aos-duration="1300">
                                         <div class="content-box">
                                             <div class="content">
-                                                <h5><?= $baslik ?> <span><?= $baslik ?></span></h5>
+                                                <h5><?= $baslik_words_1 ?> <span><?= $baslik_words_2 ?? '' ?></span></h5>
                                                 <p><?= $ozet ?></p>
                                             </div>
                                         </div>
                                         <div class="thumbnail" style="max-height: none">
                                             <a href="<?= $url ?>" class="partner_logo">
-                                                <img src="<?= $assetURL ?>images/a1.jpg">
+                                                <img src="<?= $resim ?>" alt="<?= $baslik ?>">
                                                 <div>
-                                                    <img src="<?= $resim ?>" alt="<?= $baslik ?>">
+                                                    <img src="<?= $logo ?>" alt="<?= $baslik ?>">
                                                 </div>
                                             </a>
                                         </div>
@@ -251,68 +262,38 @@ $isitirakler_sayfalar = $this->getCategoryPages("İştirakler");
                         </div>
                         <div class="row justify-content-center">
 
-                            <!-- Blog 1 -->
+                            <!-- Blogs -->
+                            <?php foreach ($blogs as $blog) :
+                                $baslik = $blog['baslik'];
+                                $ozet = $blog['ozet'];
+                                $resim = $this->dbResimAl($blog['resim'], "blog", "390,360");
+                                $url = $this->BaseURL('blog_detay', $lang, 1, $blog['id']);
+                                //first word Eylül  second word 28, third word 2024 by turkish format
+                                $tarih = $this->gun_ay_yil($blog['tarih']);
+                                
+
+
+                            ?>
                             <div class="col-xl-4 col-md-6">
                                 <div class="blog-post-item style-one mb-80" data-aos="fade-up" data-aos-duration="1200">
                                     <div class="post-thumbnail">
-                                        <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                            <img src="<?= $assetURL ?>images/blog/blog1.jpg" alt="Blog">
+                                        <a href="<?= $url ?>">
+                                            <img src="<?= $resim ?>" alt="<?= $baslik ?>">
                                         </a>
                                     </div>
                                     <div class="post-content">
                                         <div class="post-meta style-one">
-                                            <span class="date"><a href="#">Ekim 12, 2024</a></span>
+                                            <span class="date"><a href="<?= $url ?>"><?= $tarih ?></a></span>
                                         </div>
                                         <h4 class="title">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                GGB Holding’den Yeni Yatırım: Üretim Teknolojilerinde Güçlü Adım
+                                            <a href="<?= $url ?>">
+                                                <?= $baslik ?>
                                             </a>
                                         </h4>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Blog 2 -->
-                            <div class="col-xl-4 col-md-6">
-                                <div class="blog-post-item style-one mb-80" data-aos="fade-up" data-aos-duration="1400">
-                                    <div class="post-thumbnail">
-                                        <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                            <img src="<?= $assetURL ?>images/blog/blog2.jpg" alt="Blog">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <div class="post-meta style-one">
-                                            <span class="date"><a href="#">Ekim 05, 2024</a></span>
-                                        </div>
-                                        <h4 class="title">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                Sektörlerde Dijital Dönüşüm: GGB Holding’den Stratejik Atılım
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Blog 3 -->
-                            <div class="col-xl-4 col-md-6">
-                                <div class="blog-post-item style-one mb-80" data-aos="fade-up" data-aos-duration="1600">
-                                    <div class="post-thumbnail">
-                                        <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                            <img src="<?= $assetURL ?>images/blog/blog3.jpg" alt="Blog">
-                                        </a>
-                                    </div>
-                                    <div class="post-content">
-                                        <div class="post-meta style-one">
-                                            <span class="date"><a href="#">Eylül 28, 2024</a></span>
-                                        </div>
-                                        <h4 class="title">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                GGB Holding’den Sürdürülebilirlik Odaklı Yeni Proje
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
 
                         </div>
                     </div>

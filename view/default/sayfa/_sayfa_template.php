@@ -13,7 +13,23 @@
 $table = "sayfa";
 
 // Get page data from database based on URL
+// Try to find page with exact URL first
 $veri = $this->dbLangSelectRow($table, array("url" => $page), "resim");
+
+// If not found, try to find by matching without numbers at the end
+if (!is_array($veri) || empty($veri)) {
+    // Get all pages to search
+    $all_pages = $this->dbLangSelect($table, "aktif = 1 and baslik <> ''", "", "", "ORDER BY sira ASC");
+    if (is_array($all_pages)) {
+        foreach ($all_pages as $p) {
+            $p_url_clean = preg_replace('/-\d+$/', '', $p['url']);
+            if ($p_url_clean == $page) {
+                $veri = $this->dbLangSelectRow($table, array("url" => $p['url']), "resim");
+                break;
+            }
+        }
+    }
+}
 
 // Check if page exists
 if (!is_array($veri) || empty($veri)) {
@@ -121,7 +137,9 @@ if ($kid > 0) {
                                         </div>
                                         <ul>
                                             <?php foreach ($sidebar_pages as $sidebar_page): 
-                                                $sidebar_url = $this->lang->link($sidebar_page['url']);
+                                                // Remove numbers from end of URL (e.g., hakkimizda-1 -> hakkimizda)
+                                                $sidebar_url_clean = preg_replace('/-\d+$/', '', $sidebar_page['url']);
+                                                $sidebar_url = $this->lang->link($sidebar_url_clean);
                                                 $sidebar_page_url = $this->BaseURL($sidebar_url, $lang, 1);
                                                 $is_active = ($sidebar_page['url'] == $page) ? 'active' : '';
                                             ?>

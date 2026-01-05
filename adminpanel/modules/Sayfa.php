@@ -162,12 +162,27 @@ class Sayfa  extends Settings{
 
         if($id) $data = $tabs->tabData($this->table,$id);
 
+        // Check if category is İştirakler
+        $isIstirakler = false;
+        $selectedKid = (isset($data['tr']['kid'])) ? $data['tr']['kid'] : (isset($_POST['kid']) ? $_POST['kid'] : '');
+        if ($selectedKid) {
+            $kategori = $this->dbConn->tekSorgu("SELECT baslik FROM $this->ktable WHERE id = '".$this->kirlet($selectedKid)."'");
+            if ($kategori && isset($kategori['baslik']) && $kategori['baslik'] == 'İştirakler') {
+                $isIstirakler = true;
+            }
+        }
+
         foreach ($this->settings->lang('lang') as $dil=>$title):
             $tabForm[$dil]['text']  = $form->input(array('value'=>((isset($data[$dil]['baslik']) ? $this->temizle($data[$dil]['baslik']) :'')),'title'=>'Sayfa Adı','lang'=>$dil,'name'=>'baslik'));
             $tabForm[$dil]['text'] .= $form->textarea(array('value'=>((isset($data[$dil]['ozet']) ? $this->temizle($data[$dil]['ozet']) :'')),'title'=>'Özet','name'=>'ozet','lang'=>$dil));
             $tabForm[$dil]['text'] .= $form->textEditor(array('value'=>((isset($data[$dil]['detay']) ? $this->temizle($data[$dil]['detay']) :'')),'title'=>'Detay','name'=>'detay','lang'=>$dil,'height' => '250'));
 
             $tabForm[$dil]['text'].= $form->file(array("lang"=>$dil, 'url'=>$this->BaseURL('upload')."/".$this->modulName,'folder'=>$this->modulName,'title'=>'Sayfa Resmi','name'=>'resim','resimBoyut'=>$this->modul_image_size($this->modul_info["id"]),'src'=>((isset($data[$dil]['resim'])) ? $data[$dil]['resim'] :'')));
+            
+            // Add logo field only for İştirakler category (using banner field)
+            if ($isIstirakler) {
+                $tabForm[$dil]['text'].= $form->file(array("lang"=>$dil, 'url'=>$this->BaseURL('upload')."/".$this->modulName,'folder'=>$this->modulName,'title'=>'Logo','name'=>'banner','resimBoyut'=>'600x300','src'=>((isset($data[$dil]['banner'])) ? $data[$dil]['banner'] :'')));
+            }
         endforeach;
 
         $text .= $tabs->tabContent($tabForm);
@@ -193,6 +208,32 @@ class Sayfa  extends Settings{
 
     public function kaydet($id=null)
     {
+        // Check if category is İştirakler
+        $isIstirakler = false;
+        $selectedKid = ($this->_POST('kid')) ? $this->_POST('kid') : 0;
+        if ($selectedKid) {
+            $kategori = $this->dbConn->tekSorgu("SELECT baslik FROM $this->ktable WHERE id = '".$this->kirlet($selectedKid)."'");
+            if ($kategori && isset($kategori['baslik']) && $kategori['baslik'] == 'İştirakler') {
+                $isIstirakler = true;
+            }
+        }
+
+        // Ensure banner column exists in both tables if İştirakler category
+        if ($isIstirakler) {
+            $dbname = $this->getDbName();
+            
+            // Check and add banner column to main table (sayfa)
+            $knt = $this->dbConn->tekSorgu("SELECT COUNT(*) as tp FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$this->table' AND COLUMN_NAME = 'banner' AND table_schema = '".$dbname."'");
+            if (!isset($knt["tp"]) || $knt["tp"] == 0) {
+                $this->dbConn->manualSql("ALTER TABLE $this->table ADD COLUMN banner TEXT(0)");
+            }
+            
+            // Check and add banner column to lang table (sayfa_lang)
+            $knt_lang = $this->dbConn->tekSorgu("SELECT COUNT(*) as tp FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$this->tablelang' AND COLUMN_NAME = 'banner' AND table_schema = '".$dbname."'");
+            if (!isset($knt_lang["tp"]) || $knt_lang["tp"] == 0) {
+                $this->dbConn->manualSql("ALTER TABLE $this->tablelang ADD COLUMN banner TEXT(0)");
+            }
+        }
 
         foreach ($this->settings->lang('lang') as $dil=>$title):
 
@@ -206,6 +247,10 @@ class Sayfa  extends Settings{
                     'kid'=>($this->_POST('kid')) ? $this->_POST('kid'):0,
                     'dil' => $dil
                 );
+                // Add banner (logo) field only for İştirakler category
+                if ($isIstirakler):
+                    $post[$dil]['banner'] = $this->_RESIM_BASE64('banner_'.$dil, $this->modulName);
+                endif;
             else:
                 $post[$dil] = array(
                     'baslik'=> $this->kirlet($this->_POST('baslik',$dil)),
@@ -216,6 +261,10 @@ class Sayfa  extends Settings{
                     'kid'=>($this->_POST('kid')) ? $this->_POST('kid'):0,
                     'dil' => $dil
                 );
+                // Add banner (logo) field only for İştirakler category
+                if ($isIstirakler):
+                    $post[$dil]['banner'] = $this->_RESIM_BASE64('banner_'.$dil, $this->modulName);
+                endif;
             endif;
 
 

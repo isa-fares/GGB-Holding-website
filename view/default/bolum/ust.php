@@ -101,9 +101,14 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                             <ul>
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Kurumsal') ?></a>
                                     <ul class="sub-menu">
-                                        <?php foreach ($kurumsal_sayfalar as $sayfa) {
-                                            $link = $this->lang->link($sayfa['url']);
-                                            $url = $this->BaseURL($link, $lang, 1); 
+                                        <?php 
+                                        $kurumsal_link = $this->lang->link('kurumsal');
+                                        foreach ($kurumsal_sayfalar as $sayfa) {
+                                            $page_url = $sayfa['url'];
+                                            // Remove any numbers from end of URL (e.g., hakkimizda-1 -> hakkimizda, sertifika-2 -> sertifika)
+                                            $page_url_clean = preg_replace('/-\d+$/', '', $page_url);
+                                            // Build URL: kurumsal/page-url.html (without numbers)
+                                            $url = $this->BaseURL($kurumsal_link . '/' . $page_url_clean, $lang, 1);
                                             $baslik = $sayfa['baslik'];
                                         ?>
                                             <li>
@@ -115,13 +120,16 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Politikalar') ?></a>
                                     <ul class="sub-menu">
                                         <?php foreach ($politikalar_sayfalar as $sayfa) {
-                                            $link = $this->lang->link($sayfa['url']);
+                                            $page_url = $sayfa['url'];
+                                            // Remove numbers from end of URL (e.g., cevre-politikasi-1 -> cevre-politikasi)
+                                            $page_url_clean = preg_replace('/-\d+$/', '', $page_url);
+                                            $link = $this->lang->link($page_url_clean);
                                             $url = $this->BaseURL($link, $lang, 1); 
                                             $baslik = $sayfa['baslik'];
                                         ?>
-                                            <li>
+                                        <li>
                                                 <a href="<?= $url ?>"><?= $baslik ?></a>
-                                            </li>
+                                        </li>
                                         <?php } ?>
                                     </ul>
                                 </li>
@@ -129,9 +137,14 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                                 <li class="menu-item"><a href="<?= $this->BaseURL($this->lang->link('insan_kaynaklari'), $lang, 1) ?>"><?= $this->lang->header('Insan Kaynaklari') ?></a></li>
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('İştirakler') ?></a>
                                     <ul class="sub-menu">
-                                        <?php foreach ($isitirakler_sayfalar as $sayfa) {
-                                            $link = $this->lang->link($sayfa['url']);
-                                            $url = $this->BaseURL($link, $lang, 1); 
+                                        <?php 
+                                        $istirakler_link = $this->lang->link('istirakler');
+                                        foreach ($isitirakler_sayfalar as $sayfa) {
+                                            $page_url = $sayfa['url'];
+                                            // Remove numbers from end of URL (e.g., kristal-1 -> kristal)
+                                            $page_url_clean = preg_replace('/-\d+$/', '', $page_url);
+                                            // Build URL: istirakler/page-url.html (without numbers)
+                                            $url = $this->BaseURL($istirakler_link . '/' . $page_url_clean, $lang, 1);
                                             $baslik = $sayfa['baslik'];
                                         ?>
                                             <li>

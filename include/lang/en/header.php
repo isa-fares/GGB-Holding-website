@@ -3,7 +3,7 @@
 return[
 
 	// Home Page
-	'index'=>'HOME',
+		'index'=>'HOME',
 	'Anasayfa'=>'HOME',
 	
 	// Menu Items

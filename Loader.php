@@ -252,6 +252,11 @@ class Loader extends FrontClass
                 $text .= $this->_include('sayfa/kurumsal',$data,$this->theme);
                 break;
 
+            case 'istirakler':
+            case 'İştirakler':
+                $text .= $this->_include('sayfa/İştirakler',$data,$this->theme);
+                break;
+
             case 'destek':
                 $text .= $this->_include('sayfa/destek',$data,$this->theme);
                 break;

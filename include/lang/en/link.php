@@ -58,6 +58,8 @@ return[
 		'enerji_politikasi'=>'energy-policy',
 		'faaliyet_alanlari'=>'business-areas',
 		'insan_kaynaklari'=>'human-resources',
+		'politikalar'=>'policies',
+		'istirakler'=>'subsidiaries',
 		'kristal'=>'kristal',
 		'guven'=>'guven',
 		'blog_liste'=>'blog',

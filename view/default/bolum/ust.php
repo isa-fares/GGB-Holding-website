@@ -158,7 +158,7 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                                 <li class="menu-item has-children"><a href="#"><?= $this->lang->header('Multimedya') ?></a>
                                     <ul class="sub-menu">
                                         <li><a href="<?= $this->BaseURL($this->lang->link('foto_galeri'), $lang, 1) ?>"><?= $this->lang->header('Foto Galeri') ?></a></li>
-                                        <li><a href="#">Video Galeri</a></li>
+                                        <li><a href="<?= $this->BaseURL($this->lang->link('video_galeri'), $lang, 1) ?>"><?= $this->lang->header('Video Galeri') ?></a></li>
                                         <li><a href="<?= $this->BaseURL($this->lang->link('blog_liste'), $lang, 1) ?>"><?= $this->lang->header('Blog Liste') ?></a></li>
                                     </ul>
                                 </li>

@@ -254,6 +254,7 @@ class Loader extends FrontClass
 
             case 'istirakler':
             case 'İştirakler':
+            case 'subsidiaries':
                 $text .= $this->_include('sayfa/İştirakler',$data,$this->theme);
                 break;
 

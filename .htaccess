@@ -19,33 +19,32 @@ RewriteRule ^ajax/(.*)\.html$ index.php?page=$1&type=ajax [L,NC]
 
 RewriteRule ^bulten.html/(.*)/([0-9]+)$ index.php?page=bulten&lang=$1&id=$2 [L]
 
+# Specific category pages - must come before general rules
+RewriteRule ^kurumsal/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=tr [L,NC]
+RewriteRule ^en/corporate/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=en [L,NC]
+RewriteRule ^ar/kurumsal/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=ar [L,NC]
+RewriteRule ^istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=tr [L,NC]
+RewriteRule ^en/subsidiaries/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=en [L,NC]
+RewriteRule ^ar/istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=ar [L,NC]
+RewriteRule ^politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=tr [L,NC]
+RewriteRule ^en/policies/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=en [L,NC]
+RewriteRule ^ar/politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=ar [L,NC]
+RewriteRule ^blog/(.*)\.html$ index.php?page=blog&katurl=$1&lang=tr [L,NC]
+RewriteRule ^en/blog/(.*)\.html$ index.php?page=blog&katurl=$1&lang=en [L,NC]
+RewriteRule ^ar/blog/(.*)\.html$ index.php?page=blog&katurl=$1&lang=ar [L,NC]
 
+# General language rules
 RewriteRule ^en/(.*)/(.*)-([0-9]+)\.html$ index.php?page=$1&katurl=$2&id=$3&lang=en [L,NC]
 RewriteRule ^en/(.*).html$ index.php?page=$1&lang=en  [L,NC]
 RewriteRule ^en/(.*)/(.*)-([0-9]+)\.html/([0-9]+)$ index.php?page=$1&katurl=$2&id=$3&lang=en&sayfa=$4 [L,NC]
 RewriteRule ^en/(.*).html/([0-9]+)$ index.php?page=$1&lang=en&sayfa=$2 [L,NC]
 RewriteRule ^en/user/(.*)\.html$ index.php?page=user&type=$1&lang=en [L,NC]
 
-
 RewriteRule ^ar/(.*)/(.*)-([0-9]+)\.html$ index.php?page=$1&katurl=$2&id=$3&lang=ar [L,NC]
 RewriteRule ^ar/(.*).html$ index.php?page=$1&lang=ar  [L,NC]
 RewriteRule ^ar/(.*)/(.*)-([0-9]+)\.html/([0-9]+)$ index.php?page=$1&katurl=$2&id=$3&lang=ar&sayfa=$4 [L,NC]
 RewriteRule ^ar/(.*).html/([0-9]+)$ index.php?page=$1&lang=ar&sayfa=$2 [L,NC]
 RewriteRule ^ar/user/(.*)\.html$ index.php?page=user&type=$1&lang=ar [L,NC]
-
-
-RewriteRule ^kurumsal/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=tr [L,NC]
-RewriteRule ^en/kurumsal/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=en [L,NC]
-RewriteRule ^ar/kurumsal/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=ar [L,NC]
-RewriteRule ^istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=tr [L,NC]
-RewriteRule ^en/istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=en [L,NC]
-RewriteRule ^ar/istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=ar [L,NC]
-RewriteRule ^politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=tr [L,NC]
-RewriteRule ^en/politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=en [L,NC]
-RewriteRule ^ar/politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=ar [L,NC]
-RewriteRule ^blog/(.*)\.html$ index.php?page=blog&katurl=$1&lang=tr [L,NC]
-RewriteRule ^en/blog/(.*)\.html$ index.php?page=blog&katurl=$1&lang=en [L,NC]
-RewriteRule ^ar/blog/(.*)\.html$ index.php?page=blog&katurl=$1&lang=ar [L,NC]
 RewriteRule ^(.*)/(.*)/(.*)\.html$ index.php?page=$1&katurl=$2&urunurl=$3&lang=tr [L,NC]
 RewriteRule ^(.*)/(.*)-([0-9]+)\.html$ index.php?page=$1&katurl=$2&id=$3&lang=tr [L,NC]
 

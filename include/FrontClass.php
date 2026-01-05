@@ -2006,6 +2006,11 @@ EOT;
         $lang = $this->pageLang;
         return $this->temizle($this->ayarlar("kisaca_".$lang));
     }
+    public function ozetKisaca()
+    {
+        $lang = $this->pageLang;
+        return $this->temizle($this->ayarlar("ozet_" . $lang));
+    }
 
 
 

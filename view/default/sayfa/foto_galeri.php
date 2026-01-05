@@ -63,7 +63,7 @@ $fotos = ($galeri_data && isset($galeri_data['fotos'])) ? $galeri_data['fotos'] 
                                     <?php if ($galeri_data && isset($galeri_data['galeri']['ozet']) && !empty($galeri_data['galeri']['ozet'])): ?>
                                         <p><?= $galeri_data['galeri']['ozet'] ?></p>
                                     <?php else: ?>
-                                        <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya devam ediyoruz.</p>
+                                        <p><?= $this->lang->genel('company_stats_description') ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@ $fotos = ($galeri_data && isset($galeri_data['fotos'])) ? $galeri_data['fotos'] 
                                 <?php else: ?>
                                     <div class="col-12">
                                         <div class="alert alert-info text-center">
-                                            <p><?= $this->lang->genel('urun-foto') ?? 'Henüz fotoğraf eklenmemiş.' ?></p>
+                                            <p><?= $this->lang->genel('no_photos_message') ?></p>
                                         </div>
                                     </div>
                                 <?php endif; ?>

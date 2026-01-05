@@ -52,7 +52,7 @@ $this->setPageMeta(
                             </section>
                         </div>
                         <div>
-                            <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya devam ediyoruz.</p>
+                            <p><?= $this->lang->genel('company_stats_description') ?></p>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ $this->setPageMeta(
                         <?php else: ?>
                             <div class="col-12">
                                 <div class="alert alert-info text-center">
-                                    <p>Henüz video eklenmemiş.</p>
+                                    <p><?= $this->lang->genel('no_videos_message') ?></p>
                                 </div>
                             </div>
                         <?php endif; ?>

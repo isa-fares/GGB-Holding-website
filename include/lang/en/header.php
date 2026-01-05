@@ -7,11 +7,11 @@ return[
 	'Anasayfa'=>'HOME',
 	
 	// Menu Items
-	'Kurumsal'=>'CORPORATE',
-	'Politikalar'=>'POLICIES',
-	'İletişim'=>'CONTACT',
-	'İştirakler'=>'SUBSIDIARIES',
-	'Multimedya'=>'MULTIMEDIA',
+	'Kurumsal'=>'Corporate',
+	'Politikalar'=>'Policies',
+	'İletişim'=>'Contact',
+	'İştirakler'=>'Subsidiaries',
+	'Multimedya'=>'Multimedia',
 	
 	// Sub Menus
 	'Hakkımızda'=>'About Us',
@@ -31,6 +31,7 @@ return[
 	'Kristal'=>'Kristal Textile',
 	'Guven'=>'Guven Paint',
 	'Foto Galeri'=>'Photo Gallery',
+	'Video Galeri'=>'Video Gallery',
 	'Blog Liste'=>'Blog',
 	'Blog Detay'=>'Blog Detail',
 	'Yonetim Kurulu'=>'Board of Directors',

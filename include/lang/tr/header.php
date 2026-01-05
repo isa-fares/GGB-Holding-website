@@ -31,6 +31,7 @@ return[
 	'Kristal'=>'Kristal Tekstil',
 	'Guven'=>'Güven Boya',
 	'Foto Galeri'=>'Foto Galeri',
+	'Video Galeri'=>'Video Galeri',
 	'Blog Liste'=>'Blog',
 	'Blog Detay'=>'Blog Detay',
 	'Yonetim Kurulu'=>'Yönetim Kurulu',

@@ -31,6 +31,7 @@ return[
 	'Kristal'=>'كريستال للنسيج',
 	'Guven'=>'جوفين للدهانات',
 	'Foto Galeri'=>'معرض الصور',
+	'Video Galeri'=>'معرض الفيديو',
 	'Blog Liste'=>'المدونة',
 	'Blog Detay'=>'تفاصيل المدونة',
 	'Yonetim Kurulu'=>'مجلس الإدارة',

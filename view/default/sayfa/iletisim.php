@@ -140,7 +140,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="form-group">
+                                        <div class="form-group">
                                                 <label><?= $this->lang->iletisim('form_captcha_label') ?></label>
                                                 <div class="captcha" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
                                                     <img class="captcha_image" src="<?= $this->baseURL("ajax/getcaptchaimage", "tr", 1) ?>" style="cursor: pointer;">

@@ -552,6 +552,52 @@ class FrontClass extends Mail
     }
 
     /**
+     * Get gallery by baslik and return its photos
+     * 
+     * @param string $baslik Gallery title (e.g., "Foto Galeri")
+     * @param string $limit Limit for photos (optional)
+     * @return array|bool Array with gallery info and photos, or false if not found
+     */
+    public function getGaleriByBaslik($baslik, $limit = "") {
+        $lang = $this->pageLang;
+        if ($lang == "") $lang = "tr";
+        
+        // Get gallery by baslik - galeri table uses 'dil' column directly, not _lang table
+        $query = "SELECT * FROM galeri WHERE baslik = '".$this->kirlet($baslik)."' AND dil = '".$lang."' AND aktif = 1 AND sil = 0 LIMIT 1";
+        $galeri = $this->tekSorgu($query);
+        
+        if (!is_array($galeri)) {
+            // If not found in current language, try Turkish
+            if ($lang != "tr") {
+                $query = "SELECT * FROM galeri WHERE baslik = '".$this->kirlet($baslik)."' AND dil = 'tr' AND aktif = 1 AND sil = 0 LIMIT 1";
+                $galeri = $this->tekSorgu($query);
+            }
+        }
+        
+        if (!is_array($galeri)) {
+            return false;
+        }
+        
+        $galeri_id = $galeri['id'];
+        
+        // Get photos from dosyalar table where type = 'galeri' and data_id = gallery id
+        $limit_clause = ($limit != "") ? "LIMIT ".$limit : "";
+        $query = "SELECT * FROM dosyalar WHERE type = 'galeri' AND data_id = ".$galeri_id." AND tur = 'resim' AND lang = '".$lang."' AND aktif = 1 AND sil = 0 ORDER BY sira ASC, id DESC ".$limit_clause;
+        $fotos = $this->sorgu($query);
+        
+        // If no photos in current language, try Turkish
+        if (!is_array($fotos) && $lang != "tr") {
+            $query = "SELECT * FROM dosyalar WHERE type = 'galeri' AND data_id = ".$galeri_id." AND tur = 'resim' AND lang = 'tr' AND aktif = 1 AND sil = 0 ORDER BY sira ASC, id DESC ".$limit_clause;
+            $fotos = $this->sorgu($query);
+        }
+        
+        return array(
+            'galeri' => $galeri,
+            'fotos' => (is_array($fotos)) ? $fotos : array()
+        );
+    }
+
+    /**
      * @param $resim
      * @param $klasor
      * @param string $boyut

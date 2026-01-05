@@ -552,49 +552,148 @@ class FrontClass extends Mail
     }
 
     /**
-     * Get gallery by baslik and return its photos
+     * Get gallery by baslik and return gallery data with photos
      * 
      * @param string $baslik Gallery title (e.g., "Foto Galeri")
-     * @param string $limit Limit for photos (optional)
-     * @return array|bool Array with gallery info and photos, or false if not found
+     * @return array|false Array with 'galeri' (gallery data) and 'fotos' (photos array), or false if not found
      */
-    public function getGaleriByBaslik($baslik, $limit = "") {
+    public function getGaleriByBaslik($baslik) {
         $lang = $this->pageLang;
         if ($lang == "") $lang = "tr";
         
-        // Get gallery by baslik - galeri table uses 'dil' column directly, not _lang table
-        $query = "SELECT * FROM galeri WHERE baslik = '".$this->kirlet($baslik)."' AND dil = '".$lang."' AND aktif = 1 AND sil = 0 LIMIT 1";
-        $galeri = $this->tekSorgu($query);
+        // Get gallery by baslik from galeri table
+        // First, try to get from main table (Turkish)
+        $originalLang = $this->pageLang;
+        $this->pageLang = "tr";
         
-        if (!is_array($galeri)) {
-            // If not found in current language, try Turkish
-            if ($lang != "tr") {
-                $query = "SELECT * FROM galeri WHERE baslik = '".$this->kirlet($baslik)."' AND dil = 'tr' AND aktif = 1 AND sil = 0 LIMIT 1";
-                $galeri = $this->tekSorgu($query);
-            }
-        }
+        $galeri = $this->dbLangSelectRow("galeri", ["baslik" => $baslik], "resim");
         
-        if (!is_array($galeri)) {
+        // Restore original language
+        $this->pageLang = $originalLang;
+        
+        if (!$galeri || !isset($galeri["id"])) {
             return false;
         }
         
-        $galeri_id = $galeri['id'];
+        $galeri_id = intval($galeri["id"]);
         
         // Get photos from dosyalar table where type = 'galeri' and data_id = gallery id
-        $limit_clause = ($limit != "") ? "LIMIT ".$limit : "";
-        $query = "SELECT * FROM dosyalar WHERE type = 'galeri' AND data_id = ".$galeri_id." AND tur = 'resim' AND lang = '".$lang."' AND aktif = 1 AND sil = 0 ORDER BY sira ASC, id DESC ".$limit_clause;
-        $fotos = $this->sorgu($query);
+        // Note: dosyalar table uses 'data_id' column (not 'kid')
+        $lang_safe = $this->kirlet($lang);
         
-        // If no photos in current language, try Turkish
-        if (!is_array($fotos) && $lang != "tr") {
-            $query = "SELECT * FROM dosyalar WHERE type = 'galeri' AND data_id = ".$galeri_id." AND tur = 'resim' AND lang = 'tr' AND aktif = 1 AND sil = 0 ORDER BY sira ASC, id DESC ".$limit_clause;
-            $fotos = $this->sorgu($query);
+        // Build query to get photos from dosyalar table
+        $fotos_query = "SELECT * FROM dosyalar WHERE (type = 'galeri' OR type = '2') AND aktif = 1 AND sil <> 1 AND data_id = $galeri_id AND tur = 'resim'";
+        
+        // Add language condition if needed
+        if ($lang != "tr") {
+            $fotos_query .= " AND (lang = '$lang_safe' OR lang = 'tr')";
+        } else {
+            $fotos_query .= " AND lang = 'tr'";
+        }
+        
+        $fotos_query .= " ORDER BY sira ASC, id DESC";
+        
+        $fotos = $this->sorgu($fotos_query);
+        
+        // Get gallery data in current language
+        $galeri_data = $this->dbLangSelectRow("galeri", ["id" => $galeri_id, "master_id" => $galeri_id], "resim");
+        
+        // If gallery data not found in current language, use Turkish version
+        if (!is_array($galeri_data)) {
+            $galeri_data = $galeri;
         }
         
         return array(
-            'galeri' => $galeri,
+            'galeri' => $galeri_data,
             'fotos' => (is_array($fotos)) ? $fotos : array()
         );
+    }
+
+    /**
+     * Get videos from video table
+     * 
+     * @param int|null $seri_id Series/Category ID (optional, if null gets all active videos)
+     * @param string $limit SQL LIMIT clause (optional, e.g., "LIMIT 10")
+     * @return array|false Array of videos in current language, or false if error
+     */
+    public function getVideos($seri_id = null, $limit = "") {
+        $lang = $this->pageLang;
+        if ($lang == "") $lang = "tr";
+        
+        // Build condition
+        $kosul = "aktif = 1 AND sil = 0";
+        
+        // If seri_id is provided, filter by it
+        if ($seri_id !== null) {
+            $seri_id = intval($seri_id);
+            $kosul .= " AND seri = $seri_id";
+        }
+        
+        // Get videos using dbLangSelect
+        // Note: embed field might not be in main table, so we'll get it from lang table if needed
+        $videos = $this->dbLangSelect(
+            "video",
+            $kosul,
+            "resim",  // Get resim field
+            $limit,
+            "ORDER BY sira ASC, id DESC"
+        );
+        
+        // If videos found and we need embed field, try to get it
+        if (is_array($videos) && !empty($videos)) {
+            // Embed field should be in the lang table, dbLangSelect should already include it
+            // But if not, we can add it manually if needed
+        }
+        
+        // Ensure it's an array
+        if (is_array($videos)) {
+            return $videos;
+        }
+        
+        return array();
+    }
+
+    /**
+     * Convert video URL to embed URL for iframe
+     * Supports: YouTube, Vimeo, Dailymotion, etc.
+     * 
+     * @param string $url Video URL
+     * @return string Embed URL for iframe, or original URL if conversion fails
+     */
+    public function convertVideoUrlToEmbed($url) {
+        if (empty($url)) {
+            return '';
+        }
+        
+        // YouTube
+        // Formats: https://www.youtube.com/watch?v=VIDEO_ID
+        //          https://youtu.be/VIDEO_ID
+        //          https://www.youtube.com/embed/VIDEO_ID
+        if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/', $url, $matches)) {
+            return 'https://www.youtube.com/embed/' . $matches[1] . '?rel=0';
+        }
+        
+        // Vimeo
+        // Formats: https://vimeo.com/VIDEO_ID
+        //          https://player.vimeo.com/video/VIDEO_ID
+        if (preg_match('/(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/', $url, $matches)) {
+            return 'https://player.vimeo.com/video/' . $matches[1];
+        }
+        
+        // Dailymotion
+        // Formats: https://www.dailymotion.com/video/VIDEO_ID
+        //          https://www.dailymotion.com/embed/video/VIDEO_ID
+        if (preg_match('/(?:dailymotion\.com\/video\/|dailymotion\.com\/embed\/video\/)([a-zA-Z0-9]+)/', $url, $matches)) {
+            return 'https://www.dailymotion.com/embed/video/' . $matches[1];
+        }
+        
+        // If already an embed URL or iframe src, return as is
+        if (strpos($url, 'embed') !== false || strpos($url, 'iframe') !== false) {
+            return $url;
+        }
+        
+        // Return original URL if no match (might be a direct video file or unsupported platform)
+        return $url;
     }
 
     /**

@@ -5,14 +5,75 @@
  * @var $lang string
  * @var $assetURL string
  * @var $page string
+ * @var $id int
+ * @var $katurl string
  */
 
-// Page Configuration
-$sayfa = "Isg Politikasi";  // Page name
-$baslik = $this->lang->header("Isg Politikasi"); // Page title from translation file
-$this->sayfaBaslik = $baslik . " - " . $this->ayarlar("title_" . $lang); // Title tag for browser tab
-$this->ogBaslik = $this->sayfaBaslik;  // Open Graph title (for social media)
-$this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
+// ---   Page Settings  ---
+$table = "sayfa";
+$categoryName = "Politikalar"; // Category name
+
+// Get category pages
+$politikalar_pages = $this->getCategoryPages($categoryName);
+
+// Get current page data - if katurl parameter exists, get that specific page, otherwise get first page
+$veri = null;
+// Check for katurl parameter (for links like politikalar/cevre-politikasi.html)
+$katurl_param = isset($katurl) ? $katurl : "";
+$current_page_url_clean = !empty($katurl_param) ? $katurl_param : null;
+
+if ($current_page_url_clean && !empty($politikalar_pages)) {
+    // Find the page by matching URL without numbers suffix
+    // Database URLs contain numbers (e.g., cevre-politikasi-1), but links are without numbers (e.g., cevre-politikasi)
+    foreach ($politikalar_pages as $p) {
+        $p_url_clean = preg_replace('/-\d+$/', '', $p['url']);
+        if ($p_url_clean == $current_page_url_clean) {
+            $veri = $this->dbLangSelectRow($table, array("url" => $p['url']), "resim");
+            $current_page_url = $p['url']; // Store full URL (with numbers) for comparison
+            break;
+        }
+    }
+}
+
+// If no specific page found, get the first page from category
+if (!is_array($veri) && !empty($politikalar_pages)) {
+    $first_page = $politikalar_pages[0];
+    $veri = $this->dbLangSelectRow($table, array("url" => $first_page['url']), "resim");
+    $current_page_url = $first_page['url'];
+}
+
+// Check if page exists
+if (!is_array($veri) || empty($veri)) {
+    header("Location: " . $this->baseURL("hata", $lang, 1));
+    exit;
+}
+
+$getID = $this->getID($veri);
+$baslik = $this->temizle($veri["baslik"]);
+$detay = htmlspecialchars_decode($veri["detay"]);
+$ozet = $this->temizle($veri["ozet"]);
+$kid = isset($veri["kid"]) ? $veri["kid"] : 0;
+
+// Get page image
+$boyut = $this->getimageinfo("sayfa", "", "big");
+$resim = $this->dbResimAl($veri["resim"], "sayfa", $boyut);
+
+// Set page meta data using setPageMeta function
+$this->setPageMeta(
+    $categoryName,  // Page name/key
+    $baslik,  // Custom title (page title from database)
+    $ozet,  // Custom description (page summary from database)
+    null,  // Custom keywords (null = use default)
+    "index, follow"  // Robots meta tag
+);
+
+if (!empty($resim)) {
+    $this->ogResim = $resim;
+}
+
+// Get category info for sidebar
+$kategori_baslik = $categoryName;
+$sidebar_pages = $politikalar_pages;
 
 ?>
 <div id="">
@@ -29,21 +90,24 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                 <div class="container">
                     <div class="col-12">
                         <div>
-                            <h1>İSG Politikası</h1>
+                            <h1><?= $baslik ?></h1>
                             <section class="breadcrumb_section">
                                 <div class="row">
                                     <div class="breadcrumb_overlay">
                                         <div class="breadcrumb">
-                                            <a href="/">Anasayfa </a>
-                                            <a href="/">İSG Politikası </a>
+                                            <a href="<?= $this->BaseURL($this->lang->link('index'), $lang, 1) ?>"><?= $this->lang->header('index') ?> </a>
+                                            <a href="#"><?= $baslik ?> </a>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                         <div>
-                            <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya
-                                devam ediyoruz.</p>
+                            <?php if (!empty($ozet)): ?>
+                                <p><?= $ozet ?></p>
+                            <?php else: ?>
+                                <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya devam ediyoruz.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -51,107 +115,47 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
             <section style="padding-bottom: 80px;">
                 <div class="container">
                     <div class="row corporate_page">
-                        <div class="col-lg-4 sidemenu119">
-                            <div class="lister_sidebar">
-                                <div class="sub_menu wbx_1">
-                                    <div class="CategorySubjects">
-                                        <i></i>
-                                        Kurumsal
+                        <?php if (!empty($sidebar_pages) && count($sidebar_pages) > 0): ?>
+                            <div class="col-lg-4 sidemenu119">
+                                <div class="lister_sidebar">
+                                    <div class="sub_menu wbx_1">
+                                        <div class="CategorySubjects">
+                                            <i></i>
+                                            <?= $kategori_baslik ?>
+                                        </div>
+                                        <ul>
+                                            <?php 
+                                            $politikalar_link = $this->lang->link('politikalar');
+                                            foreach ($sidebar_pages as $sidebar_page): 
+                                                // Remove any numbers from end of URL (e.g., cevre-politikasi-1 -> cevre-politikasi)
+                                                $sidebar_url_clean = preg_replace('/-\d+$/', '', $sidebar_page['url']);
+                                                // Build URL: politikalar/page-url.html (without numbers)
+                                                $sidebar_page_url = $this->BaseURL($politikalar_link . '/' . $sidebar_url_clean, $lang, 1);
+                                                $is_active = ($sidebar_page['url'] == $current_page_url) ? 'active' : '';
+                                            ?>
+                                                <li>
+                                                    <a href="<?= $sidebar_page_url ?>" class="<?= $is_active ?>"><?= $this->temizle($sidebar_page['baslik']) ?></a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
                                     </div>
-                                    <ul>
-                                        <li>
-                                            <a href="<?= $this->BaseURL('sosyal_sorumluluk_politikasi', $lang, 1) ?>">Sosyal
-                                                Sorumluluk Politikası</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL('cevre_politikasi', $lang, 1) ?>">Çevre Politikası</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL('yolsuzluk_politikasi', $lang, 1) ?>">Yolsuzluk ve Rüşvet
-                                                Politikası</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?= $this->BaseURL('kalite_politikasi', $lang, 1) ?>">Kalite Politikası</a>
-                                        </li>
-                                        <li>
-                                            <a class="active" href="<?= $this->BaseURL('isg_politikasi', $lang, 1) ?>">İSG Politikası</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="<?= $this->BaseURL('enerji_politikasi', $lang, 1) ?>">Enerji Politikası</a>
-                                        </li>
-                                    </ul>
                                 </div>
-                                <!--
-                                        <div class="widget_box wbx_1 bigNews">
-                                            <a href="#">
-                                                <img src="<?= $assetURL ?>img/slide4.jpg" alt="">
-                                            </a>
-                                            <a class="no_btn789" href="#"><strong>Yalıtımlı Sürme Profiller</strong></a>
-                                            <p>Modern yapılarda enerji verimliliği ve konfor için özel olarak tasarlanmış
-                                                yalıtımlı sürme profillerimiz, ısı ve ses yalıtımında üstün performans sunar.
-                                                Özel tasarımı ve kaliteli malzemeleriyle uzun ömürlü kullanım sağlar.</p>
-                                            <a href="#" class="donate_link789">Ürünü İnceleyin</a>
-                                        </div>-->
                             </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="corporate content-detail">
-                                <h3>Amaç</h3>
-                                <p>GGB Holding olarak, polyester iplik üretiminde faaliyet gösteren büyük
-                                    ölçekli bir kuruluş olmanın sorumluluğuyla, çalışanlarımızın sağlığı ve
-                                    güvenliğini öncelikli değerimiz olarak görmekteyiz. İşle ilgili yaralanmaların
-                                    ve meslek hastalıklarının önlenmesi amacıyla tüm faaliyetlerimizde güvenli ve
-                                    sağlıklı çalışma koşulları sağlamayı taahhüt ederiz. Bu politika, kuruluşumuzun
-                                    faaliyet alanına, ölçeğine, bağlamına ve iş sağlığı ve güvenliği (İSG) risk ve
-                                    fırsatlarının doğasına uygun olarak hazırlanmıştır.</p>
-
-                                <h3>Kapsam</h3>
-                                <p>Bu iş sağlığı ve güvenliği politikası;</p>
-                                <ul>
-                                    <li>Mevcut polyester iplik üretim tesisimizi ve gelecekteki tüm yatırımları,
-                                    </li>
-                                    <li>GGB Holding bünyesinde görev alan tüm çalışanları,</li>
-                                    <li>Tedarikçiler, yükleniciler, taşeronlar ve diğer kuruluşlarla yapılan
-                                        sözleşmelerde yer alan personel de dahil olmak üzere GGB Holding’ın tüm
-                                        paydaşlarını kapsamaktadır.</li>
-                                </ul>
-
-                                <h3>Politika Ve Taahhütlerimiz</h3>
-                                <p>Faaliyet gösterdiğimiz tüm alanlarda:</p>
-                                <ul>
-                                    <li>Tüm iş sağlığı ve güvenliği uygulamalarımız, yürürlükteki ulusal mevzuata ve
-                                        ilgili standartlara tam uyum içerisinde yürütülür.</li>
-                                    <li>Olası iş kazaları ve meslek hastalıklarının önüne geçmek için tehlikeler
-                                        tanımlanır, riskler analiz edilir ve uygun önleyici tedbirler almayı
-                                        amaçlarız.</li>
-                                    <li>İSG hedeflerinin belirlenmesi için sistematik ve ölçülebilir bir çerçeve
-                                        oluştururuz.</li>
-                                    <li>İSG yönetim sistemini sürekli gözden geçirip, gelişen teknoloji ve
-                                        uygulamalara uyum sağlayarak sürekli iyileştirmeyi hedefleriz.</li>
-                                    <li>Gerekli kaynakları (eğitim, ekipman, koruyucu donanım, teknik ve yönetsel
-                                        destek) sağlayarak güvenli çalışma ortamları sunarız.</li>
-                                    <li>Tüm çalışanlara, görevleri doğrultusunda ihtiyaç duydukları iş sağlığı ve
-                                        güvenliği eğitimleri düzenli olarak verilir. Bu sayede İSG bilincinin
-                                        oluşması ve sürdürülmesi sağlanır.</li>
-                                    <li>Çalışanlarımızın iş sağlığı ve güvenliği konularında görüş ve önerileri
-                                        alınır, katılımları teşvik edilir. Açık iletişim ortamını destekleriz.</li>
-                                    <li>Olası acil durumlara karşı hazırlıklı olunması için senaryolar oluşturulur,
-                                        tatbikatlar yapılır ve düzenli ekipman kontrolleri ile olası kazalar
-                                        önlenmeye çalışılır.</li>
-                                    <li>İş yerinde bulunan tüm taşeron çalışanları ve ziyaretçilerin de iş sağlığı
-                                        ve güvenliği kurallarına uymasını sağlarız.</li>
-                                </ul>
-
-                                <p>GGB Holding San. ve Tic. Ltd. Şti. olarak, tüm çalışanlarımızın sağlıklı ve
-                                    güvenli bir ortamda çalışmasını sağlamak, iş kazalarını ve meslek hastalıklarını
-                                    önlemek en temel önceliğimizdir. Bu doğrultuda ihtiyaç duyulan tüm kaynaklar,
-                                    eğitimler ve teknik altyapılar eksiksiz olarak sağlanacak ve sürdürülebilir bir
-                                    İSG kültürü oluşturulacaktır.</p>
-
+                            <div class="col-lg-8">
+                        <?php else: ?>
+                            <div class="col-lg-12">
+                        <?php endif; ?>
+                                <div class="corporate content-detail">
+                                    <?php if (!empty($resim)): ?>
+                                        <img src="<?= $resim ?>" alt="<?= $baslik ?>">
+                                    <?php endif; ?>
+                                    
+                                    <?= $detay ?>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </section>
         </main>
+    </div>
+</div>

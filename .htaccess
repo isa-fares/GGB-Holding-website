@@ -40,6 +40,9 @@ RewriteRule ^ar/kurumsal/(.*)\.html$ index.php?page=kurumsal&katurl=$1&lang=ar [
 RewriteRule ^istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=tr [L,NC]
 RewriteRule ^en/istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=en [L,NC]
 RewriteRule ^ar/istirakler/(.*)\.html$ index.php?page=istirakler&katurl=$1&lang=ar [L,NC]
+RewriteRule ^politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=tr [L,NC]
+RewriteRule ^en/politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=en [L,NC]
+RewriteRule ^ar/politikalar/(.*)\.html$ index.php?page=politikalar&katurl=$1&lang=ar [L,NC]
 RewriteRule ^(.*)/(.*)/(.*)\.html$ index.php?page=$1&katurl=$2&urunurl=$3&lang=tr [L,NC]
 RewriteRule ^(.*)/(.*)-([0-9]+)\.html$ index.php?page=$1&katurl=$2&id=$3&lang=tr [L,NC]
 

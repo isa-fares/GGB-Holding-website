@@ -5,16 +5,83 @@
  * @var $lang string
  * @var $assetURL string
  * @var $page string
+ * @var $data array
  */
 
-// Page Configuration
-$sayfa = "Blog Detay";  // Page name
-$baslik = $this->lang->header("Blog Detay"); // Page title from translation file
-$this->sayfaBaslik = $baslik . " - " . $this->ayarlar("title_" . $lang); // Title tag for browser tab
-$this->ogBaslik = $this->sayfaBaslik;  // Open Graph title (for social media)
-$this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
+// Get blog URL from katurl parameter (e.g., blog/yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu)
+$blog_url = isset($data['katurl']) ? $data['katurl'] : (isset($_GET['katurl']) ? $_GET['katurl'] : '');
 
+// Get blog post from database by URL
+$blog = null;
+if (!empty($blog_url)) {
+    // Find blog by matching URL without numbers suffix
+    // Database URLs contain numbers (e.g., yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu-1)
+    // but links are without numbers (e.g., yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu)
+    $all_blogs = $this->dbLangSelect(
+        "blog",
+        "aktif = 1 AND sil = 0 AND baslik <> ''",
+        "resim",
+        "",
+        "ORDER BY sira ASC, id DESC"
+    );
+    
+    if (is_array($all_blogs)) {
+        foreach ($all_blogs as $b) {
+            $b_url_clean = preg_replace('/-\d+$/', '', $b['url']);
+            if ($b_url_clean == $blog_url) {
+                $blog = $this->dbLangSelectRow("blog", ["url" => $b['url']], "resim");
+                break;
+            }
+        }
+    }
+}
+
+// If still not found, try to get by ID (fallback)
+if (!$blog || !is_array($blog) || empty($blog)) {
+    $blog_id = isset($data['id']) ? intval($data['id']) : (isset($_GET['id']) ? intval($_GET['id']) : 0);
+    if ($blog_id > 0) {
+        $blog = $this->dbLangSelectRow("blog", ["id" => $blog_id, "master_id" => $blog_id], "resim");
+    }
+}
+
+// Check if blog exists
+if (!$blog || !is_array($blog) || empty($blog)) {
+    // Redirect to blog list if not found
+    header("Location: " . $this->BaseURL($this->lang->link('blog_liste'), $lang, 1));
+    exit;
+}
+
+// Extract blog data
+$blog_baslik = $this->temizle($blog['baslik']);
+$blog_detay = isset($blog['detay']) ? htmlspecialchars_decode($blog['detay']) : '';
+$blog_ozet = isset($blog['ozet']) ? $this->temizle($blog['ozet']) : '';
+$blog_resim = $this->dbResimAl($blog['resim'], "blog", "1200,600", true);
+$blog_tarih = isset($blog['tarih']) ? $this->gun_ay_yil($blog['tarih']) : '';
+$blog_liste_url = $this->BaseURL($this->lang->link('blog_liste'), $lang, 1);
+
+// Get blog ID for dosyalar table
+// dosyalar table stores data_id as the main blog ID (from blog table, not blog_lang)
+// If master_id exists, use it; otherwise use id (for Turkish language)
+$blog_id = (!empty($blog['master_id'])) ? intval($blog['master_id']) : intval($blog['id']);
+
+// Get additional images from dosyalar table for current blog only
+//dbLangSelect($table, $kosul = "", $resimler = "", $limit = "", $order = "", $showSql = false, $group = null)
+$blog_Ek_Resimler = $this->dbLangSelect("dosyalar", "type = 'blog' AND data_id = $blog_id", "dosya", "", "ORDER BY sira ASC", false, null);
+// Set page meta
+$this->setPageMeta(
+    "Blog Detay",
+    $blog_baslik,
+    $blog_ozet
+);
+
+
+echo '<pre>';
+
+print_r($blog_Ek_Resimler);
+echo '</pre>';
+ exit;
 ?>
+
 <div id="smooth-wrapper">
         <div id="smooth-content">
 
@@ -33,9 +100,16 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="page-content text-center">
-                                    <h3 class="page-title"><a href="#"><i class="fa-regular fa-arrow-left"></i>Diğer bloglar</a><br>Yeşil Enerjiyle Geleceğe Yatırım: GGB Holding’in Vizyonu</h3>
+                                    <h3 class="page-title">
+                                        <a href="<?= $blog_liste_url ?>">
+                                            <i class="fa-regular fa-arrow-left"></i>Diğer bloglar
+                                        </a><br>
+                                        <?= $blog_baslik ?>
+                                    </h3>
                                     <ul class="breadcrumb-link">
-                                        <li>24 Aralık, 2025</li>
+                                        <?php if (!empty($blog_tarih)): ?>
+                                            <li><?= $blog_tarih ?></li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>
@@ -52,62 +126,17 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
 
                                     <div class="blog-post-main mb-70">
                                         <div class="blog-post-item">
-                                            <div class="post-thumbnail">
-                                                <img src="<?= $assetURL ?>images/vismis.jpg" alt="Post Thumbnail">
-                                            </div>
+                                            <?php if (!empty($blog_resim)): ?>
+                                                <div class="post-thumbnail">
+                                                    <img src="<?= $blog_resim ?>" alt="<?= $blog_baslik ?>">
+                                                </div>
+                                            <?php endif; ?>
                                             <div class="content-detail">
-                                                <h3>Neden Yeşil Enerji?</h3>
-                                                <p>Küresel ölçekte enerji ihtiyacının artması, şirketleri sürdürülebilir
-                                                    çözümler geliştirmeye zorluyor. Fosil yakıtların giderek yetersiz
-                                                    kalması ve çevreyi olumsuz etkilemesi, yenilenebilir enerji
-                                                    yatırımlarını zorunlu hale getiriyor. GGB Holding, bu dönüşümün
-                                                    sadece bir trend değil, geleceğin temel gerekliliği olduğunun
-                                                    bilinciyle hareket ediyor.</p>
-                                                <ul>
-                                                    <li>Daha düşük karbon salımı</li>
-                                                    <li>Uzun vadede daha düşük maliyetler</li>
-                                                    <li>Enerji güvenliği ve bağımsızlığı</li>
-                                                    <li>Çevresel sürdürülebilirliğe katkı</li>
-                                                </ul>
-
-                                                <h3>GGB Holding’in Yenilenebilir Enerji Stratejisi</h3>
-                                                <p>GGB Holding’in enerji vizyonu, doğanın sunduğu kaynakları en verimli,
-                                                    en yenilikçi ve en sorumlu şekilde kullanmaya dayanıyor. Şirket,
-                                                    teknolojiyi ve çevre bilincini aynı noktada buluşturarak güçlü bir
-                                                    enerji modeli oluşturmayı amaçlıyor.</p>
-                                                <p>Yatırımların temel yapı taşları şunlardır:</p>
-                                                <ul>
-                                                    <li><strong>Güneş Enerjisi:</strong> Verimli paneller ve geniş
-                                                        ölçekli arazi yatırımları.</li>
-                                                    <li><strong>Rüzgâr Enerjisi:</strong> Yeni nesil türbinlerle
-                                                        artırılmış üretim kapasitesi.</li>
-                                                    <li><strong>Enerji Depolama:</strong> Kesintisiz tedarik için akıllı
-                                                        depolama sistemleri.</li>
-                                                    <li><strong>Ar-Ge Çalışmaları:</strong> Geleceğin enerji
-                                                        teknolojilerine yatırım.</li>
-                                                </ul>
-
-                                                <h3>Ekonomik ve Çevresel Kazanımlar</h3>
-                                                <p>Yeşil enerji yatırımları yalnızca çevreyi korumakla kalmaz; ekonomik
-                                                    açıdan da güçlü bir katma değer sunar. GGB Holding bu süreci bir
-                                                    bütünden değerlendirerek, hem ülke ekonomisine hem kendi yatırım
-                                                    portföyüne uzun vadeli fayda oluşturuyor.</p>
-                                                <ul>
-                                                    <li>Daha düşük operasyon maliyetleri</li>
-                                                    <li>Enerji arzında istikrar</li>
-                                                    <li>Yeni iş alanları ve istihdam artışı</li>
-                                                    <li>Doğal kaynakların korunması</li>
-                                                </ul>
-
-                                                <h3>GGB Holding’in Gelecek Vizyonu</h3>
-                                                <p>GGB Holding için yeşil enerji bir tercih değil; nesiller arası bir
-                                                    sorumluluk. Şirket, bugünün yatırımlarını yarının ihtiyaçlarını
-                                                    karşılayacak şekilde tasarlıyor. Daha temiz, daha güçlü, daha
-                                                    sürdürülebilir bir enerji modeliyle hem sektöre yön veriyor hem de
-                                                    topluma örnek bir değer oluşturuyor.</p>
-                                                <p>Geleceğin enerjisi yenilenebilir kaynaklarda. GGB Holding ise bu
-                                                    geleceğin mimarları arasında yer alıyor.</p>
-
+                                                <?php if (!empty($blog_detay)): ?>
+                                                    <?= $blog_detay ?>
+                                                <?php else: ?>
+                                                    <p><?= $blog_ozet ?></p>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="entry-footer">

@@ -49,7 +49,7 @@ if ($toplamSayfa > 1){
                     }
             ?>
 
-                    <li class="<?=($i == $sayfa) ? 'active' : ''?>"><a class="page-numbers" href="<?=$url?>"><?=$i?></a></li>
+                    <li><a class="page-numbers <?=($i == $sayfa) ? 'active' : ''?>" href="<?=$url?>"><?=$i?></a></li>
 
             <?php
                 }

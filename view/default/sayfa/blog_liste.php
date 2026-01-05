@@ -10,9 +10,35 @@
 // Page Configuration
 $sayfa = "Blog Liste";  // Page name
 $baslik = $this->lang->header("Blog Liste"); // Page title from translation file
-$this->sayfaBaslik = $baslik . " - " . $this->ayarlar("title_" . $lang); // Title tag for browser tab
-$this->ogBaslik = $this->sayfaBaslik;  // Open Graph title (for social media)
-$this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
+
+// Get all blog posts (without limit for pagination)
+$all_blogs = $this->dbLangSelect(
+    "blog",
+    "aktif = 1 AND sil = 0 AND baslik <> ''",
+    "resim",
+    "",
+    "ORDER BY sira ASC, id DESC"
+);
+
+// Pagination setup
+$sayfaLimit = 3; // Number of posts per page
+list($gecerli, $sayfaLimit, $toplamSayfa, $sayfa, $showlist) = $this->sayfalama($all_blogs, $sayfaLimit);
+
+// Get paginated blogs
+$blogs = $this->dbLangSelect(
+    "blog",
+    "aktif = 1 AND sil = 0 AND baslik <> ''",
+    "resim",
+    "LIMIT $gecerli, $sayfaLimit",
+    "ORDER BY sira ASC, id DESC"
+);
+
+// Set page meta
+$this->setPageMeta(
+    "Blog Liste",
+    $baslik,
+    null
+);
 
 ?>
 <div id="">
@@ -32,21 +58,20 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                         <div class="container">
                             <div class="col-12">
                                 <div>
-                                    <h1>Blog</h1>
+                                    <h1><?= $baslik ?></h1>
                                     <section class="breadcrumb_section">
                                         <div class="row">
                                             <div class="breadcrumb_overlay">
                                                 <div class="breadcrumb">
-                                                    <a href="/">Anasayfa </a>
-                                                    <a href="/">Blog </a>
+                                                    <a href="<?= $this->BaseURL($this->lang->link('index'), $lang, 1) ?>"><?= $this->lang->header('index') ?> </a>
+                                                    <a href="#"><?= $baslik ?> </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </section>
                                 </div>
                                 <div>
-                                    <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya
-                                        devam ediyoruz.</p>
+                                    <p><strong>2 sektör ve 1.000'e</strong> yakın çalışanımızla üretmeye ve değer yaratmaya devam ediyoruz.</p>
                                 </div>
                             </div>
                         </div>
@@ -55,101 +80,62 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                     <section class="blog-grid-page-ss pb-130" id="blogLister">
                         <div class="container">
                             <div class="row">
-                    
-                                <div class="col-xl-4 col-md-6 col-sm-12">
-                                    <div class="blog-post-item style-three" data-aos="fade-up" data-aos-duration="1200">
-                                        <div class="post-thumbnail">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                <img src="<?= $assetURL ?>images/blog/blog-grid1.jpg" alt="GGB Holding İnşaat Projeleri">
-                                            </a>
-                                        </div>
-                                        <div class="post-content">
-                                            <div class="post-meta style-one">
-                                                <span class="date"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Aralık 4, 2025</a></span>
+                                <?php if (!empty($blogs) && is_array($blogs)): ?>
+                                    <?php foreach ($blogs as $blog): ?>
+                                        <?php
+                                        $baslik = $blog['baslik'];
+                                        $ozet = isset($blog['ozet']) ? $blog['ozet'] : '';
+                                        $resim = $this->dbResimAl($blog['resim'], "blog", "390,360", true);
+                                        // Remove -id suffix from URL (e.g., yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu-1 -> yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu)
+                                        $blog_url_clean = preg_replace('/-\d+$/', '', $blog['url']);
+                                        $url = $this->BaseURL('blog/' . $blog_url_clean, $lang, 1);
+                                        $tarih = $this->gun_ay_yil($blog['tarih']);
+                                        ?>
+                                        <div class="col-xl-4 col-md-6 col-sm-12">
+                                            <div class="blog-post-item style-three" data-aos="fade-up" data-aos-duration="1200">
+                                                <div class="post-thumbnail">
+                                                    <a href="<?= $url ?>">
+                                                        <img src="<?= $resim ?>" alt="<?= $this->temizle($baslik) ?>">
+                                                    </a>
+                                                </div>
+                                                <div class="post-content">
+                                                    <div class="post-meta style-one">
+                                                        <span class="date"><a href="<?= $url ?>"><?= $tarih ?></a></span>
+                                                    </div>
+                                                    <h4 class="title">
+                                                        <a href="<?= $url ?>">
+                                                            <?= $this->temizle($baslik) ?>
+                                                        </a>
+                                                    </h4>
+                                                </div>
                                             </div>
-                                            <h4 class="title"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">GGB Holding: Geleceğin Şehirlerini İnşa Ediyor</a></h4>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <div class="col-12">
+                                        <div class="alert alert-info text-center">
+                                            <p>Henüz blog yazısı eklenmemiş.</p>
                                         </div>
                                     </div>
-                                </div>
-                    
-                                <div class="col-xl-4 col-md-6 col-sm-12">
-                                    <div class="blog-post-item style-three" data-aos="fade-up" data-aos-duration="1200">
-                                        <div class="post-thumbnail">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                <img src="<?= $assetURL ?>images/blog/blog-grid2.jpg" alt="GGB Holding Enerji Yatırımları">
-                                            </a>
-                                        </div>
-                                        <div class="post-content">
-                                            <div class="post-meta style-one">
-                                                <span class="date"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Aralık 4, 2025</a></span>
-                                            </div>
-                                            <h4 class="title"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Yeşil Enerjiyle Geleceğe Yatırım: GGB Holding’in Vizyonu</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div class="col-xl-4 col-md-6 col-sm-12">
-                                    <div class="blog-post-item style-three" data-aos="fade-up" data-aos-duration="1200">
-                                        <div class="post-thumbnail">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                <img src="<?= $assetURL ?>images/blog/blog-grid3.jpg" alt="GGB Holding Gayrimenkul">
-                                            </a>
-                                        </div>
-                                        <div class="post-content">
-                                            <div class="post-meta style-one">
-                                                <span class="date"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Aralık 4, 2025</a></span>
-                                            </div>
-                                            <h4 class="title"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Konfor ve Lüksün Buluşma Noktası: GGB Holding’in Gayrimenkul Projeleri</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div class="col-xl-4 col-md-6 col-sm-12">
-                                    <div class="blog-post-item style-three" data-aos="fade-up" data-aos-duration="1200">
-                                        <div class="post-thumbnail">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                <img src="<?= $assetURL ?>images/blog/blog-grid4.jpg" alt="GGB Holding Turizm">
-                                            </a>
-                                        </div>
-                                        <div class="post-content">
-                                            <div class="post-meta style-one">
-                                                <span class="date"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Aralık 4, 2025</a></span>
-                                            </div>
-                                            <h4 class="title"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Türkiye’nin Turizm Potansiyelini Keşfedin: GGB Holding’in Öncülüğü</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div class="col-xl-4 col-md-6 col-sm-12">
-                                    <div class="blog-post-item style-three" data-aos="fade-up" data-aos-duration="1200">
-                                        <div class="post-thumbnail">
-                                            <a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">
-                                                <img src="<?= $assetURL ?>images/blog/blog-grid5.jpg" alt="GGB Holding Tarım">
-                                            </a>
-                                        </div>
-                                        <div class="post-content">
-                                            <div class="post-meta style-one">
-                                                <span class="date"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Aralık 4, 2025</a></span>
-                                            </div>
-                                            <h4 class="title"><a href="<?= $this->BaseURL('blog_detay', $lang, 1) ?>">Sürdürülebilir Tarımın Öncüsü: GGB Holding’in Yenilikçi Yaklaşımı</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                    
+                                <?php endif; ?>
                             </div>
                     
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="sasly-pagination text-center mt-30">
-                                        <ul>
-                                            <li><a href="#" class="active">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#"><i class="far fa-angle-right"></i></a></li>
-                                        </ul>
+                            <?php if ($toplamSayfa > 1): ?>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="sasly-pagination text-center mt-30">
+                                            <?php
+                                            $blog_liste_url = $this->BaseURL($this->lang->link('blog_liste'), $lang, 1);
+                                            $this->sayfalamaButon(array(
+                                                "toplamSayfa" => $toplamSayfa,
+                                                "sayfa" => $sayfa,
+                                                "pageURL" => $blog_liste_url,
+                                            ));
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </section>                    
 

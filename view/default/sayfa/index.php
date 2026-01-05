@@ -267,7 +267,9 @@ $blogs = $this->dbLangSelect(
                                 $baslik = $blog['baslik'];
                                 $ozet = $blog['ozet'];
                                 $resim = $this->dbResimAl($blog['resim'], "blog", "390,360");
-                                $url = $this->BaseURL('blog_detay', $lang, 1, $blog['id']);
+                                // Remove -id suffix from URL (e.g., yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu-1 -> yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu)
+                                $blog_url_clean = preg_replace('/-\d+$/', '', $blog['url']);
+                                $url = $this->BaseURL('blog/' . $blog_url_clean, $lang, 1);
                                 //first word Eylül  second word 28, third word 2024 by turkish format
                                 $tarih = $this->gun_ay_yil($blog['tarih']);
                                 

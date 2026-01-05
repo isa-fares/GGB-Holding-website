@@ -37,7 +37,7 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                                  * This code creates a language switcher that toggles between Turkish (tr) and English (en)
                                  * - If current language is Turkish: shows "EN" button to switch to English
                                  * - If current language is English: shows "TR" button to switch to Turkish
-                                 * - Maintains the same page when switching languages
+                                 * - Maintains the same page and katurl when switching languages
                                  */
                                 
                                 // Get current language (default to Turkish if not set)
@@ -53,13 +53,26 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                                 // If page is not set, default to index page
                                 $currentPage = isset($page) ? $page : "index";
                                 
-                                // Convert page key to SEO-friendly link using lang->link()
-                                // This ensures the link works with both Turkish and English names
-                                $currentPageLink = $this->lang->link($currentPage);
+                                // Get katurl parameter if exists (for category pages like kurumsal/hakkimizda.html)
+                                $currentKaturl = isset($_GET['katurl']) ? $_GET['katurl'] : '';
+                                
+                                // Convert page key to SEO-friendly link using lang->link() with target language
+                                // We need to use the target language's link() method, so we temporarily switch language context
+                                $tempLang = $this->lang;
+                                $targetLangObj = new \Lang($toggleLang);
+                                $targetPageLink = $targetLangObj->link($currentPage);
+                                
+                                // Build the language switch URL
+                                // If katurl exists, append it to the page link (e.g., kurumsal/hakkimizda)
+                                if (!empty($currentKaturl)) {
+                                    $fullLink = $targetPageLink . '/' . $currentKaturl;
+                                } else {
+                                    $fullLink = $targetPageLink;
+                                }
                                 
                                 // Build the language switch URL using BaseURL method
                                 // BaseURL($url, $lang, $uzanti) - uzanti=1 adds .html extension
-                                $langSwitchUrl = $this->BaseURL($currentPageLink, $toggleLang, 1);
+                                $langSwitchUrl = $this->BaseURL($fullLink, $toggleLang, 1);
                                 
                                 // Set tooltip text based on target language
                                 $tooltipText = ($toggleLang == "en") ? "Switch to English" : "Switch to Turkish";

@@ -53,7 +53,7 @@ $blogs = $this->dbLangSelect(
                                 <div class="hero-content">
                                     <div class="text-box" data-aos="fade-down" data-aos-duration="1800">
                                         <p><?= $this->lang->index('hero_description') ?></p>
-                                        <a href="#" class="theme-btn style-two"><?= $this->lang->index('hero_cta') ?><i
+                                        <a href="<?= $this->BaseURL($this->lang->link('istirakler'), $lang, 1) ?>" class="theme-btn style-two"><?= $this->lang->index('hero_cta') ?><i
                                                 class="far fa-angle-double-right"></i></a>
                                     </div>
                                     <div class="hero-image" data-aos="fade-up" data-aos-duration="2000">
@@ -120,7 +120,7 @@ $blogs = $this->dbLangSelect(
                                     </div>
                                 </div>
                                 <div class="col-12" id="jj_theme">
-                                    <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two" data-aos="fade-up"
+                                    <a href="<?= $this->BaseURL($this->lang->link('kurumsal'), $lang, 1) ?>" class="theme-btn style-two" data-aos="fade-up"
                                         data-aos-duration="1800"><?= $this->lang->index('values_cta') ?><i
                                             class="far fa-angle-double-right"></i></a>
                                 </div>
@@ -166,7 +166,7 @@ $blogs = $this->dbLangSelect(
                                         </div>
                                     </div>
                                     <div class="about-button" data-aos="fade-up">
-                                        <a href="<?= $this->BaseURL('kurumsal', $lang, 1) ?>" class="theme-btn style-two"><?= $this->lang->index('about_cta') ?> <i
+                                        <a href="<?= $this->BaseURL($this->lang->link('kurumsal'), $lang, 1) ?>" class="theme-btn style-two"><?= $this->lang->index('about_cta') ?> <i
                                                 class="far fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
@@ -214,8 +214,11 @@ $blogs = $this->dbLangSelect(
                             </div>
                             <div class="row">
                                 <?php foreach ($isitirakler_sayfalar as $sayfa) : 
-                                    $link = $this->lang->link($sayfa['url']);
-                                    $url = $this->BaseURL($link, $lang, 1);
+                                    // Remove numbers from end of URL (e.g., kristal-1 -> kristal)
+                                    $page_url_clean = preg_replace('/-\d+$/', '', $sayfa['url']);
+                                    $istirakler_link = $this->lang->link('istirakler');
+                                    // Build URL: istirakler/page-url.html (without numbers)
+                                    $url = $this->BaseURL($istirakler_link . '/' . $page_url_clean, $lang, 1);
                                     $ozet = $sayfa['ozet'];
                                     $resim = $this->dbResimAl($sayfa['resim'], "sayfa", "600,400");
                                     $logo = $this->dbResimAl($sayfa['banner'], "sayfa", "600,300");
@@ -269,7 +272,8 @@ $blogs = $this->dbLangSelect(
                                 $resim = $this->dbResimAl($blog['resim'], "blog", "390,360");
                                 // Remove -id suffix from URL (e.g., yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu-1 -> yesil-enerjiyle-gelecege-yatirim-ggb-holding-in-vizyonu)
                                 $blog_url_clean = preg_replace('/-\d+$/', '', $blog['url']);
-                                $url = $this->BaseURL('blog/' . $blog_url_clean, $lang, 1);
+                                $blog_link = $this->lang->link('blog_liste');
+                                $url = $this->BaseURL($blog_link . '/' . $blog_url_clean, $lang, 1);
                                 //first word Eylül  second word 28, third word 2024 by turkish format
                                 $tarih = $this->gun_ay_yil($blog['tarih']);
                                 
@@ -322,7 +326,7 @@ $blogs = $this->dbLangSelect(
                                         </h2>
                                     </div>
                                     <div class="cta-button" data-aos="fade-up" data-aos-duration="1200">
-                                        <a href="<?= $this->BaseURL('surdurulebilirlik', $lang, 1) ?>" class="theme-btn style-one">
+                                        <a href="<?= $this->BaseURL($this->lang->link('politikalar'), $lang, 1) ?>" class="theme-btn style-one">
                                             <?= $this->lang->index('sustainability_cta') ?> <i class="far fa-angle-double-right"></i>
                                         </a>
                                     </div>

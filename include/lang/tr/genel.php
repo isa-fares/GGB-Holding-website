@@ -34,5 +34,8 @@ return[
 	'error_404_message'=>'Aradığınız sayfa bulunamadı.',
 	'error_404_home'=>'Anasayfa',
 	'error_404_back'=>'Geri Dön',
+	
+	// Preloader
+	'loading_text'=>'Yükleniyor...',
 
 ];

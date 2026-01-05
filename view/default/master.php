@@ -72,6 +72,14 @@ $this->inc_file("css", array(
 
 <body class="business-website lang_<?= $lang ?> <?= ($page == "index") ? "index" : "other" ?>">
 
+        <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-spinner"></div>
+            <div class="preloader-text"><?= $this->lang->genel('loading_text') ?></div>
+        </div>
+    </div>
+
     <div class="page">
 
 

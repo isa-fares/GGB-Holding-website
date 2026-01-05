@@ -34,5 +34,8 @@ return[
 	'error_404_message'=>'The page you are looking for could not be found.',
 	'error_404_home'=>'Home',
 	'error_404_back'=>'Go Back',
+	
+	// Preloader
+	'loading_text'=>'Loading...',
 
 ];

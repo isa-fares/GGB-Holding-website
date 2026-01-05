@@ -24,7 +24,7 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
                     <div class="col-lg-7">
                         <div class="top-left">
                             <span><i class="fas fa-envelope"></i><a
-                                    href="mailto:support@gmail.com">info@ggbholding.com</a></span>
+                                    href="<?= $this->linkEmail() ?>"><?= $this->ayarlar('email_merkez') ?></a></span>
                         </div>
                     </div>
                     <div class="col-lg-5">

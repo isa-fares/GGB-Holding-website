@@ -3,7 +3,7 @@
 return[
 
 	// Ana Sayfa
-	'index'=>'Anasayfa',
+		'index'=>'Anasayfa',
 	'Anasayfa'=>'Anasayfa',
 	
 	// Menü Öğeleri

@@ -17,8 +17,8 @@ $kurumsal_kimlik = $this->dbLangSelectRow('sayfa', ['id'=>2, 'master_id'=>22]);
                     <div class="footer_inner" style="background-size: cover; background-repeat: no-repeat;">
                         <div class="ft_left" style="background-size: cover; background-repeat: no-repeat;">
                             <div><img src="<?= $assetURL ?>images/header_logo.png" alt=""></div>
-                            <p>2. Organize Sanayi Bölgesi Celal Doğan Bulvarı No: 56 Başpınar / Gaziantep<br><br><a
-                                    href="#">0 (342) 909 97 20</a><br><a href="#">info@ggbholding.com</a></p>
+                            <p><?= $this->ayarlar('adres_merkez') ?><br><br><a
+                                    href="<?= $this->linkTelefon() ?>"><?= $this->ayarlar('telefon_merkez') ?></a><br><a href="<?= $this->linkEmail() ?>"><?= $this->ayarlar('email_merkez') ?></a></p>
                             <div style="background-size: cover; background-repeat: no-repeat;">
                                 <h3><?= $this->lang->footer('follow_us') ?></h3>
                                 <ul class="social_list">

@@ -60,7 +60,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                                 data-aos-duration="1300">
                                 <div class="content">
                                     <h5><?= $this->lang->iletisim('contact_headquarters') ?></h5>
-                                    <p>2. Organize Sanayi Bölgesi Celal Doğan Bulvarı No: 56 Başpınar / Gaziantep
+                                    <p><?= $this->ayarlar('adres_merkez') ?>
                                     </p>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                                 data-aos-duration="1600">
                                 <div class="content">
                                     <h5><?= $this->lang->iletisim('contact_email') ?></h5>
-                                    <p><a href="info@ggbholding.com.tr">info@ggbholding.com.tr</a></p>
+                                    <p><a href="<?= $this->linkEmail() ?>"><?= $this->ayarlar('email_merkez') ?></a></p>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ $this->ogUrl = $this->fullUrl;         // Open Graph URL (canonical)
                                 data-aos-duration="1900">
                                 <div class="content">
                                     <h5><?= $this->lang->iletisim('contact_phone') ?></h5>
-                                    <p><a href="tel:+903429099720">+90 (342) 909 97 20</a></p>
+                                    <p><a href="<?= $this->linkTelefon() ?>"><?= $this->ayarlar('telefon_merkez') ?></a></p>
                                 </div>
                             </div>
                         </div>

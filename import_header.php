@@ -185,8 +185,12 @@ if (empty($filePaths)) {
     
     // Regenerate language files from database
     if (method_exists($settings, 'ceviriDosyaYaz')) {
-        $settings->ceviriDosyaYaz($fileName);
-        echo '<div class="alert alert-success">Regenerated language files from database</div>';
+        try {
+            $settings->ceviriDosyaYaz($fileName);
+            echo '<div class="alert alert-success">Regenerated language files from database</div>';
+        } catch (\Exception $e) {
+            echo '<div class="alert alert-warning">Warning: Could not regenerate language files: ' . htmlspecialchars($e->getMessage()) . '</div>';
+        }
     }
     
     // Show results

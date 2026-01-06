@@ -308,13 +308,24 @@ if ($runImport) {
         output("  " . (isset($_SERVER['HTTP_HOST']) ? 'http://' . $_SERVER['HTTP_HOST'] : '') . $_SERVER['SCRIPT_NAME'] . "?run=1", 'info');
         output("", 'info');
         output("To import specific files:", 'info');
-        output("  " . (isset($_SERVER['HTTP_HOST']) ? 'http://' . $_SERVER['HTTP_HOST'] : '') . $_SERVER['SCRIPT_NAME'] . "?run=1&type=selected&files=header,form,link", 'info');
+        output("  " . (isset($_SERVER['HTTP_HOST']) ? 'http://' . $_SERVER['HTTP_HOST'] : '') . $_SERVER['SCRIPT_NAME'] . "?run=1&type=selected&files=genel,index,faaliyet,footer,iletisim,link,form,katalog", 'info');
         output("", 'info');
         output("Options:", 'info');
         output("  ?run=1 - Run import", 'info');
         output("  &type=all - Import all files (default)", 'info');
-        output("  &type=selected&files=header,form - Import specific files", 'info');
+        output("  &type=selected&files=genel,index,faaliyet,footer,iletisim,link,form,katalog - Import specific files", 'info');
         output("  &overwrite=1 - Overwrite existing (default: 1)", 'info');
+        output("", 'info');
+        output("Available translation files:", 'info');
+        output("  - genel.php (General translations)", 'info');
+        output("  - index.php (Homepage translations)", 'info');
+        output("  - faaliyet.php (Activities page translations)", 'info');
+        output("  - footer.php (Footer translations)", 'info');
+        output("  - iletisim.php (Contact page translations)", 'info');
+        output("  - link.php (URL/SEO link translations)", 'info');
+        output("  - form.php (Form translations)", 'info');
+        output("  - katalog.php (Catalog translations)", 'info');
+        output("  - header.php (Header/Menu translations - use import_header.php)", 'info');
     }
 }
 

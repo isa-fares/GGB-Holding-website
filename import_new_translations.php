@@ -194,11 +194,12 @@ if (!$isCLI) {
     <?php
 }
 
-// Files to import
-$filesToImport = array('index', 'faaliyet', 'footer', 'iletisim');
+// Files to import - All translation files
+$filesToImport = array('genel', 'index', 'faaliyet', 'footer', 'iletisim', 'link', 'form', 'katalog');
 
-output("Starting import process for new translation files...", 'info');
+output("Starting import process for translation files...", 'info');
 output("Files to import: " . implode(', ', $filesToImport), 'info');
+output("Note: This will import all translation files found in include/lang/ directories", 'info');
 output("", 'info');
 
 $langDir = __DIR__ . '/include/lang/';

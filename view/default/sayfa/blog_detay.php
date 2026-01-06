@@ -28,7 +28,7 @@ if (!empty($blog_url)) {
         "",
         "ORDER BY sira ASC, id DESC"
     );
-    
+
     if (is_array($all_blogs)) {
         foreach ($all_blogs as $b) {
             $b_url_clean = preg_replace('/-\d+$/', '', $b['url']);
@@ -65,15 +65,20 @@ $blog_tarih = isset($blog['tarih']) ? $this->gun_ay_yil($blog['tarih']) : '';
 $blog_id = (!empty($blog['master_id'])) ? intval($blog['master_id']) : intval($blog['id']);
 
 // Get additional images from dosyalar table
-$blog_Ek_Resimler = $this->dbLangSelect(
-    "dosyalar", 
-    "type = 'blog' AND data_id = $blog_id", 
-    "dosya", 
-    "", 
-    "ORDER BY sira ASC", 
-    false, 
-    null
+// Note: dosyalar table has lang column directly, not a separate _lang table
+// Sanitize language code for SQL query
+$lang_safe = addslashes($lang);
+$blog_Ek_Resimler = $this->sorgu(
+    "SELECT * FROM dosyalar 
+     WHERE type = 'blog' AND data_id = $blog_id 
+     AND tur = 'resim' AND lang = '$lang_safe' AND sil <> 1 
+     ORDER BY sira ASC, id DESC"
 );
+
+// Ensure it's an array
+if (!is_array($blog_Ek_Resimler)) {
+    $blog_Ek_Resimler = array();
+}
 
 // ============================================
 // PAGE META DATA
@@ -87,23 +92,44 @@ $this->setPageMeta(
 // ============================================
 // URL CONSTANTS
 // ============================================
+$blog_url_clean = preg_replace('/-\d+$/', '', $blog['url']);
+$blog_page_url = $this->BaseURL($this->lang->link('blog_liste') . '/' . $blog_url_clean, $lang, 1);
+
 $urls = [
     'blog_liste' => $this->BaseURL($this->lang->link('blog_liste'), $lang, 1),
+    'current_page' => isset($this->fullUrl) ? $this->fullUrl : $blog_page_url,
 ];
 
 // ============================================
 // SHARE DATA
 // ============================================
 $share_message = urlencode($this->lang->genel('blog_share_message'));
-$current_url = 'window.location.href';
+$current_url = urlencode($urls['current_page']);
 
+// Get additional images from dosyalar table (if not already fetched)
+if (empty($blog_Ek_Resimler) || !is_array($blog_Ek_Resimler)) {
+    $blog_Ek_Resimler = $this->sorgu("SELECT * FROM dosyalar 
+        WHERE type = 'blog' 
+        AND tur = 'resim' 
+        AND data_id = $blog_id
+        AND sil <> 1
+        AND lang = '$lang_safe'
+        AND aktif = 1
+        ORDER BY sira ASC");
+    
+    if (!is_array($blog_Ek_Resimler)) {
+        $blog_Ek_Resimler = array();
+    }
+}
+
+$blog_Ek_Resimler_img = (!empty($blog_Ek_Resimler[0]['dosya'])) 
+    ? $this->dbResimAl($blog_Ek_Resimler[0]['dosya'], "blog", "1172x0", true) 
+    : ''; 
 ?>
-<div id="smooth-wrapper">
-    <div id="smooth-content">
         <main>
             <!-- ============================================
-                 PAGE HERO SECTION
-                 ============================================ -->
+                    PAGE HERO SECTION
+                    ============================================ -->
             <section class="page-hero-ss">
                 <div class="container">
                     <div class="row">
@@ -128,8 +154,8 @@ $current_url = 'window.location.href';
             </section>
 
             <!-- ============================================
-                 BLOG DETAILS SECTION
-                 ============================================ -->
+                    BLOG DETAILS SECTION
+                    ============================================ -->
             <section class="blog-details-ss pb-80">
                 <div class="container">
                     <div class="blog-details-wrapper">
@@ -137,12 +163,12 @@ $current_url = 'window.location.href';
                             <div class="col-md-9">
                                 <div class="blog-post-main mb-70">
                                     <div class="blog-post-item">
-                                        <?php if (!empty($blog_resim)): ?>
+                                        <?php if (!empty($blog_Ek_Resimler[0]['dosya'])): ?>
                                             <div class="post-thumbnail">
-                                                <img src="<?= $blog_resim ?>" alt="<?= $blog_baslik ?>">
+                                                <img src="<?= $blog_Ek_Resimler_img ?>" alt="<?= $blog_baslik ?>">
                                             </div>
                                         <?php endif; ?>
-                                        
+
                                         <div class="content-detail">
                                             <?php if (!empty($blog_detay)): ?>
                                                 <?= $blog_detay ?>
@@ -151,29 +177,25 @@ $current_url = 'window.location.href';
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Social Share -->
                                     <div class="entry-footer">
                                         <div class="social-share">
                                             <span><?= $this->lang->genel('blog_share') ?></span>
-                                            <a target="_blank" 
-                                               href="https://twitter.com/intent/tweet?text=<?= $share_message ?>&url=" 
-                                               onclick="this.href+= encodeURIComponent(window.location.href)">
+                                            <a target="_blank"
+                                                href="https://twitter.com/intent/tweet?text=<?= $share_message ?>&url=<?= $current_url ?>">
                                                 <i class="fa-brands fa-x-twitter"></i>
                                             </a>
-                                            <a target="_blank" 
-                                               href="https://www.linkedin.com/sharing/share-offsite/?url=" 
-                                               onclick="this.href+= encodeURIComponent(window.location.href)">
+                                            <a target="_blank"
+                                                href="https://www.linkedin.com/sharing/share-offsite/?url=<?= $current_url ?>">
                                                 <i class="fa-brands fa-linkedin-in"></i>
                                             </a>
-                                            <a target="_blank" 
-                                               href="https://www.facebook.com/sharer/sharer.php?u=" 
-                                               onclick="this.href+= encodeURIComponent(window.location.href)">
+                                            <a target="_blank"
+                                                href="https://www.facebook.com/sharer/sharer.php?u=<?= $current_url ?>">
                                                 <i class="fa-brands fa-facebook-f"></i>
                                             </a>
-                                            <a target="_blank" 
-                                               href="https://api.whatsapp.com/send?text=<?= $share_message ?>:%20" 
-                                               onclick="this.href+= encodeURIComponent(window.location.href)">
+                                            <a target="_blank"
+                                                href="https://api.whatsapp.com/send?text=<?= $share_message ?>%20<?= $current_url ?>">
                                                 <i class="fa-brands fa-whatsapp"></i>
                                             </a>
                                         </div>
@@ -184,6 +206,4 @@ $current_url = 'window.location.href';
                     </div>
                 </div>
             </section>
-        </main>
-    </div>
-</div>
+        </main> 

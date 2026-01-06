@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Corporate Pages Template - Clean Code Version
+ * 
+ * This template handles category pages like kurumsal/hakkimizda.html
+ * 
  * @var $this FrontClass|Loader object
  * @var $lang string
  * @var $assetURL string
@@ -9,27 +13,31 @@
  * @var $katurl string
  */
 
-// ---   Page Settings  ---
+// ============================================
+// PAGE CONFIGURATION
+// ============================================
 $table = "sayfa";
-$categoryName = "Kurumsal"; // Category name
+$categoryName = "Kurumsal";
+
+// ============================================
+// DATA PREPARATION
+// ============================================
 
 // Get category pages
 $kurumsal_pages = $this->getCategoryPages($categoryName);
 
 // Get current page data - if katurl parameter exists, get that specific page, otherwise get first page
 $veri = null;
-// Check for katurl parameter (for links like kurumsal/hakkimizda.html)
 $katurl_param = isset($katurl) ? $katurl : "";
 $current_page_url_clean = !empty($katurl_param) ? $katurl_param : null;
 
 if ($current_page_url_clean && !empty($kurumsal_pages)) {
-    // Find the page by matching URL without -1 suffix
-    // Database URLs contain -1 (e.g., hakkimizda-1), but links are without -1 (e.g., hakkimizda)
+    // Find the page by matching URL without numbers suffix
     foreach ($kurumsal_pages as $p) {
         $p_url_clean = preg_replace('/-\d+$/', '', $p['url']);
         if ($p_url_clean == $current_page_url_clean) {
             $veri = $this->dbLangSelectRow($table, array("url" => $p['url']), "resim");
-            $current_page_url = $p['url']; // Store full URL (with -1) for comparison
+            $current_page_url = $p['url'];
             break;
         }
     }
@@ -48,6 +56,7 @@ if (!is_array($veri) || empty($veri)) {
     exit;
 }
 
+// Extract page data
 $getID = $this->getID($veri);
 $baslik = $this->temizle($veri["baslik"]);
 $detay = htmlspecialchars_decode($veri["detay"]);
@@ -58,22 +67,33 @@ $kid = isset($veri["kid"]) ? $veri["kid"] : 0;
 $boyut = $this->getimageinfo("sayfa", "", "big");
 $resim = $this->dbResimAl($veri["resim"], "sayfa", $boyut);
 
-// Set page meta data using setPageMeta function
+// ============================================
+// PAGE META DATA
+// ============================================
 $this->setPageMeta(
-    $categoryName,  // Page name/key
-    $baslik,  // Custom title (page title from database)
-    $ozet,  // Custom description (page summary from database)
-    null,  // Custom keywords (null = use default)
-    "index, follow"  // Robots meta tag
+    $categoryName,
+    $baslik,
+    $ozet,
+    null,
+    "index, follow"
 );
 
 if (!empty($resim)) {
     $this->ogResim = $resim;
 }
 
-// Get category info for sidebar
+// ============================================
+// SIDEBAR DATA
+// ============================================
 $kategori_baslik = $categoryName;
 $sidebar_pages = $kurumsal_pages;
+
+// ============================================
+// URL CONSTANTS
+// ============================================
+$urls = [
+    'index' => $this->BaseURL($this->lang->link('index'), $lang, 1),
+];
 
 ?>
 <div id="">
@@ -86,6 +106,9 @@ $sidebar_pages = $kurumsal_pages;
             <div class="line_item"></div>
         </div>
         <main>
+            <!-- ============================================
+                 PAGE HEADER SECTION
+                 ============================================ -->
             <section class="page_header177">
                 <div class="container">
                     <div class="col-12">
@@ -95,8 +118,10 @@ $sidebar_pages = $kurumsal_pages;
                                 <div class="row">
                                     <div class="breadcrumb_overlay">
                                         <div class="breadcrumb">
-                                            <a href="<?= $this->BaseURL($this->lang->link('index'), $lang, 1) ?>"><?= $this->lang->header('index') ?> </a>
-                                            <a href="#"><?= $baslik ?> </a>
+                                            <a href="<?= $urls['index'] ?>">
+                                                <?= $this->lang->header('index') ?>
+                                            </a>
+                                            <a href="#"><?= $baslik ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -108,10 +133,15 @@ $sidebar_pages = $kurumsal_pages;
                     </div>
                 </div>
             </section>
+
+            <!-- ============================================
+                 PAGE CONTENT SECTION
+                 ============================================ -->
             <section style="padding-bottom: 80px;">
                 <div class="container">
                     <div class="row corporate_page">
                         <?php if (!empty($sidebar_pages) && count($sidebar_pages) > 0): ?>
+                            <!-- Sidebar -->
                             <div class="col-lg-4 sidemenu119">
                                 <div class="lister_sidebar">
                                     <div class="sub_menu wbx_1">
@@ -123,14 +153,16 @@ $sidebar_pages = $kurumsal_pages;
                                             <?php 
                                             $kurumsal_link = $this->lang->link('kurumsal');
                                             foreach ($sidebar_pages as $sidebar_page): 
-                                                // Remove any numbers from end of URL (e.g., hakkimizda-1 -> hakkimizda, sertifika-2 -> sertifika)
+                                                // Prepare sidebar link
                                                 $sidebar_url_clean = preg_replace('/-\d+$/', '', $sidebar_page['url']);
-                                                // Build URL: kurumsal/page-url.html (without numbers)
                                                 $sidebar_page_url = $this->BaseURL($kurumsal_link . '/' . $sidebar_url_clean, $lang, 1);
                                                 $is_active = ($sidebar_page['url'] == $current_page_url) ? 'active' : '';
-                                            ?>
+                                                $sidebar_title = $this->temizle($sidebar_page['baslik']);
+                                                ?>
                                                 <li>
-                                                    <a href="<?= $sidebar_page_url ?>" class="<?= $is_active ?>"><?= $this->temizle($sidebar_page['baslik']) ?></a>
+                                                    <a href="<?= $sidebar_page_url ?>" class="<?= $is_active ?>">
+                                                        <?= $sidebar_title ?>
+                                                    </a>
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -141,6 +173,7 @@ $sidebar_pages = $kurumsal_pages;
                         <?php else: ?>
                             <div class="col-lg-12">
                         <?php endif; ?>
+                                <!-- Main Content -->
                                 <div class="corporate content-detail">
                                     <?php if (!empty($resim)): ?>
                                         <img src="<?= $resim ?>" alt="<?= $baslik ?>">

@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Subsidiaries Pages Template - Clean Code Version
+ * 
+ * This template handles category pages like istirakler/kristal.html
+ * 
  * @var $this FrontClass|Loader object
  * @var $lang string
  * @var $assetURL string
@@ -9,27 +13,31 @@
  * @var $katurl string
  */
 
-// ---   Page Settings  ---
+// ============================================
+// PAGE CONFIGURATION
+// ============================================
 $table = "sayfa";
-$categoryName = "İştirakler"; // Category name
+$categoryName = "İştirakler";
+
+// ============================================
+// DATA PREPARATION
+// ============================================
 
 // Get category pages
 $istirakler_pages = $this->getCategoryPages($categoryName);
 
 // Get current page data - if katurl parameter exists, get that specific page, otherwise get first page
 $veri = null;
-// Check for katurl parameter (for links like istirakler/kristal.html)
 $katurl_param = isset($katurl) ? $katurl : "";
 $current_page_url_clean = !empty($katurl_param) ? $katurl_param : null;
 
 if ($current_page_url_clean && !empty($istirakler_pages)) {
     // Find the page by matching URL without numbers suffix
-    // Database URLs contain numbers (e.g., kristal-1), but links are without numbers (e.g., kristal)
     foreach ($istirakler_pages as $p) {
         $p_url_clean = preg_replace('/-\d+$/', '', $p['url']);
         if ($p_url_clean == $current_page_url_clean) {
             $veri = $this->dbLangSelectRow($table, array("url" => $p['url']), "resim,banner");
-            $current_page_url = $p['url']; // Store full URL (with numbers) for comparison
+            $current_page_url = $p['url'];
             break;
         }
     }
@@ -48,6 +56,7 @@ if (!is_array($veri) || empty($veri)) {
     exit;
 }
 
+// Extract page data
 $getID = $this->getID($veri);
 $baslik = $this->temizle($veri["baslik"]);
 $detay = htmlspecialchars_decode($veri["detay"]);
@@ -65,13 +74,15 @@ if (!empty($veri["banner"])) {
     $logo = $this->dbResimAl($veri["banner"], "sayfa", $logo_boyut);
 }
 
-// Set page meta data using setPageMeta function
+// ============================================
+// PAGE META DATA
+// ============================================
 $this->setPageMeta(
-    $categoryName,  // Page name/key
-    $baslik,  // Custom title (page title from database)
-    $ozet,  // Custom description (page summary from database)
-    null,  // Custom keywords (null = use default)
-    "index, follow"  // Robots meta tag
+    $categoryName,
+    $baslik,
+    $ozet,
+    null,
+    "index, follow"
 );
 
 if (!empty($resim)) {
@@ -80,9 +91,18 @@ if (!empty($resim)) {
     $this->ogResim = $logo;
 }
 
-// Get category info for sidebar
+// ============================================
+// SIDEBAR DATA
+// ============================================
 $kategori_baslik = $categoryName;
 $sidebar_pages = $istirakler_pages;
+
+// ============================================
+// URL CONSTANTS
+// ============================================
+$urls = [
+    'index' => $this->BaseURL($this->lang->link('index'), $lang, 1),
+];
 
 ?>
 <div id="">
@@ -95,6 +115,9 @@ $sidebar_pages = $istirakler_pages;
             <div class="line_item"></div>
         </div>
         <main>
+            <!-- ============================================
+                 PAGE HEADER SECTION
+                 ============================================ -->
             <section class="page_header177">
                 <div class="container">
                     <div class="col-12">
@@ -104,8 +127,10 @@ $sidebar_pages = $istirakler_pages;
                                 <div class="row">
                                     <div class="breadcrumb_overlay">
                                         <div class="breadcrumb">
-                                            <a href="<?= $this->BaseURL($this->lang->link('index'), $lang, 1) ?>"><?= $this->lang->header('index') ?> </a>
-                                            <a href="#"><?= $baslik ?> </a>
+                                            <a href="<?= $urls['index'] ?>">
+                                                <?= $this->lang->header('index') ?>
+                                            </a>
+                                            <a href="#"><?= $baslik ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -117,10 +142,15 @@ $sidebar_pages = $istirakler_pages;
                     </div>
                 </div>
             </section>
+
+            <!-- ============================================
+                 PAGE CONTENT SECTION
+                 ============================================ -->
             <section style="padding-bottom: 80px;">
                 <div class="container">
                     <div class="row corporate_page">
                         <?php if (!empty($sidebar_pages) && count($sidebar_pages) > 0): ?>
+                            <!-- Sidebar -->
                             <div class="col-lg-4 sidemenu119">
                                 <div class="lister_sidebar">
                                     <div class="sub_menu wbx_1">
@@ -132,14 +162,16 @@ $sidebar_pages = $istirakler_pages;
                                             <?php
                                             $istirakler_link = $this->lang->link('istirakler');
                                             foreach ($sidebar_pages as $sidebar_page):
-                                                // Remove any numbers from end of URL (e.g., kristal-1 -> kristal)
+                                                // Prepare sidebar link
                                                 $sidebar_url_clean = preg_replace('/-\d+$/', '', $sidebar_page['url']);
-                                                // Build URL: istirakler/page-url.html (without numbers)
                                                 $sidebar_page_url = $this->BaseURL($istirakler_link . '/' . $sidebar_url_clean, $lang, 1);
                                                 $is_active = ($sidebar_page['url'] == $current_page_url) ? 'active' : '';
-                                            ?>
+                                                $sidebar_title = $this->temizle($sidebar_page['baslik']);
+                                                ?>
                                                 <li>
-                                                    <a href="<?= $sidebar_page_url ?>" class="<?= $is_active ?>"><?= $this->temizle($sidebar_page['baslik']) ?></a>
+                                                    <a href="<?= $sidebar_page_url ?>" class="<?= $is_active ?>">
+                                                        <?= $sidebar_title ?>
+                                                    </a>
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -147,9 +179,10 @@ $sidebar_pages = $istirakler_pages;
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                            <?php else: ?>
-                                <div class="col-lg-12">
-                                <?php endif; ?>
+                        <?php else: ?>
+                            <div class="col-lg-12">
+                        <?php endif; ?>
+                                <!-- Main Content -->
                                 <div class="corporate content-detail">
                                     <?php if (!empty($logo)): ?>
                                         <div class="partner_logo">
@@ -159,11 +192,12 @@ $sidebar_pages = $istirakler_pages;
                                             <img src="<?= $resim ?>" alt="">
                                         </div>
                                     <?php endif; ?>
+                                    
                                     <?= $detay ?>
-                                </div>
                                 </div>
                             </div>
                     </div>
+                </div>
             </section>
         </main>
     </div>

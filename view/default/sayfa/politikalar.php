@@ -98,13 +98,6 @@ $urls = [
 ?>
 <div id="">
     <div id="">
-        <div class="line_wrap">
-            <div class="line_item_one"></div>
-            <div class="line_item"></div>
-            <div class="line_item"></div>
-            <div class="line_item"></div>
-            <div class="line_item"></div>
-        </div>
         <main>
             <!-- ============================================
                  PAGE HEADER SECTION

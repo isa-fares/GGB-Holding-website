@@ -100,14 +100,6 @@ $current_url = 'window.location.href';
 ?>
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        <div class="line_wrap">
-            <div class="line_item_one"></div>
-            <div class="line_item"></div>
-            <div class="line_item"></div>
-            <div class="line_item"></div>
-            <div class="line_item"></div>
-        </div>
-
         <main>
             <!-- ============================================
                  PAGE HERO SECTION

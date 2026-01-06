@@ -490,6 +490,10 @@ class FrontClass extends Mail
 
             $deger = $kosul[$stun];
 
+            // Convert 'id' to 'master_id' for _lang tables (lang tables don't have 'id' column)
+            if ($stun == "id") {
+                $stun = "master_id";
+            }
 
             $sorgu = $this->teksorgu("SELECT *, (SELECT sira FROM $table WHERE $table.id = ".$table."_lang.master_id) as sira $rtext FROM ".$table."_lang WHERE dil = '$lang' and $stun = '".$deger."' and sil <> 1");
 
@@ -2049,10 +2053,6 @@ EOT;
         }
 
     }
-
-
-
-
 
     public function getFooterCopy()
     {

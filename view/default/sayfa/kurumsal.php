@@ -36,7 +36,9 @@ if ($current_page_url_clean && !empty($kurumsal_pages)) {
     foreach ($kurumsal_pages as $p) {
         $p_url_clean = preg_replace('/-\d+$/', '', $p['url']);
         if ($p_url_clean == $current_page_url_clean) {
-            $veri = $this->dbLangSelectRow($table, array("url" => $p['url']), "resim");
+            // Get the actual ID (dbLangSelectRow now handles id -> master_id conversion automatically)
+            $page_id = isset($p['master_id']) ? $p['master_id'] : $p['id'];
+            $veri = $this->dbLangSelectRow($table, array("id" => $page_id), "resim");
             $current_page_url = $p['url'];
             break;
         }
@@ -46,7 +48,9 @@ if ($current_page_url_clean && !empty($kurumsal_pages)) {
 // If no specific page found, get the first page from category
 if (!is_array($veri) && !empty($kurumsal_pages)) {
     $first_page = $kurumsal_pages[0];
-    $veri = $this->dbLangSelectRow($table, array("url" => $first_page['url']), "resim");
+    // Get the actual ID (dbLangSelectRow now handles id -> master_id conversion automatically)
+    $page_id = isset($first_page['master_id']) ? $first_page['master_id'] : $first_page['id'];
+    $veri = $this->dbLangSelectRow($table, array("id" => $page_id), "resim");
     $current_page_url = $first_page['url'];
 }
 
@@ -94,6 +98,12 @@ $sidebar_pages = $kurumsal_pages;
 $urls = [
     'index' => $this->BaseURL($this->lang->link('index'), $lang, 1),
 ];
+$belge_resimler = $this->sorgu(
+    "SELECT * FROM dosyalar 
+     WHERE type = 'sayfa' AND data_id = $page_id 
+     AND tur = 'resim' AND lang = '$lang' AND sil <> 1 AND aktif = 1
+     ORDER BY sira ASC, id DESC"
+);
 
 ?>
 <div id="">
@@ -143,15 +153,15 @@ $urls = [
                                             <?= $kategori_baslik ?>
                                         </div>
                                         <ul>
-                                            <?php 
+                                            <?php
                                             $kurumsal_link = $this->lang->link('kurumsal');
-                                            foreach ($sidebar_pages as $sidebar_page): 
+                                            foreach ($sidebar_pages as $sidebar_page):
                                                 // Prepare sidebar link
                                                 $sidebar_url_clean = preg_replace('/-\d+$/', '', $sidebar_page['url']);
                                                 $sidebar_page_url = $this->BaseURL($kurumsal_link . '/' . $sidebar_url_clean, $lang, 1);
                                                 $is_active = ($sidebar_page['url'] == $current_page_url) ? 'active' : '';
                                                 $sidebar_title = $this->temizle($sidebar_page['baslik']);
-                                                ?>
+                                            ?>
                                                 <li>
                                                     <a href="<?= $sidebar_page_url ?>" class="<?= $is_active ?>">
                                                         <?= $sidebar_title ?>
@@ -163,20 +173,46 @@ $urls = [
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                        <?php else: ?>
-                            <div class="col-lg-12">
-                        <?php endif; ?>
+                            <?php else: ?>
+                                <div class="col-lg-12">
+                                <?php endif; ?>
                                 <!-- Main Content -->
                                 <div class="corporate content-detail">
                                     <?php if (!empty($resim)): ?>
                                         <img src="<?= $resim ?>" alt="<?= $baslik ?>">
                                     <?php endif; ?>
-                                    
+
                                     <?= $detay ?>
+                                </div>
+                                <?php if (!empty($belge_resimler) && count($belge_resimler) > 0): ?>
+                                    <section class="team-page-ss mt-50" id="cert_page">
+                                        <div class="col-12">
+                                            <div class="row" id="rgp_row">
+                                                <?php foreach ($belge_resimler as $belge_resim):
+                                                  $resim = $this->dbResimAl($belge_resim['dosya'], "sayfa", "1200x0");
+                                                  $baslik = $this->temizle($belge_resim['baslik']);
+                                                ?>
+                                                <div class="col-xl-4 col-lg-6 col-sm-6">
+                                                    <div class="team-item style-one" data-aos="fade-up"
+                                                        data-aos-duration="1000">
+                                                        <div class="member-image">
+                                                            <a href="<?= $resim ?>" data-fancybox="cert">
+                                                                <img src="<?= $resim ?>" alt="<?= $baslik ?>">
+                                                            </a>
+                                                        </div>
+                                                        <div class="member-info">
+                                                            <span class="position"><?= $baslik ?></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </section>
+                                <?php endif; ?>
                                 </div>
                             </div>
                     </div>
-                </div>
             </section>
         </main>
     </div>

@@ -17,7 +17,7 @@
 // PAGE CONFIGURATION
 // ============================================
 $table = "sayfa";
-$categoryName = "İştirakler";
+$categoryName = "Istirakler";
 
 // ============================================
 // DATA PREPARATION

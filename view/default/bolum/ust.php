@@ -9,7 +9,7 @@
 // This function automatically handles language switching and returns pages in current language
 $kurumsal_sayfalar = $this->getCategoryPages("Kurumsal");
 $politikalar_sayfalar = $this->getCategoryPages("Politikalar");
-$isitirakler_sayfalar = $this->getCategoryPages("İştirakler");
+$isitirakler_sayfalar = $this->getCategoryPages("Istirakler");
 $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
 
 ?>

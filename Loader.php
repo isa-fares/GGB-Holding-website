@@ -254,7 +254,6 @@ class Loader extends FrontClass
 
             case 'istirakler':
             case 'İştirakler':
-            case 'subsidiaries':
                 $text .= $this->_include('sayfa/İştirakler',$data,$this->theme);
                 break;
 
@@ -341,14 +340,6 @@ class Loader extends FrontClass
                 break;
 
             case 'blog':
-                // Check if katurl exists (blog detail page)
-                if (isset($data['katurl']) && !empty($data['katurl'])) {
-                    $text .= $this->_include('sayfa/blog_detay',$data,$this->theme);
-                } else {
-                    // Blog list page
-                    $text .= $this->_include('sayfa/blog_liste',$data,$this->theme);
-                }
-                break;
             case 'blog_liste':
                 $text .= $this->_include('sayfa/blog_liste',$data,$this->theme);
                 break;

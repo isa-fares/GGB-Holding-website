@@ -116,94 +116,94 @@ if (empty($blog_Ek_Resimler) || !is_array($blog_Ek_Resimler)) {
         AND lang = '$lang_safe'
         AND aktif = 1
         ORDER BY sira ASC");
-    
+
     if (!is_array($blog_Ek_Resimler)) {
         $blog_Ek_Resimler = array();
     }
 }
 
-$blog_Ek_Resimler_img = (!empty($blog_Ek_Resimler[0]['dosya'])) 
-    ? $this->dbResimAl($blog_Ek_Resimler[0]['dosya'], "blog", "1172x0", true) 
-    : ''; 
+$blog_Ek_Resimler_img = (!empty($blog_Ek_Resimler[0]['dosya']))
+    ? $this->dbResimAl($blog_Ek_Resimler[0]['dosya'], "blog", "1172x0", true)
+    : '';
 ?>
-        <main>
-            <!-- ============================================
+<main>
+    <!-- ============================================
                     PAGE HERO SECTION
                     ============================================ -->
-            <section class="page-hero-ss">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="page-content text-center">
-                                <h3 class="page-title">
-                                    <a href="<?= $urls['blog_liste'] ?>">
-                                        <i class="fa-regular fa-arrow-left"></i>
-                                        <?= $this->lang->genel('blog_other_posts') ?>
-                                    </a><br>
-                                    <?= $blog_baslik ?>
-                                </h3>
-                                <ul class="breadcrumb-link">
-                                    <?php if (!empty($blog_tarih)): ?>
-                                        <li><?= $blog_tarih ?></li>
-                                    <?php endif; ?>
-                                </ul>
-                            </div>
-                        </div>
+    <section class="page-hero-ss" style="padding: 100px 0px 40px !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-content text-center">
+                        <h3 class="page-title">
+                            <a href="<?= $urls['blog_liste'] ?>">
+                                <i class="fa-regular fa-arrow-left"></i>
+                                <?= $this->lang->genel('blog_other_posts') ?>
+                            </a><br>
+                            <?= $blog_baslik ?>
+                        </h3>
+                        <ul class="breadcrumb-link">
+                            <?php if (!empty($blog_tarih)): ?>
+                                <li><?= $blog_tarih ?></li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- ============================================
+    <!-- ============================================
                     BLOG DETAILS SECTION
                     ============================================ -->
-            <section class="blog-details-ss pb-80">
-                <div class="container">
-                    <div class="blog-details-wrapper">
-                        <div class="row" style="justify-content: center;">
-                            <div class="col-md-9">
-                                <div class="blog-post-main mb-70">
-                                    <div class="blog-post-item">
-                                        <?php if (!empty($blog_Ek_Resimler[0]['dosya'])): ?>
-                                            <div class="post-thumbnail">
-                                                <img src="<?= $blog_Ek_Resimler_img ?>" alt="<?= $blog_baslik ?>">
-                                            </div>
-                                        <?php endif; ?>
-
-                                        <div class="content-detail">
-                                            <?php if (!empty($blog_detay)): ?>
-                                                <?= $blog_detay ?>
-                                            <?php else: ?>
-                                                <p><?= $blog_ozet ?></p>
-                                            <?php endif; ?>
-                                        </div>
+    <section class="blog-details-ss pb-80">
+        <div class="container">
+            <div class="blog-details-wrapper">
+                <div class="row" style="justify-content: center;">
+                    <div class="col-md-9">
+                        <div class="blog-post-main mb-70">
+                            <div class="blog-post-item">
+                                <?php if (!empty($blog_Ek_Resimler[0]['dosya'])): ?>
+                                    <div class="post-thumbnail">
+                                        <img src="<?= $blog_Ek_Resimler_img ?>" alt="<?= $blog_baslik ?>">
                                     </div>
+                                <?php endif; ?>
 
-                                    <!-- Social Share -->
-                                    <div class="entry-footer">
-                                        <div class="social-share">
-                                            <span><?= $this->lang->genel('blog_share') ?></span>
-                                            <a target="_blank"
-                                                href="https://twitter.com/intent/tweet?text=<?= $share_message ?>&url=<?= $current_url ?>">
-                                                <i class="fa-brands fa-x-twitter"></i>
-                                            </a>
-                                            <a target="_blank"
-                                                href="https://www.linkedin.com/sharing/share-offsite/?url=<?= $current_url ?>">
-                                                <i class="fa-brands fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank"
-                                                href="https://www.facebook.com/sharer/sharer.php?u=<?= $current_url ?>">
-                                                <i class="fa-brands fa-facebook-f"></i>
-                                            </a>
-                                            <a target="_blank"
-                                                href="https://api.whatsapp.com/send?text=<?= $share_message ?>%20<?= $current_url ?>">
-                                                <i class="fa-brands fa-whatsapp"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div class="content-detail">
+                                    <?php if (!empty($blog_detay)): ?>
+                                        <?= $blog_detay ?>
+                                    <?php else: ?>
+                                        <p><?= $blog_ozet ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Social Share -->
+                            <div class="entry-footer">
+                                <div class="social-share">
+                                    <span><?= $this->lang->genel('blog_share') ?></span>
+                                    <a target="_blank"
+                                        href="https://twitter.com/intent/tweet?text=<?= $share_message ?>&url=<?= $current_url ?>">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                    <a target="_blank"
+                                        href="https://www.linkedin.com/sharing/share-offsite/?url=<?= $current_url ?>">
+                                        <i class="fa-brands fa-linkedin-in"></i>
+                                    </a>
+                                    <a target="_blank"
+                                        href="https://www.facebook.com/sharer/sharer.php?u=<?= $current_url ?>">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                    <a target="_blank"
+                                        href="https://api.whatsapp.com/send?text=<?= $share_message ?>%20<?= $current_url ?>">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main> 
+            </div>
+        </div>
+    </section>
+</main>

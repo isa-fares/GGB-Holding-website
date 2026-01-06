@@ -202,3 +202,19 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
         </div>
     </header>
     <!-- END_HEADER -->
+
+<?php
+$blog_url = isset($data['katurl']) ? $data['katurl'] : (isset($_GET['katurl']) ? $_GET['katurl'] : '');
+
+//if pages have blogurl don't show line_wrap
+if ($page != "index"  || !isset($blog_url)) : ?>
+    <div id="">
+    <div id="">
+        <div class="line_wrap">
+            <div class="line_item_one"></div>
+            <div class="line_item"></div>
+            <div class="line_item"></div>
+            <div class="line_item"></div>
+            <div class="line_item"></div>
+        </div>
+    <?php endif; ?>

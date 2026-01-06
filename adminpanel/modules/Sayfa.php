@@ -35,7 +35,7 @@ class Sayfa  extends Settings{
         $this->tablist = array(
             //array("title" => $this->modul_info["baslik"]." Listesi", "href" => "liste", "icon" => "mdi mdi-view-sequential"),
             array("title" => "Sayfa Listesi", "href" => "liste", "icon" => "mdi mdi-view-sequential"),
-            array("title" => "Alt Sayfalar", "href" => "Altsayfalar", "icon" => "mdi mdi-view-sequential"),
+            // array("title" => "Alt Sayfalar", "href" => "Altsayfalar", "icon" => "mdi mdi-view-sequential"),
             //array("title" => $this->modul_info["baslik"]." Modül Ayarları", "href" => "settings", "icon" => "mdi mdi-settings"),
             //array("title" => "Yardım", "href" => "help", "icon" => "mdi mdi-comment-question-outline"),
         );
@@ -127,8 +127,8 @@ class Sayfa  extends Settings{
             ),
             'buton'=> array(
                 array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Resim Ekle','class'=>'btn bg-olive','dataname'=>'fotoekle','url'=>$this->BaseAdminURL('Resim/fotoekle/'), "data-icon"=>"ti-camera", "modul"=>$this->table),
-                array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Dosya Ekle','class'=>'btn btn-dark','dataname'=>'dosyaekle','url'=>$this->BaseAdminURL('Dosyalar/fotoekle/'), "data-icon"=>"ti-file", "modul"=>$this->table),
-                array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Alt Sayfalar','class'=>'btn btn-blue','dataname'=>'dosyaekle','url'=>$this->BaseAdminURL($this->modulName.'/Altsayfalar/'), "data-icon"=>"ti-files", "modul"=>$this->table),
+                // array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Dosya Ekle','class'=>'btn btn-dark','dataname'=>'dosyaekle','url'=>$this->BaseAdminURL('Dosyalar/fotoekle/'), "data-icon"=>"ti-file", "modul"=>$this->table),
+                // array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Alt Sayfalar','class'=>'btn btn-blue','dataname'=>'dosyaekle','url'=>$this->BaseAdminURL($this->modulName.'/Altsayfalar/'), "data-icon"=>"ti-files", "modul"=>$this->table),
                 array('type'=>'radio','dataname'=>'aktif','url'=>$this->BaseAdminURL($this->modulName.'/durum/')),
             ),
 
@@ -137,8 +137,8 @@ class Sayfa  extends Settings{
                 array('title'=>'Sayfa Adı','width'=>'20%'),
                 array('title'=>'Sayfa Kategorisi','width'=>'20%'),
                 array('title'=>'Çoklu Resim','width'=>'5%', "align"=>"center"),
-                array('title'=>'Dosyalar','width'=>'5%', "align"=>"center"),
-                array('title'=>'Alt Sayfalar','width'=>'5%', "align"=>"center"),
+                // array('title'=>'Dosyalar','width'=>'5%', "align"=>"center"),
+                // array('title'=>'Alt Sayfalar','width'=>'5%', "align"=>"center"),
                 array('title'=>'Durum','width'=>'4%', "align"=>"center"),
             )
         ));
@@ -388,7 +388,7 @@ class Sayfa  extends Settings{
             'modul_id'=>$this->modul_info["id"],
             'modul_name'=>$this->modulName,
             'page'=>$this->alt_table,
-            "place"=>"alt sayfalarda ara",
+            // "place"=>"alt sayfalarda ara",
             "showing"=>$showing,
             "toplamVeri"=>$toplamVeri,
             "search"=>true,
@@ -402,7 +402,7 @@ class Sayfa  extends Settings{
             ),
             'buton'=> array(
                 array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Resim Ekle','class'=>'btn bg-olive','dataname'=>'fotoekle','url'=>$this->BaseAdminURL('Resim/fotoekle/'), "data-icon"=>"ti-camera", "modul"=>$this->alt_table),
-                array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Dosya Ekle','class'=>'btn btn-dark','dataname'=>'dosyaekle','url'=>$this->BaseAdminURL('Dosyalar/fotoekle/'), "data-icon"=>"ti-file", "modul"=>$this->alt_table),
+                // array("disable_delete"=>true,'type'=>'button2','align'=>"center", 'title'=>'Dosya Ekle','class'=>'btn btn-dark','dataname'=>'dosyaekle','url'=>$this->BaseAdminURL('Dosyalar/fotoekle/'), "data-icon"=>"ti-file", "modul"=>$this->alt_table),
                 array('type'=>'radio','dataname'=>'aktif','url'=>$this->BaseAdminURL($this->modulName.'/Altsayfadurum/')),
             ),
 
@@ -411,7 +411,7 @@ class Sayfa  extends Settings{
                 array('title'=>'Sayfa Adı','width'=>'20%'),
                 array('title'=>'Sayfa Kategorisi','width'=>'20%'),
                 array('title'=>'Çoklu Resim','width'=>'5%', "align"=>"center"),
-                array('title'=>'Dosyalar','width'=>'5%', "align"=>"center"),
+                // array('title'=>'Dosyalar','width'=>'5%', "align"=>"center"),
                 array('title'=>'Durum','width'=>'4%', "align"=>"center"),
             )
         ));

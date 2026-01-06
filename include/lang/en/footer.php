@@ -2,7 +2,7 @@
 
 return[
 
-		'copy'=>'Copyright © 2026 %firm% All Rights Reserved',
+		'copy'=>'© 2026 %firm% All Rights Reserved',
 
 		// Footer Sections
 		'follow_us'=>'Follow Us',

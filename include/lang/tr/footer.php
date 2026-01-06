@@ -2,7 +2,7 @@
 
 return[
 
-		'copy'=>'Copyright © 2026 %firm% Tüm hakları saklıdır.',
+		'copy'=>'© 2026 %firm% Tüm hakları saklıdır.',
 
 		// Footer Sections
 		'follow_us'=>'Takip Edin',

@@ -44,9 +44,9 @@
     let errorMessage = "<?= $this->lang->form("hata") ?>";
     let infoMessage = "<?= $this->lang->form("bilgi") ?>";
     let pageLang = "<?= $lang ?>";
-    let confirmButton = "<?= $this->lang->genel("KAPAT") ?>";
-    let confirmButtonT = "<?= $this->lang->genel("KAPAT") ?>";
-    let sonucClickTest = "<?= $this->lang->genel("sonuc_text") ?>"
+    let confirmButton = "<?= $this->lang->form("gonder") ?? "Kapat" ?>";
+    let confirmButtonT = "<?= $this->lang->form("gonder") ?? "Kapat" ?>";
+    let sonucClickTest = "";
     let slidingMenuMargin = 'margin-left';
 </script>
 

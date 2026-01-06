@@ -206,8 +206,8 @@ $insan_kaynaklari_sayfalar = $this->getCategoryPages("İnsan Kaynakları");
 <?php
 $blog_url = isset($data['katurl']) ? $data['katurl'] : (isset($_GET['katurl']) ? $_GET['katurl'] : '');
 
-//if pages have blogurl don't show line_wrap
-if ($page != "index"  || !isset($blog_url)) : ?>
+// Show line_wrap on all pages except index
+if ($page != "index") : ?>
     <div id="">
     <div id="">
         <div class="line_wrap">

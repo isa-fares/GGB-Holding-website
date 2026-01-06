@@ -25,9 +25,9 @@ return [
              'host' =>
                 [
                      'host' => 'localhost',
-                     'dbname' => '',
-                     'user' =>'',
-                     'password' => '',
+                     'dbname' => 'demovmd_ggbholding',
+                     'user' => 'demovmd_ggbholding',
+                     'password' => 'hGZ2tU7svDSxuxm5Udgt',
                      'charset' => 'utf8',
                      'driver' => 'pdo_mysql',
                      'debug' => false,

@@ -2058,7 +2058,7 @@ EOT;
     {
         $lang = $this->pageLang;
         $bul = "%firm%";
-        $dgs = '<a href="'.$this->baseURL("index", $lang, 1).'">GESOB</a>';
+        $dgs = '<a href="'.$this->baseURL("index", $lang, 1). '">GGB Holding</a>';
         return str_replace($bul, $dgs, $this->lang->footer("copy"));
     }
 

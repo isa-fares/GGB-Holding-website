@@ -130,8 +130,8 @@ $images = [
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="section-title style-one text-white text-center mb-60" 
-                                     data-aos="fade-up" data-aos-duration="1500">
+                                <div class="section-title style-one text-white text-center mb-60"
+                                    data-aos="fade-up" data-aos-duration="1500">
                                     <span class="sub-heading">
                                         <i class="far fa-arrow-right"></i>
                                         <?= $this->lang->index('values_subheading') ?>
@@ -156,8 +156,8 @@ $images = [
                             </div>
                             <!-- Value Box 2 -->
                             <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="sasly-info-box style-one mb-30" 
-                                     data-aos="fade-up" data-aos-duration="1800">
+                                <div class="sasly-info-box style-one mb-30"
+                                    data-aos="fade-up" data-aos-duration="1800">
                                     <div class="content">
                                         <div class="number">02</div>
                                         <h4 class="title"><?= $this->lang->index('value_2_title') ?></h4>
@@ -167,8 +167,8 @@ $images = [
                             </div>
                             <!-- Value Box 3 -->
                             <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="sasly-info-box style-one mb-30" 
-                                     data-aos="fade-up" data-aos-duration="2100">
+                                <div class="sasly-info-box style-one mb-30"
+                                    data-aos="fade-up" data-aos-duration="2100">
                                     <div class="content">
                                         <div class="number">03</div>
                                         <h4 class="title"><?= $this->lang->index('value_3_title') ?></h4>
@@ -178,10 +178,10 @@ $images = [
                             </div>
                             <!-- CTA Button -->
                             <div class="col-12" id="jj_theme">
-                                <a href="<?= $urls['kurumsal'] ?>" 
-                                   class="theme-btn style-two" 
-                                   data-aos="fade-up" 
-                                   data-aos-duration="1800">
+                                <a href="<?= $urls['kurumsal'] ?>"
+                                    class="theme-btn style-two"
+                                    data-aos="fade-up"
+                                    data-aos-duration="1800">
                                     <?= $this->lang->index('values_cta') ?>
                                     <i class="far fa-angle-double-right"></i>
                                 </a>
@@ -250,9 +250,9 @@ $images = [
                             <div class="section-image-box mb-55">
                                 <div class="ia_overlay">
                                     <span><?= $this->lang->index('about_overlay_text') ?></span>
-                                    <img src="<?= $images['about'] ?>" 
-                                         class="rounded-3 translate-img"
-                                         alt="GGB Holding Hakkımızda">
+                                    <img src="<?= $images['about'] ?>"
+                                        class="rounded-3 translate-img"
+                                        alt="GGB Holding Hakkımızda">
                                 </div>
                             </div>
                         </div>
@@ -297,7 +297,7 @@ $images = [
                             </div>
                         </div>
                         <div class="row">
-                            <?php foreach ($isitirakler_sayfalar as $sayfa) : 
+                            <?php foreach ($isitirakler_sayfalar as $sayfa) :
                                 // Prepare partner data
                                 $istirakler_link = $this->lang->link('istirakler');
                                 $page_url_clean = preg_replace('/-\d+$/', '', $sayfa['url']);
@@ -306,18 +306,18 @@ $images = [
                                 $partnerDescription = $sayfa['ozet'];
                                 $partnerImage = $this->dbResimAl($sayfa['resim'], "sayfa", "600,400");
                                 $partnerLogo = $this->dbResimAl($sayfa['banner'], "sayfa", "600,300");
-                                
+
                                 // Format title into two words
                                 $baslik_words = explode(" ", $partnerTitle);
                                 $titleWords = [
                                     'first' => $baslik_words[0] ?? '',
                                     'second' => $baslik_words[1] ?? ''
                                 ];
-                                ?>
+                            ?>
                                 <div class="col-md-6">
-                                    <div class="sasly-card-item style-one mb-30" 
-                                         data-aos="fade-up" 
-                                         data-aos-duration="1300">
+                                    <div class="sasly-card-item style-one mb-30"
+                                        data-aos="fade-up"
+                                        data-aos-duration="1300">
                                         <div class="content-box">
                                             <div class="content">
                                                 <h5>
@@ -363,7 +363,7 @@ $images = [
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <?php foreach ($blogs as $blog) : 
+                        <?php foreach ($blogs as $blog) :
                             // Prepare blog data
                             $blogTitle = $blog['baslik'];
                             $blogDescription = $blog['ozet'];
@@ -372,11 +372,11 @@ $images = [
                             $blog_url_clean = preg_replace('/-\d+$/', '', $blog['url']);
                             $blogUrl = $this->BaseURL($blog_link . '/' . $blog_url_clean, $lang, 1);
                             $blogDate = $this->gun_ay_yil($blog['tarih']);
-                            ?>
+                        ?>
                             <div class="col-xl-4 col-md-6">
-                                <div class="blog-post-item style-one mb-80" 
-                                     data-aos="fade-up" 
-                                     data-aos-duration="1200">
+                                <div class="blog-post-item style-one mb-80"
+                                    data-aos="fade-up"
+                                    data-aos-duration="1200">
                                     <div class="post-thumbnail">
                                         <a href="<?= $blogUrl ?>">
                                             <img src="<?= $blogImage ?>" alt="<?= $blogTitle ?>">
@@ -414,9 +414,9 @@ $images = [
             <!-- ============================================
                  SUSTAINABILITY CTA SECTION
                  ============================================ -->
-            <section class="cta-sb bg_cover p-r z-1" 
-                     id="index_sust"
-                     style="background-image: url(<?= $images['sustainability'] ?>);">
+            <section class="cta-sb bg_cover p-r z-1"
+                id="index_sust"
+                style="background-image: url(<?= $images['sustainability'] ?>);">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-xl-8">

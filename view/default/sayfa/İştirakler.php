@@ -50,11 +50,7 @@ if (!is_array($veri) && !empty($istirakler_pages)) {
     $current_page_url = $first_page['url'];
 }
 
-// Check if page exists
-if (!is_array($veri) || empty($veri)) {
-    header("Location: " . $this->baseURL("hata", $lang, 1));
-    exit;
-}
+
 
 // Extract page data
 $getID = $this->getID($veri);

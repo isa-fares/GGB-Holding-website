@@ -72,10 +72,10 @@ $images = [
                     <div class="row justify-content-center" id="contactItems">
                         <!-- Headquarters -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="sasly-iconic-box style-twelve mb-30" 
-                                 data-aos="fade-up" 
-                                 data-aos-delay="10"
-                                 data-aos-duration="1300">
+                            <div class="sasly-iconic-box style-twelve mb-30"
+                                data-aos="fade-up"
+                                data-aos-delay="10"
+                                data-aos-duration="1300">
                                 <div class="content">
                                     <h5><?= $this->lang->iletisim('contact_headquarters') ?></h5>
                                     <p><?= $this->ayarlar('adres_merkez') ?></p>
@@ -85,10 +85,10 @@ $images = [
 
                         <!-- Email -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="sasly-iconic-box style-twelve mb-30" 
-                                 data-aos="fade-up" 
-                                 data-aos-delay="15"
-                                 data-aos-duration="1600">
+                            <div class="sasly-iconic-box style-twelve mb-30"
+                                data-aos="fade-up"
+                                data-aos-delay="15"
+                                data-aos-duration="1600">
                                 <div class="content">
                                     <h5><?= $this->lang->iletisim('contact_email') ?></h5>
                                     <p>
@@ -102,10 +102,10 @@ $images = [
 
                         <!-- Phone -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="sasly-iconic-box style-twelve mb-30" 
-                                 data-aos="fade-up" 
-                                 data-aos-delay="20"
-                                 data-aos-duration="1900">
+                            <div class="sasly-iconic-box style-twelve mb-30"
+                                data-aos="fade-up"
+                                data-aos-delay="20"
+                                data-aos-duration="1900">
                                 <div class="content">
                                     <h5><?= $this->lang->iletisim('contact_phone') ?></h5>
                                     <p>
@@ -128,9 +128,9 @@ $images = [
                     <div class="row">
                         <!-- Form Description -->
                         <div class="col-lg-4">
-                            <div class="section-content-box mb-50" 
-                                 data-aos="fade-right" 
-                                 data-aos-duration="1200">
+                            <div class="section-content-box mb-50"
+                                data-aos="fade-right"
+                                data-aos-duration="1200">
                                 <div class="section-title mb-30">
                                     <span class="sub-heading">
                                         <?= $this->lang->iletisim('form_subheading') ?>
@@ -148,12 +148,12 @@ $images = [
 
                         <!-- Contact Form -->
                         <div class="col-lg-8">
-                            <div class="contact-wrapper mb-50" 
-                                 data-aos="fade-left" 
-                                 data-aos-duration="1400">
+                            <div class="contact-wrapper mb-50"
+                                data-aos="fade-left"
+                                data-aos-duration="1400">
                                 <h3><?= $this->lang->iletisim('form_section_title') ?></h3>
                                 <p><?= $this->lang->iletisim('form_section_desc') ?></p>
-                                
+
                                 <?php Form::Open(array(
                                     "class" => "iletisim-form contact-form",
                                     "method" => "post",
@@ -166,80 +166,79 @@ $images = [
                                     ),
                                     "lang" => $lang
                                 )); ?>
-                                    <div class="row">
-                                        <!-- Name Field -->
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input type="text" 
-                                                       class="form_control" 
-                                                       placeholder="<?= $this->lang->iletisim('form_name_placeholder') ?>"
-                                                       name="adi" 
-                                                       required="">
-                                            </div>
-                                        </div>
-
-                                        <!-- Email Field -->
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input type="email" 
-                                                       class="form_control"
-                                                       placeholder="<?= $this->lang->iletisim('form_email_placeholder') ?>" 
-                                                       name="email" 
-                                                       required="">
-                                            </div>
-                                        </div>
-
-                                        <!-- Message Field -->
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <textarea class="form_control" 
-                                                          placeholder="<?= $this->lang->iletisim('form_message_placeholder') ?>"
-                                                          name="mesaj" 
-                                                          rows="5" 
-                                                          cols="8">
-                                                </textarea>
-                                            </div>
-                                        </div>
-
-                                        <!-- Captcha Field -->
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->iletisim('form_captcha_label') ?></label>
-                                                <div class="captcha" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
-                                                    <img class="captcha_image" 
-                                                         src="<?= $urls['captcha_image'] ?>" 
-                                                         style="cursor: pointer;">
-                                                    <input type="text" 
-                                                           minlength="6" 
-                                                           class="form_control" 
-                                                           name="captcha_value" 
-                                                           maxlength="6" 
-                                                           placeholder="<?= $this->lang->iletisim('form_captcha_placeholder') ?>" 
-                                                           required>
-                                                </div>
-                                                <small style="display: block; margin-top: 5px; color: #666;">
-                                                    <?= $this->lang->iletisim('form_captcha_hint') ?>
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <!-- Submit Button -->
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <button class="cmt-btn theme-btn style-one">
-                                                    <?= $this->lang->iletisim('form_submit') ?>
-                                                    <i class="far fa-angle-double-right"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <!-- Form Message -->
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <p class="form-message"></p>
-                                            </div>
+                                <div class="row">
+                                    <!-- Name Field -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                class="form_control"
+                                                placeholder="<?= $this->lang->iletisim('form_name_placeholder') ?>"
+                                                name="adi"
+                                                required="">
                                         </div>
                                     </div>
+
+                                    <!-- Email Field -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="email"
+                                                class="form_control"
+                                                placeholder="<?= $this->lang->iletisim('form_email_placeholder') ?>"
+                                                name="email"
+                                                required="">
+                                        </div>
+                                    </div>
+
+                                    <!-- Message Field -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <textarea class="form_control"
+                                                placeholder="<?= $this->lang->iletisim('form_message_placeholder') ?>"
+                                                name="mesaj"
+                                                rows="5"
+                                                cols="8"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Captcha Field -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="captcha" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                                                <img class="captcha_image"
+                                                    src="<?= $urls['captcha_image'] ?>"
+                                                    style="cursor: pointer;">
+                                                <input type="text"
+                                                    minlength="6"
+                                                    class="form_control"
+                                                    style="margin-bottom: 0"
+                                                    name="captcha_value"
+                                                    maxlength="6"
+                                                    placeholder="<?= $this->lang->iletisim('form_captcha_placeholder') ?>"
+                                                    required>
+                                            </div>
+                                            <small style="display: block; margin-top: 5px; margin-bottom: 25px; color: #666;">
+                                                <?= $this->lang->iletisim('form_captcha_hint') ?>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <button class="cmt-btn theme-btn style-one">
+                                                <?= $this->lang->iletisim('form_submit') ?>
+                                                <i class="far fa-angle-double-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Form Message -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <p class="form-message"></p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <?php Form::Close(); ?>
                             </div>
                         </div>
@@ -267,9 +266,9 @@ $images = [
             <!-- ============================================
                  SUSTAINABILITY CTA SECTION
                  ============================================ -->
-            <section class="cta-sb bg_cover p-r z-1" 
-                     id="index_sust"
-                     style="background-image: url(<?= $images['sustainability'] ?>);">
+            <section class="cta-sb bg_cover p-r z-1"
+                id="index_sust"
+                style="background-image: url(<?= $images['sustainability'] ?>);">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-xl-8">
